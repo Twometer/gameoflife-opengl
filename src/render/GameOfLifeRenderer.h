@@ -1,0 +1,14 @@
+//
+// Created by twome on 06/05/2020.
+//
+
+#ifndef GAMEOFLIFE_3D_GAMEOFLIFERENDERER_H
+#define GAMEOFLIFE_3D_GAMEOFLIFERENDERER_H
+
+
+class GameOfLifeRenderer {
+
+};
+
+
+#endif //GAMEOFLIFE_3D_GAMEOFLIFERENDERER_H

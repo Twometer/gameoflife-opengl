@@ -5,18 +5,18 @@
 #include <iostream>
 #include "Logger.h"
 
-void Logger::Print(const std::string &prefix, const std::string &message) {
+void Logger::print(const std::string &prefix, const std::string &message) {
     std::cout << prefix << ": " << message << std::endl;
 }
 
-void Logger::Error(const std::string &message) {
-    Print("ERROR", message);
+void Logger::error(const std::string &message) {
+    print("ERROR", message);
 }
 
-void Logger::Warning(const std::string &message) {
-    Print("WARN", message);
+void Logger::warn(const std::string &message) {
+    print("WARN", message);
 }
 
-void Logger::Info(const std::string &message) {
-    Print("INFO", message);
+void Logger::info(const std::string &message) {
+    print("INFO", message);
 }

@@ -1,12 +1,15 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <ctime>
 #include "util/Logger.h"
 
 int main() {
-    Logger::Info("Initializing rendering context...");
+    srand(time(NULL)); // Seed the randomizer
+
+    Logger::info("Initializing rendering context...");
     if (!glfwInit()) {
-        Logger::Error("Failed to initialize GLFW");
+        Logger::error("Failed to initialize GLFW");
         return 1;
     }
 
@@ -18,19 +21,19 @@ int main() {
 
     GLFWwindow *window = glfwCreateWindow(1024, 768, "3D Conway's Game Of Life", nullptr, nullptr);
     if (!window) {
-        Logger::Error("Failed to create GLFW window");
+        Logger::error("Failed to create GLFW window");
         glfwTerminate();
         return 1;
     }
     glfwMakeContextCurrent(window);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-        Logger::Error("Failed to initialize OpenGL");
+        Logger::error("Failed to initialize OpenGL");
         glfwTerminate();
         return 1;
     }
 
-    Logger::Info("Init complete, starting game");
+    Logger::info("Init complete, starting game");
 
     while (!glfwWindowShouldClose(window)) {
 

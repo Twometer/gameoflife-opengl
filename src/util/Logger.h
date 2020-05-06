@@ -9,14 +9,14 @@
 
 class Logger {
 private:
-    static void Print(const std::string &prefix, const std::string &message);
+    static void print(const std::string &prefix, const std::string &message);
 
 public:
-    static void Error(const std::string &message);
+    static void error(const std::string &message);
 
-    static void Warning(const std::string &message);
+    static void warn(const std::string &message);
 
-    static void Info(const std::string &message);
+    static void info(const std::string &message);
 };
 
 #endif //GAMEOFLIFE_3D_LOGGER_H
