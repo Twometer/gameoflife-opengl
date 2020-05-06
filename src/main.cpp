@@ -19,7 +19,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_SAMPLES, 4);
 
-    GLFWwindow *window = glfwCreateWindow(1024, 768, "3D Conway's Game Of Life", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(1024, 768, "Conway's Game Of Life", nullptr, nullptr);
     if (!window) {
         Logger::error("Failed to create GLFW window");
         glfwTerminate();
