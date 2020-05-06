@@ -57,3 +57,10 @@ void Vao::render() {
 
     glBindVertexArray(0);
 }
+
+Vao::~Vao() {
+    glDeleteBuffers(1, &vertexBuffer);
+    glDeleteBuffers(1, &colorBuffer);
+
+    glDeleteVertexArrays(1, &vao);
+}

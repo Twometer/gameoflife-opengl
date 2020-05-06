@@ -18,7 +18,9 @@ private:
     int vertexCount = 0;
 
 public:
-    Vao(int dimensions);
+    explicit Vao(int dimensions);
+
+    ~Vao();
 
     void bind();
 

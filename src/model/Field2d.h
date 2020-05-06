@@ -23,7 +23,7 @@ private:
 public:
     Field2d(int width, int height);
 
-    ~Field2d();
+    ~Field2d() override;
 
     void tick() override;
 

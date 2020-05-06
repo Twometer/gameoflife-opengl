@@ -1,8 +1,8 @@
-#include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <ctime>
 #include "util/Logger.h"
+#include "render/GameWindow.h"
 
 int main() {
     srand(time(NULL)); // Seed the randomizer
@@ -35,11 +35,13 @@ int main() {
 
     Logger::info("Init complete, starting game");
 
+    auto gameWindow = GameWindow::get_instance();
     while (!glfwWindowShouldClose(window)) {
-
+        gameWindow->draw_frame();
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    delete gameWindow;
 
     return 0;
 }

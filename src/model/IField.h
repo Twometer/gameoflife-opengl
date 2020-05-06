@@ -6,11 +6,23 @@
 #define GAMEOFLIFE_3D_IFIELD_H
 
 
+#include "../gl/Vao.h"
+
 class IField {
+
+protected:
+    Vao *vao = nullptr;
+
 public:
+    virtual ~IField() = 0;
+
     virtual void tick() = 0;
 
     virtual void randomize() = 0;
+
+    void render() {
+        vao->render();
+    }
 };
 
 

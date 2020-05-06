@@ -35,11 +35,13 @@ void Field2d::randomize() {
 Field2d::Field2d(int width, int height) {
     this->width = width;
     this->height = height;
+    this->vao = new Vao(2);
     buffer = new DoubleBuffer<bool>(width * height);
 }
 
 Field2d::~Field2d() {
     delete buffer;
+    delete vao;
 }
 
 int Field2d::getIndex(int x, int y) {
