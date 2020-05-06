@@ -25,5 +25,4 @@ public:
     }
 };
 
-
 #endif //GAMEOFLIFE_3D_IFIELD_H

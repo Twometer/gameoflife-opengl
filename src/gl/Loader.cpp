@@ -23,11 +23,13 @@ std::string Loader::read_text(const std::string &path) {
 }
 
 GLuint Loader::load_shader(const std::string &vertex, const std::string &fragment) {
+    Logger::info("Loading shader '" + vertex + "/" + fragment + "'");
+
     std::string vertexSource = read_text("assets/shaders/" + vertex + ".v.glsl");
     std::string fragmentSource = read_text("assets/shaders/" + fragment + ".f.glsl");
 
     if (vertexSource.length() == 0 || fragmentSource.length() == 0) {
-        Logger::error("Cannot load shader " + vertex + " / " + fragment);
+        Logger::error("Failed to load shader");
         return 0;
     }
 

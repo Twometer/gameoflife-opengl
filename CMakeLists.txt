@@ -8,7 +8,7 @@ add_subdirectory(libs/glfw)
 
 add_executable(gameoflife_3d
         ext/glad.cpp
-        src/main.cpp src/util/Logger.cpp src/util/Logger.h src/model/IField.h src/render/GameWindow.cpp src/render/GameWindow.h src/model/Field2d.cpp src/model/Field2d.h src/util/DoubleBuffer.h src/gl/Loader.cpp src/gl/Loader.h src/gl/Texture.h src/gl/Vao.cpp src/gl/Vao.h src/render/Camera.cpp src/render/Camera.h src/util/Animated.h)
+        src/main.cpp src/util/Logger.cpp src/util/Logger.h src/model/IField.h src/render/GameWindow.cpp src/render/GameWindow.h src/model/Field2d.cpp src/model/Field2d.h src/util/DoubleBuffer.h src/gl/Loader.cpp src/gl/Loader.h src/gl/Texture.h src/gl/Vao.cpp src/gl/Vao.h src/render/Camera.cpp src/render/Camera.h src/util/Animated.h src/render/shaders/IShader.cpp src/render/shaders/IShader.h src/render/shaders/BasicShader.h src/model/IField.cpp)
 
 target_include_directories(gameoflife_3d PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_3d glfw ${GLFW_LIBRARIES})

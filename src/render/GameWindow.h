@@ -9,6 +9,7 @@
 #include <glm/glm.hpp>
 #include "../model/IField.h"
 #include "Camera.h"
+#include "shaders/BasicShader.h"
 
 class GameWindow {
 private:
@@ -17,6 +18,8 @@ private:
     IField *field;
 
     Camera camera;
+
+    BasicShader basicShader;
 
     GameWindow();
 public:

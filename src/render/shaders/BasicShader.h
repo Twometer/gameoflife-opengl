@@ -1,0 +1,29 @@
+//
+// Created by twome on 06/05/2020.
+//
+
+#ifndef GAMEOFLIFE_3D_BASICSHADER_H
+#define GAMEOFLIFE_3D_BASICSHADER_H
+
+#include "IShader.h"
+
+class BasicShader : public IShader {
+private:
+    GLuint loc_cameraMatrix;
+
+public:
+    BasicShader() {
+        initialize("basic", "basic");
+    }
+
+    void bind_uniforms() override {
+        loc_cameraMatrix = get_location("cameraMatrix");
+    }
+
+    void set_camera_matrix(glm::mat4 matrix){
+        load_matrix(loc_cameraMatrix, matrix);
+    }
+
+};
+
+#endif //GAMEOFLIFE_3D_BASICSHADER_H
