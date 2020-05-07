@@ -1,3 +1,3 @@
 # gameoflife-opengl
 
-Conway's game of life with cool features OpenGL
+Conway's game of life with cool features and OpenGL
