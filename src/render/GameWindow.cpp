@@ -3,12 +3,15 @@
 //
 
 #include <iostream>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "GameWindow.h"
 #include "../model/Field2d.h"
+#include "../gl/Loader.h"
 
 GameWindow *GameWindow::instance;
 
-GameWindow::GameWindow() {
+GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"))) {
     field = new Field2d(64, 64);
     field->randomize(4);
     field->remesh();
@@ -25,8 +28,6 @@ GameWindow::~GameWindow() {
 }
 
 int ctr = 0;
-int lastliving = 0;
-int stablectr = 0;
 
 void GameWindow::draw_frame() {
     glViewport(0, 0, viewportSize.x, viewportSize.y);
@@ -42,43 +43,12 @@ void GameWindow::draw_frame() {
     if (ctr % 12 == 0) {
         field->tick();
         field->remesh();
-
-        if (field->get_living_cells() != lastliving) {
-            std::cout << "Living cells: " << field->get_living_cells() << std::endl;
-            stablectr = 0;
-        } else {
-            stablectr++;
-            if (stablectr > 5)
-                std::cout << "Reached stable configuration at cell count: " << field->get_living_cells() << std::endl;
-            else
-                std::cout << "Living cells: " << field->get_living_cells() << std::endl;
-        }
-
-
-        lastliving = field->get_living_cells();
     }
+
+    fontRenderer.draw("Living cells: " + std::to_string(field->get_living_cells()), glm::vec2(10, 10), 0.5f);
 
 
     handle_input();
-}
-
-GameWindow *GameWindow::get_instance() {
-    if (instance == nullptr)
-        instance = new GameWindow();
-    return instance;
-}
-
-glm::vec2 GameWindow::get_viewport_size() {
-    return viewportSize;
-}
-
-void GameWindow::on_scroll(glm::vec2 offset) {
-    camera.zoom += offset.y * glm::sqrt(camera.zoom.get_value() / 1280.0f);
-    camera.zoom.clamp_to(0.001, 0.1);
-}
-
-void GameWindow::on_viewport_changed(glm::vec2 newSize) {
-    this->viewportSize = newSize;
 }
 
 void GameWindow::handle_input() {
@@ -101,6 +71,30 @@ void GameWindow::handle_input() {
     mouseYLast = mouseY;
 }
 
+void GameWindow::on_scroll(glm::vec2 offset) {
+    camera.zoom += offset.y * glm::sqrt(camera.zoom.get_value() / 1280.0f);
+    camera.zoom.clamp_to(0.001, 0.1);
+}
+
+void GameWindow::on_viewport_changed(glm::vec2 newSize) {
+    this->viewportSize = newSize;
+    guiMatrix = glm::ortho(0.0f, viewportSize.x, viewportSize.y, 0.0f);
+}
+
 void GameWindow::set_glfw_handle(GLFWwindow *glfwHandle) {
     this->glfwHandle = glfwHandle;
+}
+
+GameWindow *GameWindow::get_instance() {
+    if (instance == nullptr)
+        instance = new GameWindow();
+    return instance;
+}
+
+glm::mat4 GameWindow::get_gui_matrix() {
+    return guiMatrix;
+}
+
+glm::vec2 GameWindow::get_viewport_size() {
+    return viewportSize;
 }

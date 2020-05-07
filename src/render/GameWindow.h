@@ -10,6 +10,7 @@
 #include "../model/IField.h"
 #include "Camera.h"
 #include "shaders/BasicShader.h"
+#include "../gui/font/FontRenderer.h"
 #include <GLFW/glfw3.h>
 
 class GameWindow {
@@ -25,6 +26,9 @@ private:
     BasicShader basicShader;
 
     glm::vec2 viewportSize;
+    glm::mat4 guiMatrix;
+
+    FontRenderer fontRenderer;
 
     GameWindow();
 public:
@@ -34,13 +38,15 @@ public:
 
     void draw_frame();
 
-    glm::vec2 get_viewport_size();
-
     void on_scroll(glm::vec2 offset);
 
     void on_viewport_changed(glm::vec2 newSize);
 
     void set_glfw_handle(GLFWwindow *glfwHandle);
+
+    glm::vec2 get_viewport_size();
+
+    glm::mat4 get_gui_matrix();
 
 private:
     void handle_input();

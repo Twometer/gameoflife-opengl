@@ -9,6 +9,7 @@
 #include <glad/glad.h>
 #include <string>
 #include "Texture.h"
+#include "../gui/font/Font.h"
 
 class Loader {
 private:
@@ -17,7 +18,11 @@ private:
 public:
     static std::string read_text(const std::string &path);
 
+    static uint8_t *read_bytes(const std::string &path, size_t &size);
+
     static GLuint load_shader(const std::string &vertex, const std::string &fragment);
+
+    static Font *load_font(const std::string &name);
 
     static Texture load_texture(const std::string &path);
 
