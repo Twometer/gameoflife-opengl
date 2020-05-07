@@ -73,7 +73,6 @@ glm::vec2 GameWindow::get_viewport_size() {
 }
 
 void GameWindow::on_scroll(glm::vec2 offset) {
-
     camera.zoom += offset.y * glm::sqrt(camera.zoom.get_value() / 1280.0f);
     camera.zoom.clamp_to(0.001, 0.1);
 }

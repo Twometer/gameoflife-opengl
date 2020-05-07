@@ -17,7 +17,7 @@ private:
     glm::vec2 sizeInWorld;
 
 public:
-    Animated zoom = 0.04f;
+    Animated zoom = 0.01f;
 
     Camera();
 
