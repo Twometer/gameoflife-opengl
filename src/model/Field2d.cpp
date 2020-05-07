@@ -12,23 +12,27 @@ void Field2d::tick() {
     // Our front buffer contains the field that is currently visible on-screen
     // On the back buffer we prepare the new field that contains the next generation
 
+    living_cells = 0;
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            int index = get_index(i ,j);
+            int index = get_index(i, j);
 
             bool alive = buffer->get_front()[index];
             int neighbors = count_neighbors(i, j);
 
-            if (alive && neighbors < 2)
-                buffer->get_back()[index] = false;   // Underpopulation
-            else if (alive && neighbors < 4)
-                buffer->get_back()[index] = true;    // Stays alive
-            else if (alive && neighbors > 3)
-                buffer->get_back()[index] = false;   // Overpopulation
-            else if (!alive && neighbors == 3)
-                buffer->get_back()[index] = true;    // Reproduction
-            else
-                buffer->get_back()[index] = alive;   // Stays the same
+            bool newState = alive;
+            if (alive && neighbors < 2)         // Underpopulation
+                newState = false;
+            else if (alive && neighbors < 4)    // Stays alive
+                newState = true;
+            else if (alive && neighbors > 3)    // Overpopulation
+                newState = false;
+            else if (!alive && neighbors == 3)  // Reproduction
+                newState = true;
+
+            buffer->get_back()[index] = newState;
+            if (newState)
+                living_cells++;
         }
     }
 
@@ -94,7 +98,7 @@ void Field2d::remesh() {
 
             if (alive) {
                 // Some nice color theme
-                meshBuilder->push_rectangle(i, j, 1, 1, glm::vec3(i / (float)width, j / (float)height, 1.0f));
+                meshBuilder->push_rectangle(i, j, 1, 1, glm::vec3(i / (float) width, j / (float) height, 1.0f));
             }
 
         }

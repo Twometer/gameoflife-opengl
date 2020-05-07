@@ -2,6 +2,7 @@
 // Created by twome on 06/05/2020.
 //
 
+#include <iostream>
 #include "GameWindow.h"
 #include "../model/Field2d.h"
 
@@ -24,6 +25,9 @@ GameWindow::~GameWindow() {
 }
 
 int ctr = 0;
+int lastliving = 0;
+int stablectr = 0;
+
 void GameWindow::draw_frame() {
     glViewport(0, 0, viewportSize.x, viewportSize.y);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -35,10 +39,23 @@ void GameWindow::draw_frame() {
     field->render();
 
     ctr++;
-    if (ctr % 12 == 0)
-    {
+    if (ctr % 12 == 0) {
         field->tick();
         field->remesh();
+
+        if (field->get_living_cells() != lastliving) {
+            std::cout << "Living cells: " << field->get_living_cells() << std::endl;
+            stablectr = 0;
+        } else {
+            stablectr++;
+            if (stablectr > 5)
+                std::cout << "Reached stable configuration at cell count: " << field->get_living_cells() << std::endl;
+            else
+                std::cout << "Living cells: " << field->get_living_cells() << std::endl;
+        }
+
+
+        lastliving = field->get_living_cells();
     }
 
 
