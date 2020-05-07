@@ -16,7 +16,7 @@ add_executable(gameoflife_3d
         src/gl/Vao.cpp
         src/render/Camera.cpp
         src/render/shaders/IShader.cpp
-        src/model/IField.cpp)
+        src/model/IField.cpp src/gl/MeshBuilder.cpp src/gl/MeshBuilder.h)
 
 target_include_directories(gameoflife_3d PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_3d glfw ${GLFW_LIBRARIES})

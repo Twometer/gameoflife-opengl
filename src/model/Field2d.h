@@ -16,9 +16,9 @@ private:
 
     DoubleBuffer<bool>* buffer;
 
-    inline int getIndex(int x, int y);
+    inline int get_index(int x, int y);
 
-    int countNeighbors(bool* buf, int x, int y);
+    int count_neighbors(bool* buf, int x, int y);
 
 public:
     Field2d(int width, int height);
@@ -28,6 +28,8 @@ public:
     void tick() override;
 
     void randomize() override;
+
+    void remesh() override ;
 };
 
 

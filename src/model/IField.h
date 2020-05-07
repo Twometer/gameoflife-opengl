@@ -20,6 +20,8 @@ public:
 
     virtual void randomize() = 0;
 
+    virtual void remesh() = 0;
+
     void render() {
         vao->render();
     }
