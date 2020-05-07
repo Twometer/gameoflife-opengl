@@ -4,6 +4,14 @@
 #include "util/Logger.h"
 #include "render/GameWindow.h"
 
+void scroll_callback(GLFWwindow *window, double xo, double yo) {
+    GameWindow::get_instance()->on_scroll(glm::vec2(xo, yo));
+}
+
+void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
+    GameWindow::get_instance()->on_viewport_changed(glm::vec2(width, height));
+}
+
 int main() {
     srand(time(NULL)); // Seed the randomizer
 
@@ -33,9 +41,17 @@ int main() {
         return 1;
     }
 
-    Logger::info("Init complete, starting game");
+    glfwSetScrollCallback(window, scroll_callback);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     auto gameWindow = GameWindow::get_instance();
+
+    int viewportWidth, viewportHeight;
+    glfwGetFramebufferSize(window, &viewportWidth, &viewportHeight);
+    gameWindow->on_viewport_changed(glm::vec2(viewportWidth, viewportHeight));
+
+    Logger::info("Init complete, starting game");
+
     while (!glfwWindowShouldClose(window)) {
         gameWindow->draw_frame();
         glfwSwapBuffers(window);

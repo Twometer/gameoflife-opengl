@@ -3,15 +3,18 @@
 //
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 #include "Camera.h"
 #include "GameWindow.h"
 
 void Camera::update() {
     auto window = GameWindow::get_instance();
 
+    zoom.update();
+
     // Calculate camera size depending on the zoom value
     // but keeping the aspect ratio
-    auto aspectRatio = window->viewportSize.y / window->viewportSize.x;
+    auto aspectRatio = window->get_viewport_size().y / window->get_viewport_size().x;
     auto camWidth = 1.0f / zoom.get_value();
     auto camHeight = camWidth * aspectRatio;
 

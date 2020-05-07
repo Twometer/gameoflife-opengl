@@ -19,6 +19,7 @@ public:
     Animated(float value) {
         this->srcValue = value;
         this->dstValue = value;
+        this->curValue = value;
     }
 
     void set_value(float value) {
@@ -37,6 +38,18 @@ public:
 
     void clamp_to(float min, float max) {
         dstValue = glm::clamp(dstValue, min, max);
+    }
+
+    Animated &operator+=(const float other) {
+        this->dstValue += other;
+        reset();
+        return *this;
+    }
+
+    Animated &operator-=(const float other) {
+        this->dstValue -= other;
+        reset();
+        return *this;
     }
 
 private:

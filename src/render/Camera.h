@@ -15,7 +15,7 @@ private:
     glm::mat4 projectionMatrix;
 
 public:
-    Animated zoom = 1.0f;
+    Animated zoom = 0.04f;
 
     Camera();
 
