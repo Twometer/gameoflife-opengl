@@ -54,7 +54,7 @@ void Vao::render() {
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
 
-    glDrawArrays(GL_TRIANGLES, 0, vertexCount / 3);
+    glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(0);
