@@ -20,7 +20,7 @@ private:
 
     inline int get_index(int x, int y);
 
-    int count_neighbors(bool *buf, int x, int y);
+    int count_neighbors(int x, int y);
 
 public:
     Field2d(int width, int height);

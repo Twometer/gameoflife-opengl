@@ -4,8 +4,6 @@
 
 #include "GameWindow.h"
 #include "../model/Field2d.h"
-#include <glm/ext/matrix_projection.hpp>
-#include <iostream>
 
 GameWindow *GameWindow::instance;
 
@@ -37,7 +35,7 @@ void GameWindow::draw_frame() {
     field->render();
 
     ctr++;
-    if (ctr % 120 == 0)
+    if (ctr % 12 == 0)
     {
         field->tick();
         field->remesh();
