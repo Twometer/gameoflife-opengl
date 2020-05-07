@@ -4,6 +4,8 @@
 
 #include "GameWindow.h"
 #include "../model/Field2d.h"
+#include <glm/ext/matrix_projection.hpp>
+#include <iostream>
 
 GameWindow *GameWindow::instance;
 
@@ -12,7 +14,7 @@ GameWindow::GameWindow() {
     field->randomize(4);
     field->remesh();
 
-    camera.set_midpoint(glm::vec2(32,32));
+    camera.set_midpoint(glm::vec2(32, 32));
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -32,6 +34,8 @@ void GameWindow::draw_frame() {
     basicShader.bind();
     basicShader.set_camera_matrix(camera.get_matrix());
     field->render();
+
+    handle_input();
 }
 
 GameWindow *GameWindow::get_instance() {
@@ -52,4 +56,28 @@ void GameWindow::on_scroll(glm::vec2 offset) {
 
 void GameWindow::on_viewport_changed(glm::vec2 newSize) {
     this->viewportSize = newSize;
+}
+
+void GameWindow::handle_input() {
+    bool focused = glfwGetWindowAttrib(glfwHandle, GLFW_FOCUSED) == GLFW_TRUE;
+    if (!focused) return;
+
+    double mouseX, mouseY;
+    glfwGetCursorPos(glfwHandle, &mouseX, &mouseY);
+
+
+    static double mouseXLast, mouseYLast;
+    if ((mouseXLast != mouseX || mouseYLast != mouseY) &&
+        glfwGetMouseButton(glfwHandle, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+        glm::vec2 offset = glm::vec2(-(mouseX - mouseXLast) / viewportSize.x * camera.get_size().x,
+                                     (mouseY - mouseYLast) / viewportSize.y * camera.get_size().y);
+        camera.move_midpoint(offset);
+    }
+
+    mouseXLast = mouseX;
+    mouseYLast = mouseY;
+}
+
+void GameWindow::set_glfw_handle(GLFWwindow *glfwHandle) {
+    this->glfwHandle = glfwHandle;
 }

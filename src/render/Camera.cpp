@@ -17,19 +17,29 @@ void Camera::update() {
     auto camWidth = 1.0f / zoom.get_value();
     auto camHeight = camWidth * aspectRatio;
 
-    projectionMatrix = glm::ortho(-camWidth / 2.f, +camWidth / 2.f, -camHeight / 2.f, +camHeight / 2.f);
-    projectionMatrix = glm::translate(projectionMatrix, glm::vec3(-midpoint.x, -midpoint.y, 0));
+    sizeInWorld = glm::vec2(camWidth, camHeight);
+
+    projectionMatrix = glm::ortho(-camWidth / 2.f + midpoint.x, +camWidth / 2.f + midpoint.x,
+                                  -camHeight / 2.f + midpoint.y, +camHeight / 2.f + midpoint.y);
 }
 
 glm::mat4 Camera::get_matrix() {
-    return projectionMatrix * viewMatrix;
+    return projectionMatrix;
 }
 
-// Initialize matrices to identity
-Camera::Camera() : viewMatrix(1.0f), projectionMatrix(1.0f) {
+// Initialize matrix to identity
+Camera::Camera() : projectionMatrix(1.0f) {
 
 }
 
 void Camera::set_midpoint(glm::vec2 midpoint) {
     this->midpoint = midpoint;
+}
+
+void Camera::move_midpoint(glm::vec2 offset) {
+    this->midpoint += offset;
+}
+
+glm::vec2 Camera::get_size() {
+    return sizeInWorld;
 }

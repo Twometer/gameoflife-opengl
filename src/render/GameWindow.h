@@ -10,10 +10,13 @@
 #include "../model/IField.h"
 #include "Camera.h"
 #include "shaders/BasicShader.h"
+#include <GLFW/glfw3.h>
 
 class GameWindow {
 private:
     static GameWindow *instance;
+
+    GLFWwindow *glfwHandle;
 
     IField *field;
 
@@ -25,7 +28,6 @@ private:
 
     GameWindow();
 public:
-
     static GameWindow *get_instance();
 
     ~GameWindow();
@@ -37,6 +39,11 @@ public:
     void on_scroll(glm::vec2 offset);
 
     void on_viewport_changed(glm::vec2 newSize);
+
+    void set_glfw_handle(GLFWwindow *glfwHandle);
+
+private:
+    void handle_input();
 };
 
 

@@ -10,11 +10,11 @@
 
 class Camera {
 private:
-    glm::mat4 viewMatrix;
-
     glm::mat4 projectionMatrix;
 
     glm::vec2 midpoint;
+
+    glm::vec2 sizeInWorld;
 
 public:
     Animated zoom = 0.04f;
@@ -26,6 +26,10 @@ public:
     glm::mat4 get_matrix();
 
     void set_midpoint(glm::vec2 midpoint);
+
+    void move_midpoint(glm::vec2 offset);
+
+    glm::vec2 get_size();
 
 };
 

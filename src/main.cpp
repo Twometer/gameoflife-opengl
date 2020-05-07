@@ -45,6 +45,7 @@ int main() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     auto gameWindow = GameWindow::get_instance();
+    gameWindow->set_glfw_handle(window);
 
     int viewportWidth, viewportHeight;
     glfwGetFramebufferSize(window, &viewportWidth, &viewportHeight);
