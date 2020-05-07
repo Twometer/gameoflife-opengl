@@ -1,2 +1,3 @@
-# gameoflife-3d
-3D Game Of Life
+# gameoflife-opengl
+
+Conway's game of life with cool features OpenGL
