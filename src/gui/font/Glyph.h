@@ -2,8 +2,8 @@
 // Created by twome on 07/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_GLYPH_H
-#define GAMEOFLIFE_3D_GLYPH_H
+#ifndef GAMEOFLIFE_OPENGL_GLYPH_H
+#define GAMEOFLIFE_OPENGL_GLYPH_H
 
 struct Glyph {
     int id;
@@ -16,4 +16,4 @@ struct Glyph {
     int advance;
 };
 
-#endif //GAMEOFLIFE_3D_GLYPH_H
+#endif //GAMEOFLIFE_OPENGL_GLYPH_H

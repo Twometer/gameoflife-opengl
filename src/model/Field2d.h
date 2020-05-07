@@ -2,8 +2,8 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_FIELD2D_H
-#define GAMEOFLIFE_3D_FIELD2D_H
+#ifndef GAMEOFLIFE_OPENGL_FIELD2D_H
+#define GAMEOFLIFE_OPENGL_FIELD2D_H
 
 
 #include "IField.h"
@@ -35,4 +35,4 @@ public:
 };
 
 
-#endif //GAMEOFLIFE_3D_FIELD2D_H
+#endif //GAMEOFLIFE_OPENGL_FIELD2D_H

@@ -2,8 +2,8 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_LOGGER_H
-#define GAMEOFLIFE_3D_LOGGER_H
+#ifndef GAMEOFLIFE_OPENGL_LOGGER_H
+#define GAMEOFLIFE_OPENGL_LOGGER_H
 
 #include <string>
 
@@ -19,4 +19,4 @@ public:
     static void info(const std::string &message);
 };
 
-#endif //GAMEOFLIFE_3D_LOGGER_H
+#endif //GAMEOFLIFE_OPENGL_LOGGER_H

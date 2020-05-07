@@ -2,8 +2,8 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_ISHADER_H
-#define GAMEOFLIFE_3D_ISHADER_H
+#ifndef GAMEOFLIFE_OPENGL_ISHADER_H
+#define GAMEOFLIFE_OPENGL_ISHADER_H
 
 #include <string>
 #include <glad/glad.h>
@@ -37,4 +37,4 @@ public:
 };
 
 
-#endif //GAMEOFLIFE_3D_ISHADER_H
+#endif //GAMEOFLIFE_OPENGL_ISHADER_H

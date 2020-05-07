@@ -2,8 +2,8 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_BASICSHADER_H
-#define GAMEOFLIFE_3D_BASICSHADER_H
+#ifndef GAMEOFLIFE_OPENGL_BASICSHADER_H
+#define GAMEOFLIFE_OPENGL_BASICSHADER_H
 
 #include "IShader.h"
 
@@ -26,4 +26,4 @@ public:
 
 };
 
-#endif //GAMEOFLIFE_3D_BASICSHADER_H
+#endif //GAMEOFLIFE_OPENGL_BASICSHADER_H

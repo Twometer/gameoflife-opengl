@@ -2,8 +2,8 @@
 // Created by twome on 07/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_FONTREADER_H
-#define GAMEOFLIFE_3D_FONTREADER_H
+#ifndef GAMEOFLIFE_OPENGL_FONTREADER_H
+#define GAMEOFLIFE_OPENGL_FONTREADER_H
 
 
 #include <fstream>
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif //GAMEOFLIFE_3D_FONTREADER_H
+#endif //GAMEOFLIFE_OPENGL_FONTREADER_H

@@ -2,8 +2,8 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_LOADER_H
-#define GAMEOFLIFE_3D_LOADER_H
+#ifndef GAMEOFLIFE_OPENGL_LOADER_H
+#define GAMEOFLIFE_OPENGL_LOADER_H
 
 
 #include <glad/glad.h>
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif //GAMEOFLIFE_3D_LOADER_H
+#endif //GAMEOFLIFE_OPENGL_LOADER_H

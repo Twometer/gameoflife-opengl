@@ -2,8 +2,8 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_ANIMATED_H
-#define GAMEOFLIFE_3D_ANIMATED_H
+#ifndef GAMEOFLIFE_OPENGL_ANIMATED_H
+#define GAMEOFLIFE_OPENGL_ANIMATED_H
 
 #include <glm/glm.hpp>
 
@@ -60,4 +60,4 @@ private:
 
 };
 
-#endif //GAMEOFLIFE_3D_ANIMATED_H
+#endif //GAMEOFLIFE_OPENGL_ANIMATED_H

@@ -2,8 +2,8 @@
 // Created by twome on 07/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_TIMER_H
-#define GAMEOFLIFE_3D_TIMER_H
+#ifndef GAMEOFLIFE_OPENGL_TIMER_H
+#define GAMEOFLIFE_OPENGL_TIMER_H
 
 #include <GLFW/glfw3.h>
 
@@ -32,4 +32,4 @@ public:
 
 };
 
-#endif //GAMEOFLIFE_3D_TIMER_H
+#endif //GAMEOFLIFE_OPENGL_TIMER_H

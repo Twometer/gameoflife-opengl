@@ -2,8 +2,8 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_MESHBUILDER_H
-#define GAMEOFLIFE_3D_MESHBUILDER_H
+#ifndef GAMEOFLIFE_OPENGL_MESHBUILDER_H
+#define GAMEOFLIFE_OPENGL_MESHBUILDER_H
 
 
 #include <vector>
@@ -34,4 +34,4 @@ public:
 };
 
 
-#endif //GAMEOFLIFE_3D_MESHBUILDER_H
+#endif //GAMEOFLIFE_OPENGL_MESHBUILDER_H

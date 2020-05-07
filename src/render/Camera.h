@@ -2,8 +2,8 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_3D_CAMERA_H
-#define GAMEOFLIFE_3D_CAMERA_H
+#ifndef GAMEOFLIFE_OPENGL_CAMERA_H
+#define GAMEOFLIFE_OPENGL_CAMERA_H
 
 #include <glm/glm.hpp>
 #include "../util/Animated.h"
@@ -34,4 +34,4 @@ public:
 };
 
 
-#endif //GAMEOFLIFE_3D_CAMERA_H
+#endif //GAMEOFLIFE_OPENGL_CAMERA_H
