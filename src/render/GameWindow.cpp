@@ -25,6 +25,7 @@ GameWindow::~GameWindow() {
     delete field;
 }
 
+int ctr = 0;
 void GameWindow::draw_frame() {
     glViewport(0, 0, viewportSize.x, viewportSize.y);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -34,6 +35,14 @@ void GameWindow::draw_frame() {
     basicShader.bind();
     basicShader.set_camera_matrix(camera.get_matrix());
     field->render();
+
+    ctr++;
+    if (ctr % 120 == 0)
+    {
+        field->tick();
+        field->remesh();
+    }
+
 
     handle_input();
 }
