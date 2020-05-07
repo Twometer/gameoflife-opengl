@@ -2,7 +2,6 @@
 // Created by twome on 06/05/2020.
 //
 
-#include <fstream>
 #include <spng.h>
 #include <iostream>
 #include "Loader.h"
@@ -88,20 +87,16 @@ Texture Loader::load_texture(const std::string &path) {
 
     size_t inputSize;
     uint8_t *input = read_bytes(path, inputSize);
-    int r = spng_set_png_buffer(ctx, input, inputSize);
-    std::cout << spng_strerror(r) << std::endl;
+    spng_set_png_buffer(ctx, input, inputSize);
 
     spng_ihdr ihdr{};
-    r = spng_get_ihdr(ctx, &ihdr);
-    std::cout << spng_strerror(r) << std::endl;
+    spng_get_ihdr(ctx, &ihdr);
 
     size_t outputSize;
-    r = spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &outputSize);
-    std::cout << spng_strerror(r) << std::endl;
+    spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &outputSize);
 
     auto *output = new uint8_t[outputSize];
-    r = spng_decode_image(ctx, output, outputSize, SPNG_FMT_RGBA8, 0);
-    std::cout << spng_strerror(r) << std::endl;
+    spng_decode_image(ctx, output, outputSize, SPNG_FMT_RGBA8, 0);
 
     delete[] input;
 
@@ -116,6 +111,8 @@ Texture Loader::load_texture(const std::string &path) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    delete[] output;
 
     return {texture, ihdr.width, ihdr.height};
 }

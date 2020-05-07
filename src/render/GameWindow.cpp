@@ -11,7 +11,7 @@
 
 GameWindow *GameWindow::instance;
 
-GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"))) {
+GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"))), timer(20) {
     field = new Field2d(64, 64);
     field->randomize(4);
     field->remesh();
@@ -27,8 +27,6 @@ GameWindow::~GameWindow() {
     delete field;
 }
 
-int ctr = 0;
-
 void GameWindow::draw_frame() {
     glViewport(0, 0, viewportSize.x, viewportSize.y);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -39,10 +37,11 @@ void GameWindow::draw_frame() {
     basicShader.set_camera_matrix(camera.get_matrix());
     field->render();
 
-    ctr++;
-    if (ctr % 12 == 0) {
-        field->tick();
-        field->remesh();
+    if (timer.elapsed()) {
+        field->tick();      // Next generation
+        field->remesh();    // Rebuild mesh
+
+        timer.reset();
     }
 
     fontRenderer.draw("Living cells: " + std::to_string(field->get_living_cells()), glm::vec2(10, 10), 0.5f);

@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "shaders/BasicShader.h"
 #include "../gui/font/FontRenderer.h"
+#include "../util/Timer.h"
 #include <GLFW/glfw3.h>
 
 class GameWindow {
@@ -24,6 +25,8 @@ private:
     Camera camera;
 
     BasicShader basicShader;
+
+    Timer timer;
 
     glm::vec2 viewportSize;
     glm::mat4 guiMatrix;
