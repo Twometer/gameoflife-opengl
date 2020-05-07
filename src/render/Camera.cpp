@@ -18,6 +18,7 @@ void Camera::update() {
     auto camHeight = camWidth * aspectRatio;
 
     projectionMatrix = glm::ortho(-camWidth / 2.f, +camWidth / 2.f, -camHeight / 2.f, +camHeight / 2.f);
+    projectionMatrix = glm::translate(projectionMatrix, glm::vec3(-midpoint.x, -midpoint.y, 0));
 }
 
 glm::mat4 Camera::get_matrix() {
@@ -30,5 +31,5 @@ Camera::Camera() : viewMatrix(1.0f), projectionMatrix(1.0f) {
 }
 
 void Camera::set_midpoint(glm::vec2 midpoint) {
-
+    this->midpoint = midpoint;
 }

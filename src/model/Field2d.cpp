@@ -26,10 +26,10 @@ void Field2d::tick() {
     }
 }
 
-void Field2d::randomize() {
+void Field2d::randomize(int mod) {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            buffer->get_front()[get_index(i, j)] = rand() % 2;
+            buffer->get_front()[get_index(i, j)] = (rand() % mod) == 0;
         }
     }
 }

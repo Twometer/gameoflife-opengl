@@ -18,7 +18,7 @@ public:
 
     virtual void tick() = 0;
 
-    virtual void randomize() = 0;
+    virtual void randomize(int mod) = 0;
 
     virtual void remesh() = 0;
 

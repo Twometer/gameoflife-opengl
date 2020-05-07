@@ -8,9 +8,11 @@
 GameWindow *GameWindow::instance;
 
 GameWindow::GameWindow() {
-    field = new Field2d(16, 16);
-    field->randomize();
+    field = new Field2d(64, 64);
+    field->randomize(4);
     field->remesh();
+
+    camera.set_midpoint(glm::vec2(32,32));
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

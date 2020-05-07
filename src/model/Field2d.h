@@ -29,7 +29,7 @@ public:
 
     void tick() override;
 
-    void randomize() override;
+    void randomize(int mod) override;
 
     void remesh() override;
 };

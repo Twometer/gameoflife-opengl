@@ -14,6 +14,8 @@ private:
 
     glm::mat4 projectionMatrix;
 
+    glm::vec2 midpoint;
+
 public:
     Animated zoom = 0.04f;
 
