@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "Field2d.h"
 #include "../gl/MeshBuilder.h"
+#include "../util/Logger.h"
 
 void Field2d::tick() {
     buffer->swap();
@@ -38,9 +39,11 @@ Field2d::Field2d(int width, int height) {
     this->height = height;
     this->vao = new Vao(2);
     buffer = new DoubleBuffer<bool>(width * height);
+    meshBuilder = new MeshBuilder();
 }
 
 Field2d::~Field2d() {
+    delete meshBuilder;
     delete buffer;
     delete vao;
 }
@@ -67,19 +70,20 @@ int Field2d::count_neighbors(bool *buf, int x, int y) {
 }
 
 void Field2d::remesh() {
-    MeshBuilder builder;
+    meshBuilder->clear();
+
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             bool alive = buffer->get_front()[get_index(i, j)];
 
             if (alive) {
-                builder.push_rectangle(i, j, 1, 1, glm::vec3(1.0f, 1.0f, 1.0f));
+                meshBuilder->push_rectangle(i, j, 1, 1, glm::vec3(1.0f, 1.0f, 1.0f));
             }
 
         }
     }
 
-    vao->set_data(builder.get_vertices(), builder.get_vertex_count(), builder.get_colors(), builder.get_color_count());
+    vao->set_data(meshBuilder->get_vertices(), meshBuilder->get_vertex_count(), meshBuilder->get_colors(), meshBuilder->get_color_count());
 }
 
 

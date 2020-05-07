@@ -11,14 +11,13 @@ Vao::Vao(int dimensions) {
 
     GLuint vertexBuffer;
     glGenBuffers(1, &vertexBuffer);
-    glVertexAttribPointer(0, dimensions, GL_FLOAT, false, 0, nullptr);
 
     GLuint colorBuffer;
     glGenBuffers(1, &colorBuffer);
-    glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
 
     glBindVertexArray(0);
 
+    this->dimensions = dimensions;
     this->vao = vao;
     this->vertexBuffer = vertexBuffer;
     this->colorBuffer = colorBuffer;
@@ -35,17 +34,22 @@ void Vao::unbind() {
 void Vao::set_data(float *vertexBuf, int vertexBufSize, float *colorBuf, int colorBufSize) {
     bind();
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, vertexBufSize * sizeof(float), vertexBuf, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertexBufSize * sizeof(GLfloat), vertexBuf, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(0, dimensions, GL_FLOAT, false, 0, nullptr);
 
     glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-    glBufferData(GL_ARRAY_BUFFER, colorBufSize * sizeof(float), colorBuf, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, colorBufSize * sizeof(GLfloat), colorBuf, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, nullptr);
 
     unbind();
-    vertexCount = vertexBufSize / 3;
+    vertexCount = vertexBufSize / dimensions;
 }
 
 void Vao::render() {
-    glBindVertexArray(vao);
+    if (vertexCount == 0)
+        return;
+
+    bind();
 
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
@@ -55,7 +59,7 @@ void Vao::render() {
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(0);
 
-    glBindVertexArray(0);
+    unbind();
 }
 
 Vao::~Vao() {

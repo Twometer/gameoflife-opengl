@@ -8,17 +8,19 @@
 
 #include "IField.h"
 #include "../util/DoubleBuffer.h"
+#include "../gl/MeshBuilder.h"
 
 class Field2d : public IField {
 private:
     int width;
     int height;
 
-    DoubleBuffer<bool>* buffer;
+    MeshBuilder *meshBuilder;
+    DoubleBuffer<bool> *buffer;
 
     inline int get_index(int x, int y);
 
-    int count_neighbors(bool* buf, int x, int y);
+    int count_neighbors(bool *buf, int x, int y);
 
 public:
     Field2d(int width, int height);
@@ -29,7 +31,7 @@ public:
 
     void randomize() override;
 
-    void remesh() override ;
+    void remesh() override;
 };
 
 

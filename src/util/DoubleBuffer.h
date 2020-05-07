@@ -6,6 +6,8 @@
 #define GAMEOFLIFE_3D_DOUBLEBUFFER_H
 
 
+#include <cstring>
+
 template <typename T>
 class DoubleBuffer {
 private:
@@ -28,6 +30,10 @@ template<typename T>
 DoubleBuffer<T>::DoubleBuffer(int size) {
     front = new T[size];
     back = new T[size];
+
+    // Zero arrays
+    memset(front, 0, sizeof(T) * size);
+    memset(back, 0, sizeof(T) * size);
 }
 
 template<typename T>

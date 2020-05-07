@@ -15,6 +15,9 @@ private:
 
     std::vector<float> colors;
 
+    void push_vertex(float x, float y);
+    void push_color(float r, float g, float b);
+
 public:
     void push_rectangle(float x, float y, float width, float height, glm::vec3 color);
 
@@ -25,6 +28,8 @@ public:
     float *get_colors();
 
     int get_color_count();
+
+    void clear();
 
 };
 

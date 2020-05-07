@@ -16,6 +16,7 @@ private:
     GLuint colorBuffer = 0;
 
     int vertexCount = 0;
+    int dimensions = 0;
 
 public:
     explicit Vao(int dimensions);
