@@ -61,10 +61,14 @@ void IContainer::layout() {
         // Align the component correctly
         if (component->get_horizontal_alignment() == Alignment::CENTER) {
             xCoord += cellWidth / 2 - (component->get_minimum_size().x + component->get_margin().x * 2) / 2;
+        } else if (component->get_horizontal_alignment() == Alignment::END) {
+            xCoord += cellWidth - (component->get_minimum_size().x + component->get_margin().x * 2);
         }
 
         if (component->get_vertical_alignment() == Alignment::CENTER) {
             yCoord += cellHeight / 2 - (component->get_minimum_size().y + component->get_margin().y * 2) / 2;
+        } else if (component->get_vertical_alignment() == Alignment::END){
+            yCoord += cellHeight - (component->get_minimum_size().y + component->get_margin().y * 2);
         }
 
         // Apply to the component
