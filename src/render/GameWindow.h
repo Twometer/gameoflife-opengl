@@ -12,6 +12,7 @@
 #include "shaders/BasicShader.h"
 #include "../gui/font/FontRenderer.h"
 #include "../util/Timer.h"
+#include "../gui/GuiRenderer.h"
 #include <GLFW/glfw3.h>
 
 class GameWindow {
@@ -31,6 +32,7 @@ private:
     glm::vec2 viewportSize;
     glm::mat4 guiMatrix;
 
+    GuiRenderer guiRenderer;
     FontRenderer fontRenderer;
 
     GameWindow();
@@ -50,6 +52,10 @@ public:
     glm::vec2 get_viewport_size();
 
     glm::mat4 get_gui_matrix();
+
+    GuiRenderer *get_gui_renderer();
+
+    FontRenderer *get_font_renderer();
 
 private:
     void handle_input();

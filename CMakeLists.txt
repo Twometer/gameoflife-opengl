@@ -19,8 +19,14 @@ add_executable(gameoflife_opengl
         src/render/shaders/IShader.cpp
         src/model/IField.cpp
         src/gl/MeshBuilder.cpp
+        src/gui/GuiRenderer.cpp
         src/gui/font/FontRenderer.cpp
-        src/gui/font/FontReader.cpp)
+        src/gui/font/FontReader.cpp
+        src/gui/screens/MenuScreen.cpp
+        src/gui/base/IContainer.cpp
+        src/gui/base/IScreen.cpp
+        src/gui/base/IComponent.cpp
+        src/gui/components/Label.cpp)
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)

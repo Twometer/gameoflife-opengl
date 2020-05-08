@@ -8,15 +8,18 @@
 #include "GameWindow.h"
 #include "../model/Field2d.h"
 #include "../gl/Loader.h"
+#include "../gui/screens/MenuScreen.h"
 
 GameWindow *GameWindow::instance;
 
 GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"))), timer(20) {
-    field = new Field2d(64, 64);
+    field = new Field2d(128, 128);
     field->randomize(4);
     field->remesh();
 
-    camera.set_midpoint(glm::vec2(32, 32));
+    guiRenderer.show_screen(new MenuScreen());
+
+    camera.set_midpoint(glm::vec2(64, 64));
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -46,6 +49,7 @@ void GameWindow::draw_frame() {
 
     fontRenderer.draw("Living cells: " + std::to_string(field->get_living_cells()), glm::vec2(10, 10), 0.5f);
 
+    guiRenderer.draw();
 
     handle_input();
 }
@@ -78,6 +82,7 @@ void GameWindow::on_scroll(glm::vec2 offset) {
 void GameWindow::on_viewport_changed(glm::vec2 newSize) {
     this->viewportSize = newSize;
     guiMatrix = glm::ortho(0.0f, viewportSize.x, viewportSize.y, 0.0f);
+    guiRenderer.on_resize();
 }
 
 void GameWindow::set_glfw_handle(GLFWwindow *glfwHandle) {
@@ -96,4 +101,12 @@ glm::mat4 GameWindow::get_gui_matrix() {
 
 glm::vec2 GameWindow::get_viewport_size() {
     return viewportSize;
+}
+
+GuiRenderer *GameWindow::get_gui_renderer() {
+    return &guiRenderer;
+}
+
+FontRenderer *GameWindow::get_font_renderer() {
+    return &fontRenderer;
 }
