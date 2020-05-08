@@ -21,3 +21,7 @@ void GuiRenderer::on_resize() {
     if (currentScreen != nullptr)
         this->currentScreen->layout();
 }
+
+void GuiRenderer::bind_gui_shader() {
+    guiShader.bind();
+}

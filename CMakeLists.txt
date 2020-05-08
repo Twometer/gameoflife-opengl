@@ -26,7 +26,9 @@ add_executable(gameoflife_opengl
         src/gui/base/IContainer.cpp
         src/gui/base/IScreen.cpp
         src/gui/base/IComponent.cpp
-        src/gui/components/Label.cpp src/gui/components/Panel.cpp src/gui/components/Panel.h)
+        src/gui/components/Label.cpp
+        src/gui/components/Panel.cpp
+        src/gui/components/Button.cpp)
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)

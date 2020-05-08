@@ -5,6 +5,7 @@
 #include "Panel.h"
 
 void Panel::draw(glm::vec2 origin) {
+    bind_gui_shader();
     meshBuilder.clear();
     meshBuilder.set_origin(origin);
     meshBuilder.push_rectangle(position.x, position.y, size.x, size.y, glm::vec3(0.1843, 0.2218, 0.2431));

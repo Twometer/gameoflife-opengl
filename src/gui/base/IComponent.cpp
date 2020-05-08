@@ -3,6 +3,7 @@
 //
 
 #include "IComponent.h"
+#include "../../render/GameWindow.h"
 
 IComponent::IComponent(const std::string &id) {
     this->id = id;
@@ -82,4 +83,8 @@ glm::vec2 IComponent::get_minimum_size() {
 
 glm::vec2 IComponent::get_maximum_size() {
     return maximumSize;
+}
+
+void IComponent::bind_gui_shader() {
+    GameWindow::get_instance()->get_gui_renderer()->bind_gui_shader();
 }

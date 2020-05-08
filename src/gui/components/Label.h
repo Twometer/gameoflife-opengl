@@ -10,8 +10,8 @@
 
 class Label : public IComponent {
 protected:
-    std::string text;
-    float fontSize;
+    std::string text = "";
+    float fontSize = 1.0f;
 
 public:
     explicit Label(const std::string &id);

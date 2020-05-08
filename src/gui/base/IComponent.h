@@ -27,6 +27,7 @@ protected:
     Alignment verticalAlignment = Alignment::START;
     Alignment horizontalAlignment = Alignment::START;
 
+    static void bind_gui_shader();
 public:
     explicit IComponent(const std::string &id);
 

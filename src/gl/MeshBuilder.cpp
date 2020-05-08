@@ -43,8 +43,8 @@ void MeshBuilder::clear() {
 }
 
 void MeshBuilder::push_vertex(float x, float y) {
-    vertices.push_back(x);
-    vertices.push_back(y);
+    vertices.push_back(x + origin.x);
+    vertices.push_back(y + origin.y);
 }
 
 void MeshBuilder::push_color(float r, float g, float b) {

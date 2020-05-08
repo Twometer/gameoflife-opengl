@@ -13,16 +13,24 @@ FontRenderer::FontRenderer(Font *font) : font(font) {
 
 glm::vec2 FontRenderer::get_bounds(const std::string &text, float size) {
     float x = 0;
-    float y = 0;
+    float minY = 9999999;
+    float maxY = 0;
     for (char c : text) {
         Glyph *glyph = font->glyphs[static_cast<int>(c)];
         if (glyph == nullptr)
             continue;
-        x += (glyph->advance - 15.0f) * size;
-        if (y < glyph->height * size)
-            y = glyph->height * size;
+        x += (glyph->advance - 14.0f) * size;
+
+        float y0 = glyph->yOffset * size;
+        float y1 = y0 + glyph->height * size;
+
+        if (y0 < minY)
+            minY = y0;
+        if (y1 > maxY)
+            maxY = y1;
+
     }
-    return glm::vec2(x, y);
+    return glm::vec2(x, maxY - minY);
 }
 
 void FontRenderer::draw(const std::string &text, glm::vec2 position, float size, glm::vec4 color) {
@@ -41,13 +49,25 @@ void FontRenderer::draw(const std::string &text, glm::vec2 position, float size,
     float tw = font->atlas.width;
     float th = font->atlas.height;
 
+    // Calculate how far down all characters will be
+    float totalYOffset = 999;
+    for (char c : text) {
+        Glyph *glyph = font->glyphs[static_cast<int>(c)];
+        if (glyph == nullptr)
+            continue;
+
+        if (glyph->yOffset < totalYOffset)
+            totalYOffset = glyph->yOffset;
+    }
+
+    // Then draw the text
     for (char c : text) {
         Glyph *glyph = font->glyphs[static_cast<int>(c)];
         if (glyph == nullptr)
             continue;
 
         float x0 = position.x + glyph->xOffset * size;
-        float y0 = position.y + glyph->yOffset * size;
+        float y0 = position.y + glyph->yOffset * size - totalYOffset * size;
         float x1 = x0 + glyph->width * size;
         float y1 = y0 + glyph->height * size;
 
@@ -65,7 +85,7 @@ void FontRenderer::draw(const std::string &text, glm::vec2 position, float size,
         glBufferData(GL_ARRAY_BUFFER, sizeof box, box, GL_DYNAMIC_DRAW);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-        position.x += (glyph->advance - 15.0f) * size;
+        position.x += (glyph->advance - 14) * size;
     }
 
     shader.unbind();

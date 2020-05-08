@@ -22,6 +22,8 @@ public:
 
     void on_resize();
 
+    void bind_gui_shader();
+
 };
 
 
