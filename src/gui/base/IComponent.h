@@ -60,7 +60,7 @@ public:
 
     glm::vec2 get_size();
 
-    glm::vec2 get_preferred_size(glm::vec2 size);
+    glm::vec2 get_preferred_size();
 
 };
 

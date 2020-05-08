@@ -4,13 +4,33 @@
 
 #include "MenuScreen.h"
 #include "../components/Label.h"
+#include "../components/Panel.h"
 
 MenuScreen::MenuScreen() : IScreen("menuScreen") {
-    auto testLabel = new Label("label1");
-    testLabel->set_text("Hello world!");
-    testLabel->set_font_size(0.25f);
-    testLabel->set_vertical_alignment(Alignment::CENTER);
-    testLabel->set_horizontal_alignment(Alignment::START);
 
-    add_component(testLabel);
+    auto testPanel = new Panel("panel1");
+    testPanel->set_row(0);
+    testPanel->set_col(0);
+    testPanel->set_vertical_alignment(Alignment::CENTER);
+    testPanel->set_horizontal_alignment(Alignment::CENTER);
+    testPanel->set_rows(2);
+    testPanel->set_cols(1);
+
+    auto titleLabel = new Label("label1");
+    titleLabel->set_text("Game of Life");
+    titleLabel->set_font_size(0.5f);
+    titleLabel->set_vertical_alignment(Alignment::CENTER);
+    titleLabel->set_horizontal_alignment(Alignment::CENTER);
+    testPanel->add_component(titleLabel);
+
+    auto copyrightLabel = new Label("label2");
+    copyrightLabel->set_text("(c) 2020 Twometer Apps");
+    copyrightLabel->set_font_size(0.25f);
+    copyrightLabel->set_row(1);
+    copyrightLabel->set_vertical_alignment(Alignment::CENTER);
+    copyrightLabel->set_horizontal_alignment(Alignment::CENTER);
+    testPanel->add_component(copyrightLabel);
+
+    add_component(testPanel);
+
 }

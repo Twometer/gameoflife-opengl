@@ -64,6 +64,6 @@ glm::vec2 IComponent::get_size() {
     return size;
 }
 
-glm::vec2 IComponent::get_preferred_size(glm::vec2 size) {
+glm::vec2 IComponent::get_preferred_size() {
     return preferredSize;
 }

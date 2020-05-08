@@ -19,8 +19,8 @@ glm::vec2 FontRenderer::get_bounds(const std::string &text, float size) {
         if (glyph == nullptr)
             continue;
         x += (glyph->advance - 15.0f) * size;
-        if (y < glyph->height)
-            y = glyph->height;
+        if (y < glyph->height * size)
+            y = glyph->height * size;
     }
     return glm::vec2(x, y);
 }

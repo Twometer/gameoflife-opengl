@@ -6,10 +6,14 @@
 #define GAMEOFLIFE_OPENGL_GUIRENDERER_H
 
 #include "base/IScreen.h"
+#include "../render/shaders/BasicShader.h"
 
 class GuiRenderer {
 private:
     IScreen* currentScreen = nullptr;
+
+    // We can reuse the main game shader here
+    BasicShader guiShader;
 
 public:
     void show_screen(IScreen *screen);

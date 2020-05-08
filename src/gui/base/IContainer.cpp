@@ -32,8 +32,8 @@ void IContainer::layout() {
         float maxHeight = 0.0f;
         for (int c = 0; c < columns; c++) {
             IComponent *component = find_component(r, c);
-            if (component != nullptr && component->get_size().y > maxHeight)
-                maxHeight = component->get_size().y;
+            if (component != nullptr && component->get_preferred_size().y > maxHeight)
+                maxHeight = component->get_preferred_size().y;
         }
         rowHeights.push_back(maxHeight);
     }
@@ -43,8 +43,8 @@ void IContainer::layout() {
         float maxWidth = 0.0f;
         for (int r = 0; r < rows; r++) {
             IComponent *component = find_component(r, c);
-            if (component != nullptr && component->get_size().x > maxWidth)
-                maxWidth = component->get_size().x;
+            if (component != nullptr && component->get_preferred_size().x > maxWidth)
+                maxWidth = component->get_preferred_size().x;
         }
         colWidths.push_back(maxWidth);
     }
@@ -54,8 +54,8 @@ void IContainer::layout() {
         float xCoord = std::accumulate(colWidths.begin(), colWidths.begin() + component->get_col(), 0.f);
         float yCoord = std::accumulate(rowHeights.begin(), rowHeights.begin() + component->get_row(), 0.f);
 
-        float width = colWidths[component->get_col()];
-        float height = rowHeights[component->get_row()];
+        float width = std::accumulate(colWidths.begin() + component->get_col(), colWidths.begin() + component->get_col() + component->get_col_span(), 0.f);
+        float height = std::accumulate(rowHeights.begin() + component->get_row(), rowHeights.begin() + component->get_row() + component->get_row_span(), 0.f);
 
         component->set_position(glm::vec2(xCoord, yCoord));
         component->set_size(glm::vec2(width, height));

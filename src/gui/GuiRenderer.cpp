@@ -3,6 +3,7 @@
 //
 
 #include "GuiRenderer.h"
+#include "../render/GameWindow.h"
 
 void GuiRenderer::show_screen(IScreen *screen) {
     this->currentScreen = screen;
@@ -10,6 +11,8 @@ void GuiRenderer::show_screen(IScreen *screen) {
 }
 
 void GuiRenderer::draw() {
+    guiShader.bind();
+    guiShader.set_camera_matrix(GameWindow::get_instance()->get_gui_matrix());
     if (currentScreen != nullptr)
         this->currentScreen->draw();
 }
