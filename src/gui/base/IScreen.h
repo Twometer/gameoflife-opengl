@@ -8,9 +8,11 @@
 #include "IContainer.h"
 
 class IScreen : public IContainer {
+public:
+    IScreen(const std::string &id);
 
 public:
-    void draw();
+    void draw() override;
 
 };
 

@@ -10,9 +10,11 @@ void GuiRenderer::show_screen(IScreen *screen) {
 }
 
 void GuiRenderer::draw() {
-    this->currentScreen->draw();
+    if (currentScreen != nullptr)
+        this->currentScreen->draw();
 }
 
 void GuiRenderer::on_resize() {
-    this->currentScreen->layout();
+    if (currentScreen != nullptr)
+        this->currentScreen->layout();
 }

@@ -5,8 +5,8 @@
 #include "MenuScreen.h"
 #include "../components/Label.h"
 
-MenuScreen::MenuScreen() {
-    auto testLabel = new Label();
+MenuScreen::MenuScreen() : IScreen("menuScreen") {
+    auto testLabel = new Label("label1");
     testLabel->set_text("Hello world!");
     testLabel->set_font_size(0.25f);
     testLabel->set_vertical_alignment(Alignment::CENTER);

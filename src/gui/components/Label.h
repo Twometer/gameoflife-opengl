@@ -14,7 +14,11 @@ protected:
     float fontSize;
 
 public:
+    explicit Label(const std::string &id);
+
     void draw() override;
+
+    void layout() override;
 
     void set_text(std::string text);
     void set_font_size(float fontSize);

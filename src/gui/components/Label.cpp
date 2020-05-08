@@ -4,11 +4,17 @@
 
 #include "Label.h"
 
-#include <utility>
 #include "../../render/GameWindow.h"
 
+Label::Label(const std::string &id) : IComponent(id) {
+}
+
 void Label::draw() {
-    GameWindow::get_instance()->get_font_renderer()->draw(text, glm::vec2(), fontSize);
+    GameWindow::get_instance()->get_font_renderer()->draw(text, position, fontSize);
+}
+
+void Label::layout() {
+    preferredSize = GameWindow::get_instance()->get_font_renderer()->get_bounds(text, fontSize);
 }
 
 void Label::set_text(std::string text) {

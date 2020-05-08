@@ -50,6 +50,7 @@ int main() {
     int viewportWidth, viewportHeight;
     glfwGetFramebufferSize(window, &viewportWidth, &viewportHeight);
     gameWindow->on_viewport_changed(glm::vec2(viewportWidth, viewportHeight));
+    gameWindow->on_startup();
 
     Logger::info("Init complete, starting game");
 

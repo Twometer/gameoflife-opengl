@@ -43,6 +43,8 @@ public:
 
     void draw_frame();
 
+    void on_startup();
+
     void on_scroll(glm::vec2 offset);
 
     void on_viewport_changed(glm::vec2 newSize);

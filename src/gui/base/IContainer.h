@@ -8,7 +8,7 @@
 #include <vector>
 #include "IComponent.h"
 
-class IContainer {
+class IContainer : public IComponent {
 protected:
     std::vector<IComponent *> components;
 
@@ -16,12 +16,19 @@ protected:
     int columns = 1;
 
 public:
+    IContainer(const std::string &id);
+
+    void draw() override;
+
+    void layout() override;
+
     void set_rows(int r);
     void set_cols(int c);
 
     void add_component(IComponent *component);
 
-    void layout();
+private:
+    IComponent *find_component(int row, int col);
 
 };
 

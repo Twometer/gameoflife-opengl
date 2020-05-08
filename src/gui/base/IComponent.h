@@ -18,11 +18,19 @@ protected:
     int column = 0;
     int columnSpan = 1;
 
+    glm::vec2 position = glm::vec2(0, 0);
+    glm::vec2 size = glm::vec2(0, 0);
+    glm::vec2 preferredSize = glm::vec2(0, 0);
+
     Alignment verticalAlignment = Alignment::START;
     Alignment horizontalAlignment = Alignment::START;
 
 public:
+    explicit IComponent(const std::string &id);
+
     virtual void draw() = 0;
+
+    virtual void layout() = 0;
 
     void set_row(int r);
 
@@ -32,9 +40,27 @@ public:
 
     void set_col_span(int colSpan);
 
+    int get_row();
+
+    int get_row_span();
+
+    int get_col();
+
+    int get_col_span();
+
     void set_vertical_alignment(Alignment verticalAlignment);
 
     void set_horizontal_alignment(Alignment horizontalAlignment);
+
+    void set_position(glm::vec2 position);
+
+    void set_size(glm::vec2 size);
+
+    glm::vec2 get_position();
+
+    glm::vec2 get_size();
+
+    glm::vec2 get_preferred_size(glm::vec2 size);
 
 };
 

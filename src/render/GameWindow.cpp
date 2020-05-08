@@ -10,14 +10,12 @@
 #include "../gl/Loader.h"
 #include "../gui/screens/MenuScreen.h"
 
-GameWindow *GameWindow::instance;
+GameWindow *GameWindow::instance = nullptr;
 
 GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"))), timer(20) {
     field = new Field2d(128, 128);
     field->randomize(4);
     field->remesh();
-
-    guiRenderer.show_screen(new MenuScreen());
 
     camera.set_midpoint(glm::vec2(64, 64));
 
@@ -72,6 +70,10 @@ void GameWindow::handle_input() {
 
     mouseXLast = mouseX;
     mouseYLast = mouseY;
+}
+
+void GameWindow::on_startup() {
+    guiRenderer.show_screen(new MenuScreen());
 }
 
 void GameWindow::on_scroll(glm::vec2 offset) {

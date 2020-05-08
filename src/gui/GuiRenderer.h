@@ -9,7 +9,7 @@
 
 class GuiRenderer {
 private:
-    IScreen* currentScreen;
+    IScreen* currentScreen = nullptr;
 
 public:
     void show_screen(IScreen *screen);
