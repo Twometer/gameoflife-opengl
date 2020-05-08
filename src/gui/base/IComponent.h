@@ -20,14 +20,17 @@ protected:
 
     glm::vec2 position = glm::vec2(0, 0);
 
-    glm::vec2 minimumSize = glm::vec2(0,0);
+    glm::vec2 minimumSize = glm::vec2(0, 0);
     glm::vec2 size = glm::vec2(0, 0);
     glm::vec2 maximumSize = glm::vec2(0, 0);
+    glm::vec2 margin = glm::vec2(8, 8);
+    glm::vec2 padding = glm::vec2(0, 0);
 
     Alignment verticalAlignment = Alignment::START;
     Alignment horizontalAlignment = Alignment::START;
 
     static void bind_gui_shader();
+
 public:
     explicit IComponent(const std::string &id);
 
@@ -72,6 +75,12 @@ public:
     glm::vec2 get_minimum_size();
 
     glm::vec2 get_maximum_size();
+
+    void set_margin(glm::vec2 margin);
+
+    glm::vec2 get_margin();
+
+    void set_padding(glm::vec2 padding);
 
 };
 

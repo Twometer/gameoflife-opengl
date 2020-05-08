@@ -78,7 +78,7 @@ void IComponent::set_maximum_size(glm::vec2 maxSize) {
 }
 
 glm::vec2 IComponent::get_minimum_size() {
-    return minimumSize;
+    return minimumSize + padding * 2.f;
 }
 
 glm::vec2 IComponent::get_maximum_size() {
@@ -87,4 +87,16 @@ glm::vec2 IComponent::get_maximum_size() {
 
 void IComponent::bind_gui_shader() {
     GameWindow::get_instance()->get_gui_renderer()->bind_gui_shader();
+}
+
+void IComponent::set_margin(glm::vec2 margin) {
+    this->margin = margin;
+}
+
+glm::vec2 IComponent::get_margin() {
+    return margin;
+}
+
+void IComponent::set_padding(glm::vec2 padding) {
+    this->padding = padding;
 }

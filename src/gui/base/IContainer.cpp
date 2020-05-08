@@ -14,7 +14,7 @@ void IContainer::add_component(IComponent *component) {
 
 void IContainer::draw(glm::vec2 origin) {
     for (auto component : components) {
-        component->draw(origin + position);
+        component->draw(origin + position + padding);
     }
 }
 
@@ -36,8 +36,10 @@ void IContainer::layout() {
     // Apply layout constraints
     for (auto component : components) {
         // Cell boundaries
-        float xCoord = std::accumulate(colWidths.begin(), colWidths.begin() + component->get_col(), 0.f);
-        float yCoord = std::accumulate(rowHeights.begin(), rowHeights.begin() + component->get_row(), 0.f);
+        float xCoord = std::accumulate(colWidths.begin(), colWidths.begin() + component->get_col(), 0.f) +
+                       component->get_margin().x;
+        float yCoord = std::accumulate(rowHeights.begin(), rowHeights.begin() + component->get_row(), 0.f) +
+                       component->get_margin().y;
 
         float cellWidth = std::accumulate(
                 colWidths.begin() + component->get_col(),
@@ -47,20 +49,22 @@ void IContainer::layout() {
                 rowHeights.begin() + component->get_row(),
                 rowHeights.begin() + component->get_row() + component->get_row_span(), 0.f);
 
-        // Calculate component size based on alignment
-        float width = component->get_horizontal_alignment() == Alignment::STRETCH ? cellWidth
-                                                                                  : component->get_minimum_size().x;
+        // Calculate component size based on alignment, margin and calculated minimum component size
+        float width =
+                component->get_horizontal_alignment() == Alignment::STRETCH ? cellWidth - component->get_margin().x * 2
+                                                                            : component->get_minimum_size().x;
 
-        float height = component->get_horizontal_alignment() == Alignment::STRETCH ? cellHeight
-                                                                                   : component->get_minimum_size().y;
+        float height =
+                component->get_horizontal_alignment() == Alignment::STRETCH ? cellHeight - component->get_margin().y * 2
+                                                                            : component->get_minimum_size().y;
 
         // Align the component correctly
         if (component->get_horizontal_alignment() == Alignment::CENTER) {
-            xCoord += cellWidth / 2 - component->get_minimum_size().x / 2;
+            xCoord += cellWidth / 2 - (component->get_minimum_size().x + component->get_margin().x * 2) / 2;
         }
 
         if (component->get_vertical_alignment() == Alignment::CENTER) {
-            yCoord += cellHeight / 2 - component->get_minimum_size().y / 2;
+            yCoord += cellHeight / 2 - (component->get_minimum_size().y + component->get_margin().y * 2) / 2;
         }
 
         // Apply to the component
@@ -97,8 +101,12 @@ void IContainer::build_rows(std::vector<float> &rowHeights) {
         float maxHeight = 0.0f;
         for (int c = 0; c < columns; c++) {
             IComponent *component = find_component(r, c);
-            if (component != nullptr && component->get_minimum_size().y > maxHeight)
-                maxHeight = component->get_minimum_size().y;
+            if (component == nullptr)
+                continue;
+
+            float virtualComponentHeight = component->get_minimum_size().y + component->get_margin().y * 2;
+            if (virtualComponentHeight > maxHeight)
+                maxHeight = virtualComponentHeight;
         }
         rowHeights.push_back(maxHeight);
     }
@@ -117,8 +125,12 @@ void IContainer::build_cols(std::vector<float> &colWidths) {
         float maxWidth = 0.0f;
         for (int r = 0; r < rows; r++) {
             IComponent *component = find_component(r, c);
-            if (component != nullptr && component->get_minimum_size().x > maxWidth)
-                maxWidth = component->get_minimum_size().x;
+            if (component == nullptr)
+                continue;
+
+            float virtualComponentWidth = component->get_minimum_size().x + component->get_margin().x * 2;
+            if (virtualComponentWidth > maxWidth)
+                maxWidth = virtualComponentWidth;
         }
         colWidths.push_back(maxWidth);
     }
