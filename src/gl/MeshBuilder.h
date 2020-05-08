@@ -8,12 +8,15 @@
 
 #include <vector>
 #include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
 
 class MeshBuilder {
 private:
     std::vector<float> vertices;
 
     std::vector<float> colors;
+
+    glm::vec2 origin;
 
     void push_vertex(float x, float y);
     void push_color(float r, float g, float b);
@@ -30,6 +33,8 @@ public:
     int get_color_count();
 
     void clear();
+
+    void set_origin(glm::vec2 origin);
 
 };
 

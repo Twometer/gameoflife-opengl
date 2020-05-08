@@ -48,6 +48,14 @@ void IComponent::set_horizontal_alignment(Alignment horizontalAlignment) {
     this->horizontalAlignment = horizontalAlignment;
 }
 
+Alignment IComponent::get_vertical_alignment() {
+    return verticalAlignment;
+}
+
+Alignment IComponent::get_horizontal_alignment() {
+    return horizontalAlignment;
+}
+
 void IComponent::set_size(glm::vec2 size) {
     this->size = size;
 }
@@ -64,6 +72,14 @@ glm::vec2 IComponent::get_size() {
     return size;
 }
 
-glm::vec2 IComponent::get_preferred_size() {
-    return preferredSize;
+void IComponent::set_maximum_size(glm::vec2 maxSize) {
+    this->maximumSize = maxSize;
+}
+
+glm::vec2 IComponent::get_minimum_size() {
+    return minimumSize;
+}
+
+glm::vec2 IComponent::get_maximum_size() {
+    return maximumSize;
 }

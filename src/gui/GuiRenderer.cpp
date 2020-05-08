@@ -14,7 +14,7 @@ void GuiRenderer::draw() {
     guiShader.bind();
     guiShader.set_camera_matrix(GameWindow::get_instance()->get_gui_matrix());
     if (currentScreen != nullptr)
-        this->currentScreen->draw();
+        this->currentScreen->draw(glm::vec2(0, 0));
 }
 
 void GuiRenderer::on_resize() {

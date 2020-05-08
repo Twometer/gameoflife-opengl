@@ -18,7 +18,7 @@ private:
 public:
     Panel(const std::string &id);
 
-    void draw() override;
+    void draw(glm::vec2 origin) override;
 
 };
 

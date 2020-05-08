@@ -19,8 +19,10 @@ protected:
     int columnSpan = 1;
 
     glm::vec2 position = glm::vec2(0, 0);
+
+    glm::vec2 minimumSize = glm::vec2(0,0);
     glm::vec2 size = glm::vec2(0, 0);
-    glm::vec2 preferredSize = glm::vec2(0, 0);
+    glm::vec2 maximumSize = glm::vec2(0, 0);
 
     Alignment verticalAlignment = Alignment::START;
     Alignment horizontalAlignment = Alignment::START;
@@ -28,7 +30,7 @@ protected:
 public:
     explicit IComponent(const std::string &id);
 
-    virtual void draw() = 0;
+    virtual void draw(glm::vec2 origin) = 0;
 
     virtual void layout() = 0;
 
@@ -52,7 +54,13 @@ public:
 
     void set_horizontal_alignment(Alignment horizontalAlignment);
 
+    Alignment get_vertical_alignment();
+
+    Alignment get_horizontal_alignment();
+
     void set_position(glm::vec2 position);
+
+    void set_maximum_size(glm::vec2 maxSize);
 
     void set_size(glm::vec2 size);
 
@@ -60,7 +68,9 @@ public:
 
     glm::vec2 get_size();
 
-    glm::vec2 get_preferred_size();
+    glm::vec2 get_minimum_size();
+
+    glm::vec2 get_maximum_size();
 
 };
 

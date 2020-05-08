@@ -18,7 +18,7 @@ protected:
 public:
     IContainer(const std::string &id);
 
-    void draw() override;
+    void draw(glm::vec2 origin) override;
 
     void layout() override;
 
@@ -29,6 +29,10 @@ public:
 
 private:
     IComponent *find_component(int row, int col);
+
+    void build_rows(std::vector<float> &rowWidths);
+
+    void build_cols(std::vector<float> &colHeights);
 
 };
 

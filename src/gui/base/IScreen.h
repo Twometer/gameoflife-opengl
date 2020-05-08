@@ -12,7 +12,9 @@ public:
     IScreen(const std::string &id);
 
 public:
-    void draw() override;
+    void draw(glm::vec2 origin) override;
+
+    void layout() override;
 
 };
 

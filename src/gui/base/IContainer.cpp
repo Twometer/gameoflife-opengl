@@ -12,9 +12,9 @@ void IContainer::add_component(IComponent *component) {
     this->components.push_back(component);
 }
 
-void IContainer::draw() {
+void IContainer::draw(glm::vec2 origin) {
     for (auto component : components) {
-        component->draw();
+        component->draw(origin + position);
     }
 }
 
@@ -28,43 +28,53 @@ void IContainer::layout() {
     }
 
     // Compute row heights
-    for (int r = 0; r < rows; r++) {
-        float maxHeight = 0.0f;
-        for (int c = 0; c < columns; c++) {
-            IComponent *component = find_component(r, c);
-            if (component != nullptr && component->get_preferred_size().y > maxHeight)
-                maxHeight = component->get_preferred_size().y;
-        }
-        rowHeights.push_back(maxHeight);
-    }
+    build_rows(rowHeights);
 
     // Compute column widths
-    for (int c = 0; c < columns; c++) {
-        float maxWidth = 0.0f;
-        for (int r = 0; r < rows; r++) {
-            IComponent *component = find_component(r, c);
-            if (component != nullptr && component->get_preferred_size().x > maxWidth)
-                maxWidth = component->get_preferred_size().x;
-        }
-        colWidths.push_back(maxWidth);
-    }
+    build_cols(colWidths);
 
     // Apply layout constraints
     for (auto component : components) {
+        // Cell boundaries
         float xCoord = std::accumulate(colWidths.begin(), colWidths.begin() + component->get_col(), 0.f);
         float yCoord = std::accumulate(rowHeights.begin(), rowHeights.begin() + component->get_row(), 0.f);
 
-        float width = std::accumulate(colWidths.begin() + component->get_col(), colWidths.begin() + component->get_col() + component->get_col_span(), 0.f);
-        float height = std::accumulate(rowHeights.begin() + component->get_row(), rowHeights.begin() + component->get_row() + component->get_row_span(), 0.f);
+        float cellWidth = std::accumulate(
+                colWidths.begin() + component->get_col(),
+                colWidths.begin() + component->get_col() + component->get_col_span(), 0.f);
 
+        float cellHeight = std::accumulate(
+                rowHeights.begin() + component->get_row(),
+                rowHeights.begin() + component->get_row() + component->get_row_span(), 0.f);
+
+        // Calculate component size based on alignment
+        float width = component->get_horizontal_alignment() == Alignment::STRETCH ? cellWidth
+                                                                                  : component->get_minimum_size().x;
+
+        float height = component->get_horizontal_alignment() == Alignment::STRETCH ? cellHeight
+                                                                                   : component->get_minimum_size().y;
+
+        // Align the component correctly
+        if (component->get_horizontal_alignment() == Alignment::CENTER) {
+            xCoord += cellWidth / 2 - component->get_minimum_size().x / 2;
+        }
+
+        if (component->get_vertical_alignment() == Alignment::CENTER) {
+            yCoord += cellHeight / 2 - component->get_minimum_size().y / 2;
+        }
+
+        // Apply to the component
         component->set_position(glm::vec2(xCoord, yCoord));
         component->set_size(glm::vec2(width, height));
     }
 
     // Finally, calculate size of current component
-    float totalWidth = std::accumulate(colWidths.begin(), colWidths.end(), 0.f);
-    float totalHeight = std::accumulate(rowHeights.begin(), rowHeights.end(), 0.f);
-    this->preferredSize = glm::vec2(totalWidth, totalHeight);
+    bool fillX = this->get_horizontal_alignment() == Alignment::STRETCH;
+    bool fillY = this->get_vertical_alignment() == Alignment::STRETCH;
+
+    float totalWidth = fillX ? maximumSize.x : std::accumulate(colWidths.begin(), colWidths.end(), 0.f);
+    float totalHeight = fillY ? maximumSize.y : std::accumulate(rowHeights.begin(), rowHeights.end(), 0.f);
+    this->minimumSize = glm::vec2(totalWidth, totalHeight);
 }
 
 void IContainer::set_cols(int c) {
@@ -80,5 +90,45 @@ IComponent *IContainer::find_component(int row, int col) {
         if (component->get_row() == row && component->get_col() == col)
             return component;
     return nullptr;
+}
+
+void IContainer::build_rows(std::vector<float> &rowHeights) {
+    for (int r = 0; r < rows; r++) {
+        float maxHeight = 0.0f;
+        for (int c = 0; c < columns; c++) {
+            IComponent *component = find_component(r, c);
+            if (component != nullptr && component->get_minimum_size().y > maxHeight)
+                maxHeight = component->get_minimum_size().y;
+        }
+        rowHeights.push_back(maxHeight);
+    }
+
+    if (verticalAlignment == Alignment::STRETCH) {
+        float totalHeight = std::accumulate(rowHeights.begin(), rowHeights.end(), 0.f);
+
+        for (float &rowHeight : rowHeights) {
+            rowHeight = (rowHeight / totalHeight * maximumSize.y);
+        }
+    }
+}
+
+void IContainer::build_cols(std::vector<float> &colWidths) {
+    for (int c = 0; c < columns; c++) {
+        float maxWidth = 0.0f;
+        for (int r = 0; r < rows; r++) {
+            IComponent *component = find_component(r, c);
+            if (component != nullptr && component->get_minimum_size().x > maxWidth)
+                maxWidth = component->get_minimum_size().x;
+        }
+        colWidths.push_back(maxWidth);
+    }
+
+    if (horizontalAlignment == Alignment::STRETCH) {
+        float totalWidth = std::accumulate(colWidths.begin(), colWidths.end(), 0.f);
+
+        for (float &colWidth : colWidths) {
+            colWidth = (colWidth / totalWidth * maximumSize.x);
+        }
+    }
 }
 

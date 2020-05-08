@@ -52,3 +52,7 @@ void MeshBuilder::push_color(float r, float g, float b) {
     colors.push_back(g);
     colors.push_back(b);
 }
+
+void MeshBuilder::set_origin(glm::vec2 origin) {
+    this->origin = origin;
+}

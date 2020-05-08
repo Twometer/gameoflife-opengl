@@ -9,12 +9,12 @@
 Label::Label(const std::string &id) : IComponent(id) {
 }
 
-void Label::draw() {
-    GameWindow::get_instance()->get_font_renderer()->draw(text, position, fontSize);
+void Label::draw(glm::vec2 origin) {
+    GameWindow::get_instance()->get_font_renderer()->draw(text, position + origin, fontSize);
 }
 
 void Label::layout() {
-    preferredSize = GameWindow::get_instance()->get_font_renderer()->get_bounds(text, fontSize);
+    minimumSize = GameWindow::get_instance()->get_font_renderer()->get_bounds(text, fontSize);
 }
 
 void Label::set_text(std::string text) {
