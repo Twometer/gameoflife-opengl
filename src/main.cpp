@@ -62,7 +62,7 @@ int main() {
 
     Logger::info("Init complete, starting game");
 
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window) && !gameWindow->should_close()) {
         gameWindow->draw_frame();
         glfwSwapBuffers(window);
         glfwPollEvents();

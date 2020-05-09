@@ -134,3 +134,11 @@ GuiRenderer *GameWindow::get_gui_renderer() {
 FontRenderer *GameWindow::get_font_renderer() {
     return &fontRenderer;
 }
+
+bool GameWindow::should_close() {
+    return shouldClose;
+}
+
+void GameWindow::close() {
+    shouldClose = true;
+}

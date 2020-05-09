@@ -14,7 +14,7 @@
                 HorizontalAlignment="STRETCH"/>
         <Button Id="btnLoadGame" Row="3" Text="Load game" FontSize="0.55" Margin="32,8" Padding="32,0"
                 HorizontalAlignment="STRETCH"/>
-        <Button Id="btnExitGAme" Row="4" Text="Exit game" FontSize="0.55" Margin="32,8" Padding="32,0"
+        <Button Id="btnExitGame" Row="4" Text="Exit game" FontSize="0.55" Margin="32,8" Padding="32,0"
                 HorizontalAlignment="STRETCH"/>
     </Panel>
 </Screen>

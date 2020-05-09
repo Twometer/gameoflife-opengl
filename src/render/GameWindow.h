@@ -36,6 +36,8 @@ private:
     GuiRenderer guiRenderer;
     FontRenderer fontRenderer;
 
+    bool shouldClose;
+
     GameWindow();
 public:
     static GameWindow *get_instance();
@@ -63,6 +65,10 @@ public:
     GuiRenderer *get_gui_renderer();
 
     FontRenderer *get_font_renderer();
+
+    bool should_close();
+
+    void close();
 
 private:
     void handle_input();
