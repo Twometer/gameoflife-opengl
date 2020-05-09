@@ -7,6 +7,7 @@
 
 #include <string>
 #include <glm/vec2.hpp>
+#include <functional>
 #include "Alignment.h"
 #include "../Graphics.h"
 
@@ -36,6 +37,8 @@ protected:
 
 private:
     bool isMouseDown = false;
+
+    std::function<void()> clickListener;
 
 public:
     explicit IComponent(const std::string &id);
@@ -87,6 +90,8 @@ public:
     glm::vec2 get_margin();
 
     void set_padding(glm::vec2 padding);
+
+    void set_click_listener(std::function<void()> listener);
 
     bool is_inside(glm::vec2 position);
 

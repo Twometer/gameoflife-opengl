@@ -28,7 +28,3 @@ void Button::set_text(std::string text) {
 void Button::set_font_size(float fontSize) {
     this->fontSize = fontSize;
 }
-
-void Button::on_click(glm::vec2 position) {
-    std::cout << "Button " << id << " was clicked!" << std::endl;
-}

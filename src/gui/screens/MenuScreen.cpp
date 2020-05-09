@@ -2,6 +2,7 @@
 // Created by twome on 08/05/2020.
 //
 
+#include <iostream>
 #include "MenuScreen.h"
 #include "../components/Label.h"
 #include "../components/Panel.h"
@@ -40,6 +41,9 @@ MenuScreen::MenuScreen() : IScreen("menuScreen") {
     newGameButton->set_font_size(0.55f);
     newGameButton->set_margin(glm::vec2(32, 8));
     newGameButton->set_padding(glm::vec2(32, 0));
+    newGameButton->set_click_listener([]() {
+        std::cout << "New game clicked!" << std::endl;
+    });
     panel->add_component(newGameButton);
 
     auto loadGameButton = new Button("btnLoadGame");

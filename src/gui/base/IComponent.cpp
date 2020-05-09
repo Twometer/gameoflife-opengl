@@ -109,10 +109,15 @@ void IComponent::on_mouse_up(glm::vec2 vec) {
 }
 
 void IComponent::on_click(glm::vec2 position) {
-    // Do nothing by default
+    if (clickListener)
+        clickListener();
 }
 
 bool IComponent::is_inside(glm::vec2 vec) {
     return vec.x >= this->position.x && vec.y >= this->position.y
            && vec.x < this->position.x + this->size.x && vec.y < this->position.y + this->size.y;
+}
+
+void IComponent::set_click_listener(std::function<void()> listener) {
+    this->clickListener = listener;
 }
