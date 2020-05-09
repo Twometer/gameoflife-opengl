@@ -19,9 +19,9 @@ private:
     float fontSize = 1.0f;
 
 public:
-    Button(const std::string &id);
+    explicit Button(const std::string &id);
 
-    void draw(glm::vec2 origin) override;
+    void draw(Graphics &graphics) override;
 
     void layout() override;
 

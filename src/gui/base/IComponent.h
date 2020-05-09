@@ -8,6 +8,7 @@
 #include <string>
 #include <glm/vec2.hpp>
 #include "Alignment.h"
+#include "../Graphics.h"
 
 /**
  * The base class for all GUI components
@@ -38,7 +39,7 @@ protected:
 public:
     explicit IComponent(const std::string &id);
 
-    virtual void draw(glm::vec2 origin) = 0;
+    virtual void draw(Graphics &graphics) = 0;
 
     virtual void layout() = 0;
 

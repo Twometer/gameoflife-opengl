@@ -11,15 +11,14 @@ void GuiRenderer::show_screen(IScreen *screen) {
 }
 
 void GuiRenderer::draw() {
-    guiShader.bind();
-    guiShader.set_camera_matrix(GameWindow::get_instance()->get_gui_matrix());
     if (currentScreen != nullptr)
-        this->currentScreen->draw(glm::vec2(0, 0));
+        this->currentScreen->draw(graphics);
 }
 
 void GuiRenderer::on_resize() {
     if (currentScreen != nullptr)
         this->currentScreen->layout();
+
 }
 
 void GuiRenderer::bind_gui_shader() {

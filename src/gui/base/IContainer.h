@@ -22,7 +22,7 @@ protected:
 public:
     explicit IContainer(const std::string &id);
 
-    void draw(glm::vec2 origin) override;
+    void draw(Graphics &graphics) override;
 
     void layout() override;
 

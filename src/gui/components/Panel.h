@@ -16,9 +16,9 @@ private:
     MeshBuilder meshBuilder;
 
 public:
-    Panel(const std::string &id);
+    explicit Panel(const std::string &id);
 
-    void draw(glm::vec2 origin) override;
+    void draw(Graphics &graphics) override;
 
 };
 

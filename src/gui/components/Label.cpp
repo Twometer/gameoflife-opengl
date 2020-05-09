@@ -9,8 +9,8 @@
 Label::Label(const std::string &id) : IComponent(id) {
 }
 
-void Label::draw(glm::vec2 origin) {
-    GameWindow::get_instance()->get_font_renderer()->draw(text, position + origin, fontSize);
+void Label::draw(Graphics &graphics) {
+    graphics.draw_text(text, position, fontSize);
 }
 
 void Label::layout() {

@@ -15,7 +15,7 @@ public:
     explicit IScreen(const std::string &id);
 
 public:
-    void draw(glm::vec2 origin) override;
+    void draw(Graphics &graphics) override;
 
     void layout() override;
 

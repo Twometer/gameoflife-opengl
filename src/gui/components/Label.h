@@ -16,7 +16,7 @@ protected:
 public:
     explicit Label(const std::string &id);
 
-    void draw(glm::vec2 origin) override;
+    void draw(Graphics &graphics) override;
 
     void layout() override;
 

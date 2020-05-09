@@ -7,10 +7,16 @@
 
 #include "base/IScreen.h"
 #include "../render/shaders/BasicShader.h"
+#include "Graphics.h"
+#include "../gl/Vao.h"
 
 class GuiRenderer {
 private:
-    IScreen* currentScreen = nullptr;
+    IScreen *currentScreen = nullptr;
+
+    Vao vao = Vao(2);
+    MeshBuilder meshBuilder;
+    Graphics graphics = Graphics(&vao, &meshBuilder, &guiShader, glm::vec2(0, 0));
 
     // We can reuse the main game shader here
     BasicShader guiShader;

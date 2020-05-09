@@ -5,9 +5,9 @@
 #include "IScreen.h"
 #include "../../render/GameWindow.h"
 
-void IScreen::draw(glm::vec2 origin) {
+void IScreen::draw(Graphics &graphics) {
     for (auto component : components)
-        component->draw(origin);
+        component->draw(graphics);
 }
 
 IScreen::IScreen(const std::string &id) : IContainer(id) {

@@ -43,16 +43,12 @@ void MeshBuilder::clear() {
 }
 
 void MeshBuilder::push_vertex(float x, float y) {
-    vertices.push_back(x + origin.x);
-    vertices.push_back(y + origin.y);
+    vertices.push_back(x);
+    vertices.push_back(y);
 }
 
 void MeshBuilder::push_color(float r, float g, float b) {
     colors.push_back(r);
     colors.push_back(g);
     colors.push_back(b);
-}
-
-void MeshBuilder::set_origin(glm::vec2 origin) {
-    this->origin = origin;
 }

@@ -12,9 +12,10 @@ void IContainer::add_component(IComponent *component) {
     this->components.push_back(component);
 }
 
-void IContainer::draw(glm::vec2 origin) {
+void IContainer::draw(Graphics &graphics) {
+    Graphics nextGraphics = graphics.create_offset(position + padding);
     for (auto component : components) {
-        component->draw(origin + position + padding);
+        component->draw(nextGraphics);
     }
 }
 
