@@ -9,11 +9,11 @@
 #include "../base/IComponent.h"
 #include "../../gl/Vao.h"
 #include "../../gl/MeshBuilder.h"
+#include "../../util/AnimatedColor.h"
 
 class Button : public IComponent {
 private:
-    Vao vao = Vao(2);
-    MeshBuilder meshBuilder;
+    AnimatedColor color = glm::vec3(0.1804, 0.8, 0.4431);
 
     std::string text = "";
     float fontSize = 1.0f;
@@ -26,8 +26,12 @@ public:
     void layout() override;
 
     void set_text(std::string text);
+
     void set_font_size(float fontSize);
 
+    void on_mouse_enter() override;
+
+    void on_mouse_leave() override;
 };
 
 

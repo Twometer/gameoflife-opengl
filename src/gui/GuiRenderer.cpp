@@ -30,3 +30,8 @@ void GuiRenderer::on_mouse_up(glm::vec2 position) {
     if (currentScreen != nullptr)
         currentScreen->on_mouse_up(position);
 }
+
+void GuiRenderer::on_mouse_move(glm::vec2 position) {
+    if (currentScreen != nullptr)
+        currentScreen->on_mouse_move(position);
+}

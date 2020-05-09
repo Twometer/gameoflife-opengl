@@ -27,7 +27,8 @@ private:
 
     BasicShader basicShader;
 
-    Timer timer;
+    Timer updateTimer;      // This timer checks input data and updates animations at a constant rate
+    Timer generationTimer;  // This timer calculates the next GOL generation after a given time
 
     glm::vec2 viewportSize;
     glm::mat4 guiMatrix;

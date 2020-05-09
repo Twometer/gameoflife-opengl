@@ -12,7 +12,8 @@
 
 GameWindow *GameWindow::instance = nullptr;
 
-GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"))), timer(20) {
+GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"))), generationTimer(20),
+                           updateTimer(60) {
     field = new Field2d(128, 128);
     field->randomize(4);
     field->remesh();
@@ -38,18 +39,21 @@ void GameWindow::draw_frame() {
     basicShader.set_camera_matrix(camera.get_matrix());
     field->render();
 
-    if (timer.elapsed()) {
+    if (generationTimer.elapsed()) {
         field->tick();      // Next generation
         field->remesh();    // Rebuild mesh
 
-        timer.reset();
+        generationTimer.reset();
+    }
+
+    if (updateTimer.elapsed()) {
+        handle_input();
+        updateTimer.reset();
     }
 
     fontRenderer.draw("Living cells: " + std::to_string(field->get_living_cells()), glm::vec2(10, 10), 0.5f);
 
     guiRenderer.draw();
-
-    handle_input();
 }
 
 void GameWindow::handle_input() {
@@ -61,11 +65,15 @@ void GameWindow::handle_input() {
 
 
     static double mouseXLast, mouseYLast;
-    if ((mouseXLast != mouseX || mouseYLast != mouseY) &&
-        glfwGetMouseButton(glfwHandle, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
-        glm::vec2 offset = glm::vec2(-(mouseX - mouseXLast) / viewportSize.x * camera.get_size().x,
-                                     (mouseY - mouseYLast) / viewportSize.y * camera.get_size().y);
-        camera.move_midpoint(offset);
+    if ((mouseXLast != mouseX || mouseYLast != mouseY)) {
+
+        guiRenderer.on_mouse_move(glm::vec2(mouseX, mouseY));
+
+        if (glfwGetMouseButton(glfwHandle, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+            glm::vec2 offset = glm::vec2(-(mouseX - mouseXLast) / viewportSize.x * camera.get_size().x,
+                                         (mouseY - mouseYLast) / viewportSize.y * camera.get_size().y);
+            camera.move_midpoint(offset);
+        }
     }
 
     mouseXLast = mouseX;

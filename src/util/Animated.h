@@ -40,6 +40,12 @@ public:
         dstValue = glm::clamp(dstValue, min, max);
     }
 
+    Animated &operator=(const float other) {
+        set_value(other);
+        reset();
+        return *this;
+    }
+
     Animated &operator+=(const float other) {
         this->dstValue += other;
         reset();

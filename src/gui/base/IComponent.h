@@ -37,6 +37,7 @@ protected:
 
 private:
     bool isMouseDown = false;
+    bool isMouseOver = false;
 
     std::function<void()> clickListener;
 
@@ -100,6 +101,12 @@ public:
     virtual void on_mouse_up(glm::vec2 position);
 
     virtual void on_click(glm::vec2 position);
+
+    virtual void on_mouse_move(glm::vec2 position);
+
+    virtual void on_mouse_enter();
+
+    virtual void on_mouse_leave();
 
 };
 

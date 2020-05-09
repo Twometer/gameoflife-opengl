@@ -121,3 +121,23 @@ bool IComponent::is_inside(glm::vec2 vec) {
 void IComponent::set_click_listener(std::function<void()> listener) {
     this->clickListener = listener;
 }
+
+void IComponent::on_mouse_move(glm::vec2 position) {
+    bool isInside = is_inside(position);
+
+    if (isInside && !isMouseOver) {
+        isMouseOver = true;
+        on_mouse_enter();
+    } else if (!isInside && isMouseOver) {
+        isMouseOver = false;
+        on_mouse_leave();
+    }
+}
+
+void IComponent::on_mouse_enter() {
+    // Do nothing by default
+}
+
+void IComponent::on_mouse_leave() {
+    // Do nothing by default
+}

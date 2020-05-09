@@ -32,6 +32,8 @@ public:
 
     void on_mouse_up(glm::vec2 position);
 
+    void on_mouse_move(glm::vec2 position);
+
 };
 
 

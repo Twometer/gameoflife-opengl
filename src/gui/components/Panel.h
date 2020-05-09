@@ -11,10 +11,6 @@
 #include "../../gl/MeshBuilder.h"
 
 class Panel : public IContainer {
-private:
-    Vao vao = Vao(2);
-    MeshBuilder meshBuilder;
-
 public:
     explicit Panel(const std::string &id);
 

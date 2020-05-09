@@ -183,3 +183,8 @@ void IContainer::on_mouse_up(glm::vec2 position) {
 glm::vec2 IContainer::get_origin() {
     return position + padding;
 }
+
+void IContainer::on_mouse_move(glm::vec2 position) {
+    for (auto component : components)
+        component->on_mouse_move(position - get_origin());
+}

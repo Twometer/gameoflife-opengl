@@ -36,6 +36,8 @@ public:
 
     void on_mouse_up(glm::vec2 position) override;
 
+    void on_mouse_move(glm::vec2 position) override;
+
 private:
     IComponent *find_component(int row, int col);
 
