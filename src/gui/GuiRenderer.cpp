@@ -3,7 +3,6 @@
 //
 
 #include "GuiRenderer.h"
-#include "../render/GameWindow.h"
 
 void GuiRenderer::show_screen(IScreen *screen) {
     this->currentScreen = screen;
@@ -34,4 +33,8 @@ void GuiRenderer::on_mouse_up(glm::vec2 position) {
 void GuiRenderer::on_mouse_move(glm::vec2 position) {
     if (currentScreen != nullptr)
         currentScreen->on_mouse_move(position);
+}
+
+bool GuiRenderer::is_input_blocked() {
+    return currentScreen != nullptr && currentScreen->blocks_game_inputs();
 }

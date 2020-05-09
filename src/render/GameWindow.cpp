@@ -69,7 +69,7 @@ void GameWindow::handle_input() {
 
         guiRenderer.on_mouse_move(glm::vec2(mouseX, mouseY));
 
-        if (glfwGetMouseButton(glfwHandle, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+        if (glfwGetMouseButton(glfwHandle, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS && !guiRenderer.is_input_blocked()) {
             glm::vec2 offset = glm::vec2(-(mouseX - mouseXLast) / viewportSize.x * camera.get_size().x,
                                          (mouseY - mouseYLast) / viewportSize.y * camera.get_size().y);
             camera.move_midpoint(offset);
@@ -85,6 +85,8 @@ void GameWindow::on_startup() {
 }
 
 void GameWindow::on_scroll(glm::vec2 offset) {
+    if (guiRenderer.is_input_blocked())
+        return;
     camera.zoom += offset.y * glm::sqrt(camera.zoom.get_value() / 1280.0f);
     camera.zoom.clamp_to(0.001, 0.1);
 }

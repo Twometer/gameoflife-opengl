@@ -19,6 +19,12 @@ public:
 
     void layout() override;
 
+    /**
+     * This may be true for e.g. the menu screen, but false for the ingame HUD screen
+     * @return Whether the current screen should block inputs to the game such as zooming and moving the field.
+     */
+    virtual bool blocks_game_inputs();
+
 };
 
 #endif //GAMEOFLIFE_OPENGL_ISCREEN_H

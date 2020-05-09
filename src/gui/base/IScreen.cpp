@@ -20,3 +20,7 @@ void IScreen::layout() {
     this->maximumSize = GameWindow::get_instance()->get_viewport_size();
     IContainer::layout();
 }
+
+bool IScreen::blocks_game_inputs() {
+    return true;
+}
