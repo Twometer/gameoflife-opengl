@@ -141,3 +141,7 @@ void IComponent::on_mouse_enter() {
 void IComponent::on_mouse_leave() {
     // Do nothing by default
 }
+
+const std::string &IComponent::get_id() {
+    return id;
+}

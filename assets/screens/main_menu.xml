@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Author: Twometer
+    Date: 5/9/20 2:10 AM
+-->
+
+<Screen Id="menuScreen" VerticalAlignment="STRETCH"  HorizontalAlignment="STRETCH">
+    <Panel Id="mainPanel" VerticalAlignment="CENTER" HorizontalAlignment="CENTER" Rows="5" Cols="1" Padding="32,16">
+        <Label Id="titleLabel" Row="0" Text="Game of Life" FontSize="0.8" VerticalAlignment="CENTER"
+               HorizontalAlignment="CENTER"/>
+        <Label Id="subtitleLabel" Row="1" Text="(c) 2020 Twometer Apps" FontSize="0.25" VerticalAlignment="CENTER"
+               HorizontalAlignment="CENTER"/>
+        <Button Id="btnNewGame" Row="2" Text="New game" FontSize="0.55" Margin="32,8" Padding="32,0"
+                HorizontalAlignment="STRETCH"/>
+        <Button Id="btnLoadGame" Row="3" Text="Load game" FontSize="0.55" Margin="32,8" Padding="32,0"
+                HorizontalAlignment="STRETCH"/>
+        <Button Id="btnExitGAme" Row="4" Text="Exit game" FontSize="0.55" Margin="32,8" Padding="32,0"
+                HorizontalAlignment="STRETCH"/>
+    </Panel>
+</Screen>

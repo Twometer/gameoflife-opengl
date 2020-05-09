@@ -38,6 +38,20 @@ public:
 
     void on_mouse_move(glm::vec2 position) override;
 
+    // We have to define this method here instead of in the .cpp
+    // because template functions have to be defined in the header
+    // if we want to have ANY objects as template typename
+    // See: https://stackoverflow.com/q/115703
+    template<typename T>
+    T *find_component(const std::string &id) {
+        for (auto component : components)
+            if (component->get_id() == id)
+                return dynamic_cast<T *>(component);
+            else if (auto container = dynamic_cast<IContainer *>(component))
+                return container->find_component<T>(id);
+        return nullptr;
+    }
+
 private:
     IComponent *find_component(int row, int col);
 

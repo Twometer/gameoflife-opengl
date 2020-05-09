@@ -4,6 +4,8 @@
 
 #include <numeric>
 #include "IContainer.h"
+#include "../components/Button.h"
+#include "../components/Label.h"
 
 IContainer::IContainer(const std::string &id) : IComponent(id) {
 }

@@ -9,6 +9,7 @@ add_subdirectory(libs/glfw)
 add_executable(gameoflife_opengl
         ext/glad.cpp
         ext/spng.c
+        ext/tinyxml2.cpp
         src/main.cpp
         src/util/Logger.cpp
         src/render/GameWindow.cpp
@@ -29,7 +30,8 @@ add_executable(gameoflife_opengl
         src/gui/components/Label.cpp
         src/gui/components/Panel.cpp
         src/gui/components/Button.cpp
-        src/gui/Graphics.cpp)
+        src/gui/Graphics.cpp
+        src/gui/loader/GuiXmlLoader.cpp )
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)

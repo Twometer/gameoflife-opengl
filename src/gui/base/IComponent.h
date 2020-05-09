@@ -96,6 +96,8 @@ public:
 
     bool is_inside(glm::vec2 position);
 
+    const std::string &get_id();
+
     virtual void on_mouse_down(glm::vec2 position);
 
     virtual void on_mouse_up(glm::vec2 position);
