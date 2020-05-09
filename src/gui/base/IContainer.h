@@ -8,6 +8,10 @@
 #include <vector>
 #include "IComponent.h"
 
+/**
+ * The IContainer is a special component that
+ * implements a simple grid-based container for components
+ */
 class IContainer : public IComponent {
 protected:
     std::vector<IComponent *> components;
@@ -16,13 +20,14 @@ protected:
     int columns = 1;
 
 public:
-    IContainer(const std::string &id);
+    explicit IContainer(const std::string &id);
 
     void draw(glm::vec2 origin) override;
 
     void layout() override;
 
     void set_rows(int r);
+
     void set_cols(int c);
 
     void add_component(IComponent *component);

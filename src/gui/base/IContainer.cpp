@@ -18,11 +18,13 @@ void IContainer::draw(glm::vec2 origin) {
     }
 }
 
+// Yay, grid layout engine :)
 void IContainer::layout() {
     std::vector<float> rowHeights;
     std::vector<float> colWidths;
 
-    // Layout every component inside this one
+    // First, run a layout pass on all child components
+    // so that they have correct minimum sizes
     for (auto component : components) {
         component->layout();
     }
@@ -35,30 +37,30 @@ void IContainer::layout() {
 
     // Apply layout constraints
     for (auto component : components) {
-        // Cell boundaries
+        // Calculate position of the usable content area of the cell
+        // This excludes the margin of the component within the cell
         float xCoord = std::accumulate(colWidths.begin(), colWidths.begin() + component->get_col(), 0.f) +
                        component->get_margin().x;
         float yCoord = std::accumulate(rowHeights.begin(), rowHeights.begin() + component->get_row(), 0.f) +
                        component->get_margin().y;
 
-        float cellWidth = std::accumulate(
-                colWidths.begin() + component->get_col(),
-                colWidths.begin() + component->get_col() + component->get_col_span(), 0.f);
+        // Calculate the size of the mentioned usable content area
+        float cellWidth = std::accumulate(colWidths.begin() + component->get_col(),
+                                          colWidths.begin() + component->get_col() + component->get_col_span(), 0.f) -
+                          component->get_margin().x * 2;
 
-        float cellHeight = std::accumulate(
-                rowHeights.begin() + component->get_row(),
-                rowHeights.begin() + component->get_row() + component->get_row_span(), 0.f);
+        float cellHeight = std::accumulate(rowHeights.begin() + component->get_row(),
+                                           rowHeights.begin() + component->get_row() + component->get_row_span(), 0.f) -
+                           component->get_margin().y * 2;
 
-        // Calculate component size based on alignment, margin and calculated minimum component size
-        float width =
-                component->get_horizontal_alignment() == Alignment::STRETCH ? cellWidth - component->get_margin().x * 2
-                                                                            : component->get_minimum_size().x;
+        // Calculate component size based on whether it is set to fill the cell or not
+        float width = component->get_horizontal_alignment() == Alignment::STRETCH ? cellWidth
+                                                                                  : component->get_minimum_size().x;
 
-        float height =
-                component->get_horizontal_alignment() == Alignment::STRETCH ? cellHeight - component->get_margin().y * 2
-                                                                            : component->get_minimum_size().y;
+        float height = component->get_horizontal_alignment() == Alignment::STRETCH ? cellHeight
+                                                                                   : component->get_minimum_size().y;
 
-        // Align the component correctly
+        // Account for CENTER and END alignments
         if (component->get_horizontal_alignment() == Alignment::CENTER) {
             xCoord += cellWidth / 2 - (component->get_minimum_size().x + component->get_margin().x * 2) / 2;
         } else if (component->get_horizontal_alignment() == Alignment::END) {
@@ -67,30 +69,25 @@ void IContainer::layout() {
 
         if (component->get_vertical_alignment() == Alignment::CENTER) {
             yCoord += cellHeight / 2 - (component->get_minimum_size().y + component->get_margin().y * 2) / 2;
-        } else if (component->get_vertical_alignment() == Alignment::END){
+        } else if (component->get_vertical_alignment() == Alignment::END) {
             yCoord += cellHeight - (component->get_minimum_size().y + component->get_margin().y * 2);
         }
 
-        // Apply to the component
+        // Apply computed bounds to the component
         component->set_position(glm::vec2(xCoord, yCoord));
         component->set_size(glm::vec2(width, height));
     }
 
-    // Finally, calculate size of current component
+    // Finally, calculate size of current component (the container)
+    // This is simply the maximum space the component may fill if it is
+    // set to stretch. Otherwise, this consists of the accumulated size
+    // of all grid cells
     bool fillX = this->get_horizontal_alignment() == Alignment::STRETCH;
     bool fillY = this->get_vertical_alignment() == Alignment::STRETCH;
 
     float totalWidth = fillX ? maximumSize.x : std::accumulate(colWidths.begin(), colWidths.end(), 0.f);
     float totalHeight = fillY ? maximumSize.y : std::accumulate(rowHeights.begin(), rowHeights.end(), 0.f);
     this->minimumSize = glm::vec2(totalWidth, totalHeight);
-}
-
-void IContainer::set_cols(int c) {
-    this->columns = c;
-}
-
-void IContainer::set_rows(int r) {
-    this->rows = r;
 }
 
 IComponent *IContainer::find_component(int row, int col) {
@@ -101,50 +98,73 @@ IComponent *IContainer::find_component(int row, int col) {
 }
 
 void IContainer::build_rows(std::vector<float> &rowHeights) {
+    // Iterate all rows
     for (int r = 0; r < rows; r++) {
+        // Find the tallest component in each row
         float maxHeight = 0.0f;
         for (int c = 0; c < columns; c++) {
             IComponent *component = find_component(r, c);
             if (component == nullptr)
                 continue;
 
+            // Virtual component height basically just means minimum height + vertical margin
             float virtualComponentHeight = component->get_minimum_size().y + component->get_margin().y * 2;
             if (virtualComponentHeight > maxHeight)
                 maxHeight = virtualComponentHeight;
         }
+        // Add that to our list of rows
         rowHeights.push_back(maxHeight);
     }
 
+    // If our container is set to fill the parent container, we
+    // cannot just use the sizes of the components inside the grid
+    // because each cell is now larger. Therefore we have to scale it up.
     if (verticalAlignment == Alignment::STRETCH) {
+        // Calculate the height of all unstretched rows
         float totalHeight = std::accumulate(rowHeights.begin(), rowHeights.end(), 0.f);
 
         for (float &rowHeight : rowHeights) {
+            // Stretch each row to the maximum height
             rowHeight = (rowHeight / totalHeight * maximumSize.y);
         }
     }
 }
 
 void IContainer::build_cols(std::vector<float> &colWidths) {
+    // Iterate all columns
     for (int c = 0; c < columns; c++) {
+        // Find the widest component in each column
         float maxWidth = 0.0f;
         for (int r = 0; r < rows; r++) {
             IComponent *component = find_component(r, c);
             if (component == nullptr)
                 continue;
 
+            // Virtual component width basically just means minimum width + horizontal margin
             float virtualComponentWidth = component->get_minimum_size().x + component->get_margin().x * 2;
             if (virtualComponentWidth > maxWidth)
                 maxWidth = virtualComponentWidth;
         }
+        // Add that to our list of columns
         colWidths.push_back(maxWidth);
     }
 
+    // Basically the same thing as above, just for columns this time
     if (horizontalAlignment == Alignment::STRETCH) {
+        // Calculate the height of all unstretched cols
         float totalWidth = std::accumulate(colWidths.begin(), colWidths.end(), 0.f);
 
         for (float &colWidth : colWidths) {
+            // Stretch each column to the maximum width
             colWidth = (colWidth / totalWidth * maximumSize.x);
         }
     }
 }
 
+void IContainer::set_cols(int c) {
+    this->columns = c;
+}
+
+void IContainer::set_rows(int r) {
+    this->rows = r;
+}

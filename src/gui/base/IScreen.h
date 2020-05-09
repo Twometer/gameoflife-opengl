@@ -7,9 +7,12 @@
 
 #include "IContainer.h"
 
+/**
+ * The base class for all GUI screens
+ */
 class IScreen : public IContainer {
 public:
-    IScreen(const std::string &id);
+    explicit IScreen(const std::string &id);
 
 public:
     void draw(glm::vec2 origin) override;

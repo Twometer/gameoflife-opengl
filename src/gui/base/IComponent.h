@@ -9,6 +9,9 @@
 #include <glm/vec2.hpp>
 #include "Alignment.h"
 
+/**
+ * The base class for all GUI components
+ */
 class IComponent {
 protected:
     std::string id;
@@ -21,8 +24,9 @@ protected:
     glm::vec2 position = glm::vec2(0, 0);
 
     glm::vec2 minimumSize = glm::vec2(0, 0);
-    glm::vec2 size = glm::vec2(0, 0);
     glm::vec2 maximumSize = glm::vec2(0, 0);
+    glm::vec2 size = glm::vec2(0, 0);
+
     glm::vec2 margin = glm::vec2(8, 8);
     glm::vec2 padding = glm::vec2(0, 0);
 
