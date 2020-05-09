@@ -111,11 +111,16 @@ void IComponent::on_mouse_up(glm::vec2 vec) {
 void IComponent::on_click(glm::vec2 position) {
     if (clickListener)
         clickListener();
+    GameWindow::get_instance()->get_gui_renderer()->focus_component(this);
 }
 
-bool IComponent::is_inside(glm::vec2 vec) {
+bool IComponent::is_inside(glm::vec2 vec) const {
     return vec.x >= this->position.x && vec.y >= this->position.y
            && vec.x < this->position.x + this->size.x && vec.y < this->position.y + this->size.y;
+}
+
+const std::string &IComponent::get_id() const {
+    return id;
 }
 
 void IComponent::set_click_listener(std::function<void()> listener) {
@@ -135,13 +140,34 @@ void IComponent::on_mouse_move(glm::vec2 position) {
 }
 
 void IComponent::on_mouse_enter() {
-    // Do nothing by default
+    GameWindow::get_instance()->set_cursor(get_cursor());
 }
 
 void IComponent::on_mouse_leave() {
-    // Do nothing by default
+    GameWindow::get_instance()->set_cursor(Cursor::STANDARD);
 }
 
-const std::string &IComponent::get_id() {
-    return id;
+void IComponent::on_got_focus() {
+    isFocused = true;
+}
+
+void IComponent::on_lost_focus() {
+    isFocused = false;
+}
+
+bool IComponent::is_mouse_over() const {
+    return isMouseOver;
+}
+
+bool IComponent::is_mouse_down() const {
+    return isMouseDown;
+}
+
+
+bool IComponent::is_focused() const {
+    return isFocused;
+}
+
+Cursor IComponent::get_cursor() {
+    return Cursor::STANDARD;
 }

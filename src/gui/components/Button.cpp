@@ -6,7 +6,7 @@
 #include "Button.h"
 #include "../../render/GameWindow.h"
 
-Button::Button(const std::string &id) : IComponent(id) {
+Button::Button(const std::string &id) : ITextComponent(id) {
 }
 
 void Button::draw(Graphics &graphics) {
@@ -20,14 +20,6 @@ void Button::draw(Graphics &graphics) {
 
 void Button::layout() {
     minimumSize = GameWindow::get_instance()->get_font_renderer()->get_bounds(text, fontSize);
-}
-
-void Button::set_text(std::string text) {
-    this->text = text;
-}
-
-void Button::set_font_size(float fontSize) {
-    this->fontSize = fontSize;
 }
 
 void Button::on_mouse_enter() {

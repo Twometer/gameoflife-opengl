@@ -7,6 +7,7 @@
 #include "../components/Button.h"
 #include "../loader/GuiXmlLoader.h"
 #include "../../render/GameWindow.h"
+#include "NewGameScreen.h"
 
 MenuScreen::MenuScreen() : IScreen("menuScreen") {
     GuiXmlLoader::load(this, "main_menu.xml");
@@ -16,7 +17,7 @@ MenuScreen::MenuScreen() : IScreen("menuScreen") {
     auto btnExitGame = find_component<Button>("btnExitGame");
 
     btnNewGame->set_click_listener([]() {
-        std::cout << "New game clicked!" << std::endl;
+        GameWindow::get_instance()->get_gui_renderer()->show_screen(new NewGameScreen());
     });
 
     btnLoadGame->set_click_listener([]() {

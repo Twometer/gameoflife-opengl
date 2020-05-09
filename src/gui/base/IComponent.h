@@ -8,7 +8,8 @@
 #include <string>
 #include <glm/vec2.hpp>
 #include <functional>
-#include "Alignment.h"
+#include "../enums/Alignment.h"
+#include "../enums/Cursor.h"
 #include "../Graphics.h"
 
 /**
@@ -38,6 +39,7 @@ protected:
 private:
     bool isMouseDown = false;
     bool isMouseOver = false;
+    bool isFocused = false;
 
     std::function<void()> clickListener;
 
@@ -94,9 +96,15 @@ public:
 
     void set_click_listener(std::function<void()> listener);
 
-    bool is_inside(glm::vec2 position);
+    bool is_inside(glm::vec2 position) const;
 
-    const std::string &get_id();
+    bool is_mouse_over() const;
+
+    bool is_mouse_down() const;
+
+    bool is_focused() const;
+
+    const std::string &get_id() const;
 
     virtual void on_mouse_down(glm::vec2 position);
 
@@ -109,6 +117,12 @@ public:
     virtual void on_mouse_enter();
 
     virtual void on_mouse_leave();
+
+    virtual void on_got_focus();
+
+    virtual void on_lost_focus();
+
+    virtual Cursor get_cursor();
 
 };
 

@@ -7,6 +7,7 @@
 #include "../components/Panel.h"
 #include "../components/Label.h"
 #include "../components/Button.h"
+#include "../components/TextBox.h"
 
 using namespace tinyxml2;
 
@@ -34,6 +35,8 @@ IComponent *GuiXmlLoader::instantiate(const char *name, const char *idPtr) {
         return new Label(id);
     if (strcmp(name, "Button") == 0)
         return new Button(id);
+    if (strcmp(name, "TextBox") == 0)
+        return new TextBox(id);
     return nullptr;
 }
 
@@ -74,13 +77,19 @@ void GuiXmlLoader::apply_properties(IComponent *component, tinyxml2::XMLElement 
     if (auto container = dynamic_cast<IContainer *>(component)) {
         container->set_rows(xml->IntAttribute("Rows", 1));
         container->set_cols(xml->IntAttribute("Cols", 1));
-    } else if (auto label = dynamic_cast<Label *>(component)) {
-        label->set_text(xml->Attribute("Text"));
-        label->set_font_size(xml->FloatAttribute("FontSize", 1.0f));
-    } else if (auto button = dynamic_cast<Button *>(component)) {
-        button->set_text(xml->Attribute("Text"));
-        button->set_font_size(xml->FloatAttribute("FontSize", 1.0f));
+    } else if (auto textComponent = dynamic_cast<ITextComponent *>(component)) {
+        const char *text = xml->Attribute("Text");
+        if (text != nullptr)
+            textComponent->set_text(std::string(text));
+        textComponent->set_font_size(xml->FloatAttribute("FontSize", 1.0f));
+
+        if (auto textBox = dynamic_cast<TextBox *>(component)){
+            const char *placeholder = xml->Attribute("Placeholder");
+            if (placeholder != nullptr)
+                textBox->set_placeholder(std::string(placeholder));
+        }
     }
+
 }
 
 glm::vec2 GuiXmlLoader::parse_vec(const char *srcPtr) {

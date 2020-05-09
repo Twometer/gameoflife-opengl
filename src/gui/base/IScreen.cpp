@@ -24,3 +24,11 @@ void IScreen::layout() {
 bool IScreen::blocks_game_inputs() {
     return true;
 }
+
+IComponent *IScreen::get_focused_component() {
+    return focusedComponent;
+}
+
+void IScreen::set_focused_component(IComponent *focusedComponent) {
+    this->focusedComponent = focusedComponent;
+}

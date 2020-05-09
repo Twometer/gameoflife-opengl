@@ -6,22 +6,15 @@
 #define GAMEOFLIFE_OPENGL_LABEL_H
 
 #include <string>
-#include "../base/IComponent.h"
+#include "../base/ITextComponent.h"
 
-class Label : public IComponent {
-protected:
-    std::string text = "";
-    float fontSize = 1.0f;
-
+class Label : public ITextComponent {
 public:
     explicit Label(const std::string &id);
 
     void draw(Graphics &graphics) override;
 
     void layout() override;
-
-    void set_text(std::string text);
-    void set_font_size(float fontSize);
 };
 
 

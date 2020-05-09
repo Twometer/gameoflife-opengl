@@ -36,6 +36,10 @@ private:
     GuiRenderer guiRenderer;
     FontRenderer fontRenderer;
 
+    GLFWcursor *standardCursor;
+    GLFWcursor *ibeamCursor;
+    Cursor currentCursor = Cursor::STANDARD;
+
     bool shouldClose;
 
     GameWindow();
@@ -69,6 +73,10 @@ public:
     bool should_close();
 
     void close();
+
+    void set_cursor(Cursor cursor);
+
+    Cursor get_cursor();
 
 private:
     void handle_input();

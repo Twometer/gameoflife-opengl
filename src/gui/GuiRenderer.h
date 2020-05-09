@@ -34,6 +34,8 @@ public:
 
     void on_mouse_move(glm::vec2 position);
 
+    void focus_component(IComponent *component);
+
     bool is_input_blocked();
 
 };

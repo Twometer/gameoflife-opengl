@@ -6,17 +6,14 @@
 #define GAMEOFLIFE_OPENGL_BUTTON_H
 
 
-#include "../base/IComponent.h"
+#include "../base/ITextComponent.h"
 #include "../../gl/Vao.h"
 #include "../../gl/MeshBuilder.h"
 #include "../../util/AnimatedColor.h"
 
-class Button : public IComponent {
+class Button : public ITextComponent {
 private:
     AnimatedColor color = glm::vec3(0.1804, 0.8, 0.4431);
-
-    std::string text = "";
-    float fontSize = 1.0f;
 
 public:
     explicit Button(const std::string &id);
@@ -24,10 +21,6 @@ public:
     void draw(Graphics &graphics) override;
 
     void layout() override;
-
-    void set_text(std::string text);
-
-    void set_font_size(float fontSize);
 
     void on_mouse_enter() override;
 

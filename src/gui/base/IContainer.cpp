@@ -112,7 +112,7 @@ void IContainer::build_rows(std::vector<float> &rowHeights) {
 
             // Virtual component height basically just means minimum height + vertical margin
             float virtualComponentHeight = component->get_minimum_size().y + component->get_margin().y * 2;
-            if (virtualComponentHeight > maxHeight)
+            if (virtualComponentHeight > maxHeight && component->get_row_span() == 1)
                 maxHeight = virtualComponentHeight;
         }
         // Add that to our list of rows
@@ -145,7 +145,7 @@ void IContainer::build_cols(std::vector<float> &colWidths) {
 
             // Virtual component width basically just means minimum width + horizontal margin
             float virtualComponentWidth = component->get_minimum_size().x + component->get_margin().x * 2;
-            if (virtualComponentWidth > maxWidth)
+            if (virtualComponentWidth > maxWidth && component->get_col_span() == 1)
                 maxWidth = virtualComponentWidth;
         }
         // Add that to our list of columns

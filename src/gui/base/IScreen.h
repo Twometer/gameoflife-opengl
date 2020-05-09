@@ -11,13 +11,19 @@
  * The base class for all GUI screens
  */
 class IScreen : public IContainer {
+private:
+    IComponent *focusedComponent = nullptr;
+
 public:
     explicit IScreen(const std::string &id);
 
-public:
     void draw(Graphics &graphics) override;
 
     void layout() override;
+
+    void set_focused_component(IComponent *focusedComponent);
+
+    IComponent* get_focused_component();
 
     /**
      * This may be true for e.g. the menu screen, but false for the ingame HUD screen

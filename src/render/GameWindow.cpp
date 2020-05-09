@@ -20,6 +20,9 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"
 
     camera.set_midpoint(glm::vec2(64, 64));
 
+    standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
+    ibeamCursor = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
+
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
@@ -51,7 +54,7 @@ void GameWindow::draw_frame() {
         updateTimer.reset();
     }
 
-    fontRenderer.draw("Living cells: " + std::to_string(field->get_living_cells()), glm::vec2(10, 10), 0.5f);
+    // fontRenderer.draw("Living cells: " + std::to_string(field->get_living_cells()), glm::vec2(10, 10), 0.5f);
 
     guiRenderer.draw();
 }
@@ -141,4 +144,19 @@ bool GameWindow::should_close() {
 
 void GameWindow::close() {
     shouldClose = true;
+}
+
+void GameWindow::set_cursor(Cursor cursor) {
+    if (cursor != currentCursor) {
+        currentCursor = cursor;
+
+        if (cursor == Cursor::STANDARD)
+            glfwSetCursor(glfwHandle, standardCursor);
+        else if (cursor == Cursor::IBEAM)
+            glfwSetCursor(glfwHandle, ibeamCursor);
+    }
+}
+
+Cursor GameWindow::get_cursor() {
+    return currentCursor;
 }
