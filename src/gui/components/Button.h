@@ -27,6 +27,8 @@ public:
 
     void set_text(std::string text);
     void set_font_size(float fontSize);
+
+    void on_click(glm::vec2 position) override;
 };
 
 

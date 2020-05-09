@@ -34,7 +34,8 @@ protected:
     Alignment verticalAlignment = Alignment::START;
     Alignment horizontalAlignment = Alignment::START;
 
-    static void bind_gui_shader();
+private:
+    bool isMouseDown = false;
 
 public:
     explicit IComponent(const std::string &id);
@@ -86,6 +87,14 @@ public:
     glm::vec2 get_margin();
 
     void set_padding(glm::vec2 padding);
+
+    bool is_inside(glm::vec2 position);
+
+    virtual void on_mouse_down(glm::vec2 position);
+
+    virtual void on_mouse_up(glm::vec2 position);
+
+    virtual void on_click(glm::vec2 position);
 
 };
 

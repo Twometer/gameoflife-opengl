@@ -85,10 +85,6 @@ glm::vec2 IComponent::get_maximum_size() {
     return maximumSize;
 }
 
-void IComponent::bind_gui_shader() {
-    GameWindow::get_instance()->get_gui_renderer()->bind_gui_shader();
-}
-
 void IComponent::set_margin(glm::vec2 margin) {
     this->margin = margin;
 }
@@ -99,4 +95,24 @@ glm::vec2 IComponent::get_margin() {
 
 void IComponent::set_padding(glm::vec2 padding) {
     this->padding = padding;
+}
+
+void IComponent::on_mouse_down(glm::vec2 vec) {
+    if (is_inside(vec))
+        isMouseDown = true;
+}
+
+void IComponent::on_mouse_up(glm::vec2 vec) {
+    isMouseDown = false;
+    if (is_inside(vec))
+        on_click(vec);
+}
+
+void IComponent::on_click(glm::vec2 position) {
+    // Do nothing by default
+}
+
+bool IComponent::is_inside(glm::vec2 vec) {
+    return vec.x >= this->position.x && vec.y >= this->position.y
+           && vec.x < this->position.x + this->size.x && vec.y < this->position.y + this->size.y;
 }

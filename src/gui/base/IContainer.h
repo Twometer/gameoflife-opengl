@@ -32,6 +32,10 @@ public:
 
     void add_component(IComponent *component);
 
+    void on_mouse_down(glm::vec2 position) override;
+
+    void on_mouse_up(glm::vec2 position) override;
+
 private:
     IComponent *find_component(int row, int col);
 
@@ -39,6 +43,7 @@ private:
 
     void build_cols(std::vector<float> &colHeights);
 
+    inline glm::vec2 get_origin();
 };
 
 #endif //GAMEOFLIFE_OPENGL_ICONTAINER_H

@@ -13,7 +13,7 @@ void IContainer::add_component(IComponent *component) {
 }
 
 void IContainer::draw(Graphics &graphics) {
-    Graphics nextGraphics = graphics.create_offset(position + padding);
+    Graphics nextGraphics = graphics.create_offset(get_origin());
     for (auto component : components) {
         component->draw(nextGraphics);
     }
@@ -168,4 +168,18 @@ void IContainer::set_cols(int c) {
 
 void IContainer::set_rows(int r) {
     this->rows = r;
+}
+
+void IContainer::on_mouse_down(glm::vec2 position) {
+    for (auto component : components)
+        component->on_mouse_down(position - get_origin());
+}
+
+void IContainer::on_mouse_up(glm::vec2 position) {
+    for (auto component : components)
+        component->on_mouse_up(position - get_origin());
+}
+
+glm::vec2 IContainer::get_origin() {
+    return position + padding;
 }

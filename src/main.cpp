@@ -12,6 +12,13 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
     GameWindow::get_instance()->on_viewport_changed(glm::vec2(width, height));
 }
 
+void mouse_button_callback(GLFWwindow *window, int button, int action, int mods) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+        GameWindow::get_instance()->on_mouse_down();
+    else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+        GameWindow::get_instance()->on_mouse_up();
+}
+
 int main() {
     srand(time(NULL)); // Seed the randomizer
 
@@ -43,6 +50,7 @@ int main() {
 
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     auto gameWindow = GameWindow::get_instance();
     gameWindow->set_glfw_handle(window);

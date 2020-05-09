@@ -87,6 +87,18 @@ void GameWindow::on_viewport_changed(glm::vec2 newSize) {
     guiRenderer.on_resize();
 }
 
+void GameWindow::on_mouse_down() {
+    double mouseX, mouseY;
+    glfwGetCursorPos(glfwHandle, &mouseX, &mouseY);
+    guiRenderer.on_mouse_down(glm::vec2(mouseX, mouseY));
+}
+
+void GameWindow::on_mouse_up() {
+    double mouseX, mouseY;
+    glfwGetCursorPos(glfwHandle, &mouseX, &mouseY);
+    guiRenderer.on_mouse_up(glm::vec2(mouseX, mouseY));
+}
+
 void GameWindow::set_glfw_handle(GLFWwindow *glfwHandle) {
     this->glfwHandle = glfwHandle;
 }

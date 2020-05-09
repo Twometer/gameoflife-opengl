@@ -21,6 +21,12 @@ void GuiRenderer::on_resize() {
 
 }
 
-void GuiRenderer::bind_gui_shader() {
-    guiShader.bind();
+void GuiRenderer::on_mouse_down(glm::vec2 position) {
+    if (currentScreen != nullptr)
+        currentScreen->on_mouse_down(position);
+}
+
+void GuiRenderer::on_mouse_up(glm::vec2 position) {
+    if (currentScreen != nullptr)
+        currentScreen->on_mouse_up(position);
 }

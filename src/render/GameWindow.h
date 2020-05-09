@@ -49,6 +49,10 @@ public:
 
     void on_viewport_changed(glm::vec2 newSize);
 
+    void on_mouse_down();
+
+    void on_mouse_up();
+
     void set_glfw_handle(GLFWwindow *glfwHandle);
 
     glm::vec2 get_viewport_size();

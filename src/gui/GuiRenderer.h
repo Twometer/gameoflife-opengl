@@ -28,9 +28,12 @@ public:
 
     void on_resize();
 
-    void bind_gui_shader();
+    void on_mouse_down(glm::vec2 position);
+
+    void on_mouse_up(glm::vec2 position);
 
 };
 
 
 #endif //GAMEOFLIFE_OPENGL_GUIRENDERER_H
+
