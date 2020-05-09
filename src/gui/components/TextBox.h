@@ -15,6 +15,8 @@ private:
 
     std::string placeholder;
 
+    int cursorPos = 0;
+
 public:
     explicit TextBox(const std::string &id);
 
@@ -25,6 +27,12 @@ public:
     void on_got_focus() override;
 
     void on_lost_focus() override;
+
+    void on_character_typed(uint32_t codepoint) override;
+
+    void on_key_event(int key, int action) override;
+
+    void on_text_changed() override;
 
     Cursor get_cursor() override;
 

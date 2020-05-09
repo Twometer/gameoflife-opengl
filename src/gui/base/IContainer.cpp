@@ -190,3 +190,13 @@ void IContainer::on_mouse_move(glm::vec2 position) {
     for (auto component : components)
         component->on_mouse_move(position - get_origin());
 }
+
+void IContainer::on_character_typed(uint32_t codepoint) {
+    for (auto component : components)
+        component->on_character_typed(codepoint);
+}
+
+void IContainer::on_key_event(int key, int action) {
+    for (auto component : components)
+        component->on_key_event(key, action);
+}

@@ -20,8 +20,12 @@ protected:
 public:
     ITextComponent(const std::string &id) : IComponent(id) {}
 
+    virtual void on_text_changed() {
+    }
+
     void set_text(std::string text) {
         this->text = text;
+        on_text_changed();
     }
 
     void set_font_size(float fontSize) {

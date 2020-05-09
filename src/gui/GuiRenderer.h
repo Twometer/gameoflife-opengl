@@ -34,6 +34,10 @@ public:
 
     void on_mouse_move(glm::vec2 position);
 
+    void on_character_typed(uint32_t codepoint);
+
+    void on_key_event(int key, int action);
+
     void focus_component(IComponent *component);
 
     bool is_input_blocked();

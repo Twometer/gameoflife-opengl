@@ -112,6 +112,14 @@ void GameWindow::on_mouse_up() {
     guiRenderer.on_mouse_up(glm::vec2(mouseX, mouseY));
 }
 
+void GameWindow::on_character_typed(uint32_t codepoint) {
+    guiRenderer.on_character_typed(codepoint);
+}
+
+void GameWindow::on_key_event(int key, int action) {
+    guiRenderer.on_key_event(key, action);
+}
+
 void GameWindow::set_glfw_handle(GLFWwindow *glfwHandle) {
     this->glfwHandle = glfwHandle;
 }
@@ -157,6 +165,4 @@ void GameWindow::set_cursor(Cursor cursor) {
     }
 }
 
-Cursor GameWindow::get_cursor() {
-    return currentCursor;
-}
+

@@ -155,6 +155,15 @@ void IComponent::on_lost_focus() {
     isFocused = false;
 }
 
+void IComponent::on_character_typed(uint32_t codepoint) {
+    // Do nothing by default
+}
+
+void IComponent::on_key_event(int key, int action) {
+    // Do nothing by default
+}
+
+
 bool IComponent::is_mouse_over() const {
     return isMouseOver;
 }

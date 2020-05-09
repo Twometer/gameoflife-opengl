@@ -36,6 +36,16 @@ void GuiRenderer::on_mouse_move(glm::vec2 position) {
         currentScreen->on_mouse_move(position);
 }
 
+void GuiRenderer::on_character_typed(uint32_t codepoint) {
+    if (currentScreen != nullptr)
+        currentScreen->on_character_typed(codepoint);
+}
+
+void GuiRenderer::on_key_event(int key, int action) {
+    if (currentScreen != nullptr)
+        currentScreen->on_key_event(key, action);
+}
+
 bool GuiRenderer::is_input_blocked() {
     return currentScreen != nullptr && currentScreen->blocks_game_inputs();
 }

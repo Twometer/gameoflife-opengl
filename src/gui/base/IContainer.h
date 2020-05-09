@@ -38,6 +38,10 @@ public:
 
     void on_mouse_move(glm::vec2 position) override;
 
+    void on_character_typed(uint32_t codepoint) override;
+
+    void on_key_event(int key, int action) override;
+
     // We have to define this method here instead of in the .cpp
     // because template functions have to be defined in the header
     // if we want to have ANY objects as template typename

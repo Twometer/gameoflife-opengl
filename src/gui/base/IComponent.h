@@ -122,6 +122,10 @@ public:
 
     virtual void on_lost_focus();
 
+    virtual void on_character_typed(uint32_t codepoint);
+
+    virtual void on_key_event(int key, int action);
+
     virtual Cursor get_cursor();
 
 };

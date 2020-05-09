@@ -19,6 +19,14 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
         GameWindow::get_instance()->on_mouse_up();
 }
 
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+    GameWindow::get_instance()->on_key_event(key, action);
+}
+
+void character_callback(GLFWwindow *window, unsigned int codepoint) {
+    GameWindow::get_instance()->on_character_typed(codepoint);
+}
+
 int main() {
     srand(time(NULL)); // Seed the randomizer
 
@@ -51,6 +59,8 @@ int main() {
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
+    glfwSetCharCallback(window, character_callback);
+    glfwSetKeyCallback(window, key_callback);
 
     auto gameWindow = GameWindow::get_instance();
     gameWindow->set_glfw_handle(window);

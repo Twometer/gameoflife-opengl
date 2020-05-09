@@ -60,6 +60,10 @@ public:
 
     void on_mouse_up();
 
+    void on_character_typed(uint32_t codepoint);
+
+    void on_key_event(int key, int action);
+
     void set_glfw_handle(GLFWwindow *glfwHandle);
 
     glm::vec2 get_viewport_size();
@@ -75,8 +79,6 @@ public:
     void close();
 
     void set_cursor(Cursor cursor);
-
-    Cursor get_cursor();
 
 private:
     void handle_input();
