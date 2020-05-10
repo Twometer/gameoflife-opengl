@@ -34,6 +34,8 @@ public:
 
     void render();
 
+    void clear();
+
     void toggle_cell(int x, int y);
 
     glm::vec2 get_size() const;

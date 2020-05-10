@@ -84,6 +84,10 @@ void Field::render() {
     vao->render();
 }
 
+void Field::clear() {
+    buffer->clear();
+}
+
 void Field::toggle_cell(int x, int y) {
     bool *b = &buffer->get_front()[get_index(x, y)];
     *b = !*b;

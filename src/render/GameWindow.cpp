@@ -8,6 +8,7 @@
 #include "GameWindow.h"
 #include "../io/AssetLoader.h"
 #include "../gui/screens/MenuScreen.h"
+#include "../gui/dialogs/SettingsDialog.h"
 
 GameWindow *GameWindow::instance = nullptr;
 
@@ -29,6 +30,16 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
     ingameGui->btnBack->set_click_listener([this]() {
         show_demo_scene();
         guiRenderer.show_screen(new MenuScreen());
+    });
+    ingameGui->btnNew->set_click_listener([this]() {
+        if (field != nullptr) {
+            field->clear();
+            field->remesh();
+            update_stats();
+        }
+    });
+    ingameGui->btnSettings->set_click_listener([this]() {
+       guiRenderer.show_dialog(new SettingsDialog());
     });
 
     standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);

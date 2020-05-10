@@ -10,11 +10,12 @@
 #include "../render/shaders/TexturedShader.h"
 #include "Graphics.h"
 #include "../gl/Vao.h"
+#include "base/IDialog.h"
 
 class GuiRenderer {
 private:
     IScreen *currentScreen = nullptr;
-    IScreen *lastScreen = nullptr;
+    IDialog *currentDialog = nullptr;
 
     Vao vao = Vao(2);
     MeshBuilder meshBuilder;
@@ -26,6 +27,8 @@ private:
 
 public:
     void show_screen(IScreen *screen);
+
+    void show_dialog(IDialog *dialog);
 
     void draw();
 

@@ -32,7 +32,7 @@ add_executable(gameoflife_opengl
         src/gui/components/TextBox.cpp
         src/gui/components/CheckBox.cpp
         src/gui/GuiRenderer.cpp
-        src/gui/Graphics.cpp src/model/Field.cpp src/model/Field.h src/gui/screens/IngameGuiScreen.cpp src/gui/screens/IngameGuiScreen.h src/gui/components/ToolButton.cpp src/gui/components/ToolButton.h src/render/shaders/TexturedShader.h src/gui/base/IImageComponent.h src/gl/TextureManager.cpp src/gl/TextureManager.h src/gui/base/IImageComponent.cpp)
+        src/gui/Graphics.cpp src/model/Field.cpp src/model/Field.h src/gui/screens/IngameGuiScreen.cpp src/gui/screens/IngameGuiScreen.h src/gui/components/ToolButton.cpp src/gui/components/ToolButton.h src/render/shaders/TexturedShader.h src/gui/base/IImageComponent.h src/gl/TextureManager.cpp src/gl/TextureManager.h src/gui/base/IImageComponent.cpp src/gui/base/IDialog.cpp src/gui/base/IDialog.h src/gui/dialogs/SettingsDialog.cpp src/gui/dialogs/SettingsDialog.h)
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)

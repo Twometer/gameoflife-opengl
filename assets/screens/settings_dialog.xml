@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Author: Twometer
+    Date: 5/10/20 6:15 PM
+-->
+
+<Screen Id="settingsDialog" VerticalAlignment="STRETCH" HorizontalAlignment="STRETCH">
+    <Panel Id="mainPanel" VerticalAlignment="CENTER" HorizontalAlignment="CENTER" Rows="6" Cols="1" Padding="64,16">
+        <Label Id="titleLabel" Row="0" Text="Settings" FontSize="0.8" VerticalAlignment="CENTER"
+               HorizontalAlignment="CENTER"/>
+
+        <Button Id="btnExit" Row="1" Text="Close" VerticalAlignment="CENTER" HorizontalAlignment="STRETCH"
+                FontSize="0.5" Margin="32,8" Padding="32,4"/>
+    </Panel>
+</Screen>

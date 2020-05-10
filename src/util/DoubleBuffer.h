@@ -13,6 +13,7 @@ class DoubleBuffer {
 private:
     T *front;
     T *back;
+    int size;
 
 public:
     explicit DoubleBuffer(int size);
@@ -20,6 +21,8 @@ public:
     ~DoubleBuffer();
 
     void swap();
+
+    void clear();
 
     T *get_front() const;
 
@@ -29,12 +32,10 @@ public:
 
 template<typename T>
 DoubleBuffer<T>::DoubleBuffer(int size) {
+    this->size = size;
     front = new T[size];
     back = new T[size];
-
-    // Zero arrays
-    memset(front, 0, sizeof(T) * size);
-    memset(back, 0, sizeof(T) * size);
+    clear();
 }
 
 template<typename T>
@@ -58,6 +59,13 @@ T *DoubleBuffer<T>::get_front() const {
 template<typename T>
 T *DoubleBuffer<T>::get_back() const {
     return back;
+}
+
+template<typename T>
+void DoubleBuffer<T>::clear() {
+    // Zero arrays
+    memset(front, 0, sizeof(T) * size);
+    memset(back, 0, sizeof(T) * size);
 }
 
 #endif //GAMEOFLIFE_OPENGL_DOUBLEBUFFER_H
