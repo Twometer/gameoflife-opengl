@@ -28,7 +28,7 @@ public:
 
     void draw();
 
-    void on_resize();
+    void layout();
 
     void on_mouse_down(glm::vec2 position);
 

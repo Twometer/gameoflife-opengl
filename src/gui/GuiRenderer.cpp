@@ -17,7 +17,7 @@ void GuiRenderer::draw() {
         this->currentScreen->draw(graphics);
 }
 
-void GuiRenderer::on_resize() {
+void GuiRenderer::layout() {
     if (currentScreen != nullptr)
         this->currentScreen->layout();
 }

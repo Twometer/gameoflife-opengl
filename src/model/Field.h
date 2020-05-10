@@ -20,6 +20,7 @@ private:
     DoubleBuffer<bool> *buffer;
 
     int livingCells = 0;
+    int generation = 0;
 public:
     Field(int width, int height);
 
@@ -38,6 +39,8 @@ public:
     glm::vec2 get_size() const;
 
     int get_living_cells() const;
+
+    int get_generation() const;
 
 private:
     inline int get_index(int x, int y) const;

@@ -46,12 +46,15 @@ void Field::tick() {
 
     // After we built the next generation, we swap the buffers
     buffer->swap();
+    generation++;
 }
 
 void Field::randomize(int mod) {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            buffer->get_front()[get_index(i, j)] = (rand() % mod) == 0;
+            bool alive = (rand() % mod) == 0;
+            if (alive) livingCells++;
+            buffer->get_front()[get_index(i, j)] = alive;
         }
     }
 }
@@ -92,6 +95,10 @@ glm::vec2 Field::get_size() const {
 
 int Field::get_living_cells() const {
     return livingCells;
+}
+
+int Field::get_generation() const {
+    return generation;
 }
 
 int Field::get_index(int x, int y) const {

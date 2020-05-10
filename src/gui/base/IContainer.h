@@ -51,8 +51,11 @@ public:
         for (auto component : components)
             if (component->get_id() == id)
                 return dynamic_cast<T *>(component);
-            else if (auto container = dynamic_cast<IContainer *>(component))
-                return container->find_component<T>(id);
+            else if (auto container = dynamic_cast<IContainer *>(component)) {
+                IComponent *found = container->find_component<T>(id);
+                if (found != nullptr)
+                    return dynamic_cast<T *>(found);
+            }
         return nullptr;
     }
 

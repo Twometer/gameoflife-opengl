@@ -13,6 +13,7 @@
 #include "../gui/font/FontRenderer.h"
 #include "../util/Timer.h"
 #include "../gui/GuiRenderer.h"
+#include "../gui/screens/IngameGuiScreen.h"
 #include <GLFW/glfw3.h>
 
 class GameWindow {
@@ -35,6 +36,8 @@ private:
 
     GuiRenderer guiRenderer;
     FontRenderer fontRenderer;
+
+    IngameGuiScreen *ingameGui;
 
     GLFWcursor *standardCursor;
     GLFWcursor *ibeamCursor;
@@ -83,8 +86,14 @@ public:
 
     void set_field(Field *field);
 
+    void show_ingame_gui();
+
 private:
     void handle_input();
+
+    void next_generation();
+
+    void update_stats();
 
     void center_camera();
 

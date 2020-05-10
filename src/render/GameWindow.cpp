@@ -18,6 +18,20 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
     field->remesh();
     center_camera();
 
+    ingameGui = new IngameGuiScreen();
+    ingameGui->btnPlayPause->set_click_listener([this]() {
+        if (generationTimer.is_paused()) {
+            ingameGui->btnPlayPause->set_texture("pause");
+            generationTimer.resume();
+        } else {
+            ingameGui->btnPlayPause->set_texture("play");
+            generationTimer.pause();
+        }
+    });
+    ingameGui->btnNextGen->set_click_listener([this]() {
+        next_generation();
+    });
+
     standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
     ibeamCursor = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
 
@@ -41,9 +55,7 @@ void GameWindow::draw_frame() {
     field->render();
 
     if (generationTimer.elapsed()) {
-        field->tick();      // Next generation
-        field->remesh();    // Rebuild mesh
-
+        next_generation();
         generationTimer.reset();
     }
 
@@ -51,8 +63,6 @@ void GameWindow::draw_frame() {
         handle_input();
         updateTimer.reset();
     }
-
-    // fontRenderer.draw("Living cells: " + std::to_string(field->get_living_cells()), glm::vec2(10, 10), 0.5f);
 
     guiRenderer.draw();
 }
@@ -95,7 +105,7 @@ void GameWindow::on_scroll(glm::vec2 offset) {
 void GameWindow::on_viewport_changed(glm::vec2 newSize) {
     this->viewportSize = newSize;
     guiMatrix = glm::ortho(0.0f, viewportSize.x, viewportSize.y, 0.0f);
-    guiRenderer.on_resize();
+    guiRenderer.layout();
 }
 
 void GameWindow::on_mouse_down() {
@@ -171,7 +181,26 @@ void GameWindow::set_field(Field *field) {
     delete this->field;
     this->field = field;
 
+    update_stats();
     center_camera();
+}
+
+void GameWindow::show_ingame_gui() {
+    guiRenderer.show_screen(ingameGui);
+    generationTimer.pause();
+}
+
+void GameWindow::next_generation() {
+    field->tick();      // Next generation
+    field->remesh();    // Rebuild mesh
+
+    update_stats();     // Update status labels
+}
+
+void GameWindow::update_stats() {
+    ingameGui->lbLivingCells->set_text("Cells: " + std::to_string(field->get_living_cells()));
+    ingameGui->lbGeneration->set_text("Gen: " + std::to_string(field->get_generation()));
+    guiRenderer.layout();
 }
 
 void GameWindow::center_camera() {
@@ -195,5 +224,7 @@ void GameWindow::toggle_cell(glm::vec2 mousePos) {
         field->remesh();
     }
 }
+
+
 
 

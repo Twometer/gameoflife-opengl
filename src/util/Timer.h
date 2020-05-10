@@ -31,6 +31,10 @@ public:
         delay = 1.0 / tps;
     }
 
+    bool is_paused() {
+        return paused;
+    }
+
     void pause() {
         paused = true;
     }

@@ -7,9 +7,17 @@
 
 
 #include "../base/IScreen.h"
+#include "../components/Label.h"
+#include "../components/ToolButton.h"
 
 class IngameGuiScreen : public IScreen {
 public:
+    Label *lbLivingCells;
+    Label *lbGeneration;
+
+    ToolButton *btnPlayPause;
+    ToolButton *btnNextGen;
+
     IngameGuiScreen();
 
     bool blocks_game_inputs() const override;
