@@ -8,7 +8,6 @@
 #include "../../render/GameWindow.h"
 #include "MenuScreen.h"
 #include "../components/CheckBox.h"
-#include "../../model/Field2d.h"
 #include "../components/TextBox.h"
 
 NewGameScreen::NewGameScreen() : IScreen("newGameScreen") {
@@ -23,7 +22,7 @@ NewGameScreen::NewGameScreen() : IScreen("newGameScreen") {
     btnCreate->set_click_listener([=]() {
         int width = std::stoi(tbWidth->get_text());
         int height = std::stoi(tbHeight->get_text());
-        IField *field = new Field2d(width, height);
+        auto *field = new Field(width, height);
 
         if (cbRandomize->is_checked())
             field->randomize(4);

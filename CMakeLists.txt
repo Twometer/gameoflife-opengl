@@ -12,8 +12,6 @@ add_executable(gameoflife_opengl
         ext/tinyxml2.cpp
         src/main.cpp
         src/util/Logger.cpp
-        src/model/Field2d.cpp
-        src/model/IField.cpp
         src/render/GameWindow.cpp
         src/render/Camera.cpp
         src/render/shaders/IShader.cpp
@@ -34,7 +32,7 @@ add_executable(gameoflife_opengl
         src/gui/components/TextBox.cpp
         src/gui/components/CheckBox.cpp
         src/gui/GuiRenderer.cpp
-        src/gui/Graphics.cpp)
+        src/gui/Graphics.cpp src/model/Field.cpp src/model/Field.h)
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)

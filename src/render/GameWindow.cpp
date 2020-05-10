@@ -6,7 +6,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "GameWindow.h"
-#include "../model/Field2d.h"
 #include "../io/AssetLoader.h"
 #include "../gui/screens/MenuScreen.h"
 
@@ -14,7 +13,7 @@ GameWindow *GameWindow::instance = nullptr;
 
 GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nirmala"))), generationTimer(20),
                            updateTimer(60) {
-    field = new Field2d(128, 128);
+    field = new Field(128, 128);
     field->randomize(4);
     field->remesh();
     center_camera();
@@ -108,7 +107,11 @@ void GameWindow::on_mouse_down() {
 void GameWindow::on_mouse_up() {
     double mouseX, mouseY;
     glfwGetCursorPos(glfwHandle, &mouseX, &mouseY);
-    guiRenderer.on_mouse_up(glm::vec2(mouseX, mouseY));
+
+    auto mousePos = glm::vec2(mouseX, mouseY);
+    if (!guiRenderer.is_input_blocked())
+        toggle_cell(mousePos);
+    guiRenderer.on_mouse_up(mousePos);
 }
 
 void GameWindow::on_character_typed(uint32_t codepoint) {
@@ -164,7 +167,7 @@ void GameWindow::set_cursor(Cursor cursor) {
     }
 }
 
-void GameWindow::set_field(IField *field) {
+void GameWindow::set_field(Field *field) {
     delete this->field;
     this->field = field;
 
@@ -174,6 +177,24 @@ void GameWindow::set_field(IField *field) {
 void GameWindow::center_camera() {
     auto size = field->get_size();
     camera.set_midpoint(glm::vec2(size.x, size.y) * 0.5f);
+}
+
+void GameWindow::toggle_cell(glm::vec2 mousePos) {
+
+    // Find zero point in screen space by projecting with the matrix
+    glm::vec2 zeroPoint = (camera.get_matrix() * glm::vec4(0, 0, 0.0f, 1.0f) +
+                           glm::vec4(1.0f, 1.0f, 0.0f, 0.0f)) * 0.5f;
+
+    // Using that offset, unproject again to find mouse position in world space
+    int fieldX = glm::floor((mousePos.x / viewportSize.x - zeroPoint.x) * camera.get_size().x);
+    // Y mouse is inverted (OpenGL coordinate system is inverted to ours), so 1 - mousePos
+    int fieldY = glm::floor(((1 - mousePos.y / viewportSize.y) - zeroPoint.y) * camera.get_size().y);
+
+    // Check if the click was inside the field
+    if (fieldX >= 0 && fieldY >= 0 && fieldX < field->get_size().x && fieldY < field->get_size().y) {
+        field->toggle_cell(fieldX, fieldY);
+        field->remesh();
+    }
 }
 
 

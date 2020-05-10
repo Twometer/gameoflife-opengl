@@ -7,7 +7,7 @@
 
 
 #include <glm/glm.hpp>
-#include "../model/IField.h"
+#include "../model/Field.h"
 #include "Camera.h"
 #include "shaders/BasicShader.h"
 #include "../gui/font/FontRenderer.h"
@@ -21,7 +21,7 @@ private:
 
     GLFWwindow *glfwHandle;
 
-    IField *field;
+    Field *field;
 
     Camera camera;
 
@@ -81,12 +81,14 @@ public:
 
     void set_cursor(Cursor cursor);
 
-    void set_field(IField *field);
+    void set_field(Field *field);
 
 private:
     void handle_input();
 
     void center_camera();
+
+    void toggle_cell(glm::vec2 mousePos);
 };
 
 

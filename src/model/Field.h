@@ -1,0 +1,49 @@
+//
+// Created by twome on 10/05/2020.
+//
+
+#ifndef GAMEOFLIFE_OPENGL_FIELD_H
+#define GAMEOFLIFE_OPENGL_FIELD_H
+
+
+#include "../gl/Vao.h"
+#include "../gl/MeshBuilder.h"
+#include "../util/DoubleBuffer.h"
+
+class Field {
+private:
+    int width;
+    int height;
+
+    Vao *vao;
+    MeshBuilder *meshBuilder;
+    DoubleBuffer<bool> *buffer;
+
+    int livingCells = 0;
+public:
+    Field(int width, int height);
+
+    ~Field();
+
+    void tick();
+
+    void randomize(int mod);
+
+    void remesh();
+
+    void render();
+
+    void toggle_cell(int x, int y);
+
+    glm::vec2 get_size() const;
+
+    int get_living_cells() const;
+
+private:
+    inline int get_index(int x, int y) const;
+
+    int count_neighbors(int x, int y) const;
+};
+
+
+#endif //GAMEOFLIFE_OPENGL_FIELD_H

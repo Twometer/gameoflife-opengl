@@ -1,31 +1,26 @@
 //
-// Created by twome on 06/05/2020.
+// Created by twome on 10/05/2020.
 //
 
-#include <cstdlib>
-#include <iostream>
-#include "Field2d.h"
-#include "../gl/MeshBuilder.h"
-#include "../util/Logger.h"
+#include "Field.h"
 
-Field2d::Field2d(int width, int height) {
-    this->width = width;
-    this->height = height;
-    this->vao = new Vao(2);
+Field::Field(int width, int height) : width(width), height(height) {
+    vao = new Vao(2);
     buffer = new DoubleBuffer<bool>(width * height);
     meshBuilder = new MeshBuilder();
 }
 
-Field2d::~Field2d() {
-    delete meshBuilder;
+Field::~Field() {
+    delete vao;
     delete buffer;
+    delete meshBuilder;
 }
 
-void Field2d::tick() {
+void Field::tick() {
     // The front buffer contains the field that is currently visible on-screen
     // On the back buffer we prepare the new field that contains the next generation
 
-    living_cells = 0;
+    livingCells = 0;
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             int index = get_index(i, j);
@@ -45,7 +40,7 @@ void Field2d::tick() {
 
             buffer->get_back()[index] = newState;
             if (newState)
-                living_cells++;
+                livingCells++;
         }
     }
 
@@ -53,7 +48,7 @@ void Field2d::tick() {
     buffer->swap();
 }
 
-void Field2d::randomize(int mod) {
+void Field::randomize(int mod) {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             buffer->get_front()[get_index(i, j)] = (rand() % mod) == 0;
@@ -61,7 +56,7 @@ void Field2d::randomize(int mod) {
     }
 }
 
-void Field2d::remesh() {
+void Field::remesh() {
     meshBuilder->clear();
     meshBuilder->push_rectangle(-0.25, -0.25, (float) width + .5f, (float) height + .5f, glm::vec3(0.3f, 0.3f, 0.3f));
     meshBuilder->push_rectangle(0, 0, (float) width, (float) height, glm::vec3(0.2f, 0.2f, 0.2f));
@@ -82,16 +77,28 @@ void Field2d::remesh() {
                   meshBuilder->get_color_count());
 }
 
-glm::vec4 Field2d::get_size() const {
-    return glm::vec4(width, height, 0, 0);
+void Field::render() {
+    vao->render();
 }
 
+void Field::toggle_cell(int x, int y) {
+    bool *b = &buffer->get_front()[get_index(x, y)];
+    *b = !*b;
+}
 
-int Field2d::get_index(int x, int y) const {
+glm::vec2 Field::get_size() const {
+    return glm::vec2(width, height);
+}
+
+int Field::get_living_cells() const {
+    return livingCells;
+}
+
+int Field::get_index(int x, int y) const {
     return (y * width) + x;
 }
 
-int Field2d::count_neighbors(int x, int y) const {
+int Field::count_neighbors(int x, int y) const {
     int neighbors = 0;
 
     // Iterate all Moore neighbors of the current cell on the front buffer
