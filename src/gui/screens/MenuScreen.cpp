@@ -3,11 +3,15 @@
 //
 
 #include <iostream>
+
+#include <nfd.h>
+
 #include "MenuScreen.h"
 #include "../components/Button.h"
 #include "../../io/XmlGuiLoader.h"
 #include "../../render/GameWindow.h"
 #include "NewGameScreen.h"
+#include "../../io/FieldIO.h"
 
 MenuScreen::MenuScreen() : IScreen("menuScreen") {
     XmlGuiLoader::load(this, "main_menu.xml");
@@ -21,7 +25,18 @@ MenuScreen::MenuScreen() : IScreen("menuScreen") {
     });
 
     btnLoadGame->set_click_listener([]() {
-        std::cout << "Load game clicked!" << std::endl;
+        nfdchar_t *outPath = nullptr;
+        nfdresult_t result = NFD_OpenDialog("bin,txt", nullptr, &outPath);
+
+        if (result == NFD_OKAY) {
+            std::string path = std::string(outPath);
+
+            Field *field = FieldIO::read_field(path);
+            GameWindow::get_instance()->set_field(field);
+            GameWindow::get_instance()->show_ingame_gui();
+
+            delete outPath;
+        }
     });
 
     btnExitGame->set_click_listener([]() {

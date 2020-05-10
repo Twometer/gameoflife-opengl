@@ -43,4 +43,4 @@ add_executable(gameoflife_opengl
         src/model/Field.cpp)
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
-target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)
+target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib comctl32.lib ${CMAKE_SOURCE_DIR}/libs/nfd.lib)

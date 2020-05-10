@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
+#include <nfd.h>
 
 #include "GameWindow.h"
 #include "../io/AssetLoader.h"
@@ -43,10 +44,24 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
        guiRenderer.show_dialog(new SettingsDialog());
     });
     ingameGui->btnSave->set_click_listener([this]() {
-       FieldIO::write_field("test.bin", field);
+        nfdchar_t *outPath = nullptr;
+        nfdresult_t result = NFD_SaveDialog("bin", nullptr, &outPath);
+
+        if (result == NFD_OKAY) {
+            std::string path = std::string(outPath);
+            FieldIO::write_field(path, field);
+            delete outPath;
+        }
     });
     ingameGui->btnOpen->set_click_listener([this]() {
-        set_field(FieldIO::read_field("test.bin"));
+        nfdchar_t *outPath = nullptr;
+        nfdresult_t result = NFD_OpenDialog("bin,txt", nullptr, &outPath);
+
+        if (result == NFD_OKAY) {
+            std::string path = std::string(outPath);
+            GameWindow::get_instance()->set_field(FieldIO::read_field(path));
+            delete outPath;
+        }
     });
 
     standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
