@@ -28,8 +28,10 @@ void character_callback(GLFWwindow *window, unsigned int codepoint) {
 }
 
 int main() {
-    srand(time(NULL)); // Seed the randomizer
+    // Seed the randomizer
+    srand(time(NULL));
 
+    // Load GLFW
     Logger::info("Initializing rendering context...");
     if (!glfwInit()) {
         Logger::error("Failed to initialize GLFW");
@@ -42,6 +44,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_SAMPLES, 4);
 
+    // Create a window
     GLFWwindow *window = glfwCreateWindow(1024, 768, "Conway's Game Of Life", nullptr, nullptr);
     if (!window) {
         Logger::error("Failed to create GLFW window");
@@ -50,21 +53,25 @@ int main() {
     }
     glfwMakeContextCurrent(window);
 
+    // Load OpenGL with glad
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-        Logger::error("Failed to initialize OpenGL");
+        Logger::error("Failed to load OpenGL");
         glfwTerminate();
         return 1;
     }
 
+    // Register window callbacks
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetCharCallback(window, character_callback);
     glfwSetKeyCallback(window, key_callback);
 
+    // Initialize game window
     auto gameWindow = GameWindow::get_instance();
     gameWindow->set_glfw_handle(window);
 
+    // And its size
     int viewportWidth, viewportHeight;
     glfwGetFramebufferSize(window, &viewportWidth, &viewportHeight);
     gameWindow->on_viewport_changed(glm::vec2(viewportWidth, viewportHeight));
@@ -72,6 +79,7 @@ int main() {
 
     Logger::info("Init complete, starting game");
 
+    // Then start the game
     while (!glfwWindowShouldClose(window) && !gameWindow->should_close()) {
         gameWindow->draw_frame();
         glfwSwapBuffers(window);

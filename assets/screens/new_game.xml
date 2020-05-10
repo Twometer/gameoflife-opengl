@@ -10,10 +10,10 @@
                HorizontalAlignment="CENTER" ColSpan="3"/>
 
         <TextBox Id="tbWidth" Row="1" Col="0" VerticalALignment="CENTER" HorizontalAlignment="CENTER" Margin="5,5"
-                 Placeholder="Width" FontSize="0.6" Padding="25,10" Text="16"/>
+                 Placeholder="Width" FontSize="0.6" Padding="25,10" Text="32"/>
         <Label Id="lbx" Row="1" Col="1" VerticalAlignment="CENTER" FontSize="0.6" Text="x" Padding="5,0"/>
         <TextBox Id="tbHeight" Row="1" Col="2" VerticalALignment="CENTER" HorizontalAlignment="CENTER" Margin="5,5"
-                 Placeholder="Height" FontSize="0.6" Padding="25,10" Text="16"/>
+                 Placeholder="Height" FontSize="0.6" Padding="25,10" Text="32"/>
 
         <CheckBox Id="cbRandomize" Row="2" Text="Randomize" FontSize="0.55" ColSpan="3" HorizontalAlignment="CENTER"
                   Margin="0,16"/>

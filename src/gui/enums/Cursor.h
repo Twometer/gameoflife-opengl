@@ -6,8 +6,8 @@
 #define GAMEOFLIFE_OPENGL_CURSOR_H
 
 enum class Cursor {
-        STANDARD,
-        IBEAM
+    STANDARD,
+    IBEAM
 };
 
 #endif //GAMEOFLIFE_OPENGL_CURSOR_H

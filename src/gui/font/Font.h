@@ -11,7 +11,7 @@
 
 struct Font {
     Texture atlas;
-    std::map<int, Glyph*> glyphs;
+    std::map<int, Glyph *> glyphs;
 };
 
 #endif //GAMEOFLIFE_OPENGL_FONT_H

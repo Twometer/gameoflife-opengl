@@ -5,29 +5,22 @@
 #include "Vao.h"
 
 Vao::Vao(int dimensions) {
-    GLuint vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
-    GLuint vertexBuffer;
     glGenBuffers(1, &vertexBuffer);
-
-    GLuint colorBuffer;
     glGenBuffers(1, &colorBuffer);
 
     glBindVertexArray(0);
 
     this->dimensions = dimensions;
-    this->vao = vao;
-    this->vertexBuffer = vertexBuffer;
-    this->colorBuffer = colorBuffer;
 }
 
-void Vao::bind() {
+void Vao::bind() const {
     glBindVertexArray(vao);
 }
 
-void Vao::unbind() {
+void Vao::unbind() const {
     glBindVertexArray(0);
 }
 
@@ -45,7 +38,7 @@ void Vao::set_data(float *vertexBuf, int vertexBufSize, float *colorBuf, int col
     vertexCount = vertexBufSize / dimensions;
 }
 
-void Vao::render() {
+void Vao::render() const {
     if (vertexCount == 0)
         return;
 

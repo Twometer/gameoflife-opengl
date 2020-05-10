@@ -12,26 +12,29 @@ add_executable(gameoflife_opengl
         ext/tinyxml2.cpp
         src/main.cpp
         src/util/Logger.cpp
-        src/render/GameWindow.cpp
         src/model/Field2d.cpp
-        src/gl/Loader.cpp
-        src/gl/Vao.cpp
+        src/model/IField.cpp
+        src/render/GameWindow.cpp
         src/render/Camera.cpp
         src/render/shaders/IShader.cpp
-        src/model/IField.cpp
+        src/io/AssetLoader.cpp
+        src/io/FontReader.cpp
+        src/io/XmlGuiLoader.cpp
+        src/gl/Vao.cpp
         src/gl/MeshBuilder.cpp
-        src/gui/GuiRenderer.cpp
         src/gui/font/FontRenderer.cpp
-        src/gui/font/FontReader.cpp
         src/gui/screens/MenuScreen.cpp
+        src/gui/screens/NewGameScreen.cpp
         src/gui/base/IContainer.cpp
         src/gui/base/IScreen.cpp
         src/gui/base/IComponent.cpp
         src/gui/components/Label.cpp
         src/gui/components/Panel.cpp
         src/gui/components/Button.cpp
-        src/gui/Graphics.cpp
-        src/gui/loader/GuiXmlLoader.cpp src/gui/screens/NewGameScreen.cpp src/gui/screens/NewGameScreen.h src/gui/components/TextBox.cpp src/gui/components/TextBox.h src/gui/base/ITextComponent.h src/gui/enums/Cursor.h src/gui/components/CheckBox.cpp src/gui/components/CheckBox.h)
+        src/gui/components/TextBox.cpp
+        src/gui/components/CheckBox.cpp
+        src/gui/GuiRenderer.cpp
+        src/gui/Graphics.cpp)
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)

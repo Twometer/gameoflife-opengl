@@ -2,15 +2,15 @@
 // Created by twome on 09/05/2020.
 //
 
-#ifndef GAMEOFLIFE_OPENGL_GUIXMLLOADER_H
-#define GAMEOFLIFE_OPENGL_GUIXMLLOADER_H
+#ifndef GAMEOFLIFE_OPENGL_XMLGUILOADER_H
+#define GAMEOFLIFE_OPENGL_XMLGUILOADER_H
 
 #include <string>
 #include <tinyxml2.h>
 
-#include "../base/IScreen.h"
+#include "../gui/base/IScreen.h"
 
-class GuiXmlLoader {
+class XmlGuiLoader {
 public:
     static void load(IScreen *screen, const std::string &path);
 
@@ -27,4 +27,4 @@ private:
 };
 
 
-#endif //GAMEOFLIFE_OPENGL_GUIXMLLOADER_H
+#endif //GAMEOFLIFE_OPENGL_XMLGUILOADER_H

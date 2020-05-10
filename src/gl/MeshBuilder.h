@@ -17,6 +17,7 @@ private:
     std::vector<float> colors;
 
     void push_vertex(float x, float y);
+
     void push_color(float r, float g, float b);
 
 public:
@@ -24,11 +25,11 @@ public:
 
     float *get_vertices();
 
-    int get_vertex_count();
+    int get_vertex_count() const;
 
     float *get_colors();
 
-    int get_color_count();
+    int get_color_count() const;
 
     void clear();
 

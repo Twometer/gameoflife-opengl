@@ -28,7 +28,7 @@ public:
         return *this;
     }
 
-    glm::vec2 get_value() {
+    glm::vec2 get_value() const {
         return glm::vec2(x.get_value(), y.get_value());
     }
 

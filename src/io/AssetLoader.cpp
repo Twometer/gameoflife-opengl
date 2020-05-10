@@ -4,11 +4,11 @@
 
 #include <spng.h>
 #include <iostream>
-#include "Loader.h"
+#include "AssetLoader.h"
 #include "../util/Logger.h"
-#include "../gui/font/FontReader.h"
+#include "FontReader.h"
 
-void Loader::check_shader(const std::string &name, GLuint shader) {
+void AssetLoader::check_shader(const std::string &name, GLuint shader) {
     int infoLogLength;
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
     if (infoLogLength > 0) {
@@ -18,13 +18,13 @@ void Loader::check_shader(const std::string &name, GLuint shader) {
     }
 }
 
-std::string Loader::read_text(const std::string &path) {
+std::string AssetLoader::read_text(const std::string &path) {
     std::ifstream stream(path);
     std::string content((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
     return content;
 }
 
-uint8_t *Loader::read_bytes(const std::string &path, size_t &size) {
+uint8_t *AssetLoader::read_bytes(const std::string &path, size_t &size) {
     std::ifstream file(path, std::ios::binary | std::ios::in);
     file.seekg(0, std::ios::end);
     size_t length = file.tellg();
@@ -41,7 +41,7 @@ uint8_t *Loader::read_bytes(const std::string &path, size_t &size) {
     return buf;
 }
 
-GLuint Loader::load_shader(const std::string &vertex, const std::string &fragment) {
+GLuint AssetLoader::load_shader(const std::string &vertex, const std::string &fragment) {
     Logger::info("Loading shader '" + vertex + "/" + fragment + "'");
 
     std::string vertexSource = read_text("assets/shaders/" + vertex + ".v.glsl");
@@ -81,7 +81,7 @@ GLuint Loader::load_shader(const std::string &vertex, const std::string &fragmen
     return program;
 }
 
-Texture Loader::load_texture(const std::string &path) {
+Texture AssetLoader::load_texture(const std::string &path) {
     // Load PNG file from disk
     spng_ctx *ctx = spng_ctx_new(0);
 
@@ -117,7 +117,7 @@ Texture Loader::load_texture(const std::string &path) {
     return {texture, ihdr.width, ihdr.height};
 }
 
-Font *Loader::load_font(const std::string &name) {
+Font *AssetLoader::load_font(const std::string &name) {
     std::string pngPath = "assets/fonts/" + name + ".png";
     std::string fntPath = "assets/fonts/" + name + ".fnt";
 

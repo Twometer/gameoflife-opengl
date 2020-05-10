@@ -10,10 +10,6 @@
 IContainer::IContainer(const std::string &id) : IComponent(id) {
 }
 
-void IContainer::add_component(IComponent *component) {
-    this->components.push_back(component);
-}
-
 void IContainer::draw(Graphics &graphics) {
     Graphics nextGraphics = graphics.create_offset(get_origin());
     for (auto component : components) {
@@ -21,8 +17,8 @@ void IContainer::draw(Graphics &graphics) {
     }
 }
 
-// Yay, grid layout engine :)
 void IContainer::layout() {
+    // Yay, grid layout engine :)
     std::vector<float> rowHeights;
     std::vector<float> colWidths;
 
@@ -93,14 +89,56 @@ void IContainer::layout() {
     this->minimumSize = glm::vec2(totalWidth, totalHeight);
 }
 
-IComponent *IContainer::find_component(int row, int col) {
+void IContainer::set_cols(int c) {
+    this->columns = c;
+}
+
+void IContainer::set_rows(int r) {
+    this->rows = r;
+}
+
+
+void IContainer::add_component(IComponent *component) {
+    this->components.push_back(component);
+}
+
+void IContainer::on_mouse_down(glm::vec2 position) {
+    for (auto component : components)
+        component->on_mouse_down(position - get_origin());
+}
+
+void IContainer::on_mouse_up(glm::vec2 position) {
+    for (auto component : components)
+        component->on_mouse_up(position - get_origin());
+}
+
+glm::vec2 IContainer::get_origin() const {
+    return position + padding;
+}
+
+void IContainer::on_mouse_move(glm::vec2 position) {
+    for (auto component : components)
+        component->on_mouse_move(position - get_origin());
+}
+
+void IContainer::on_character_typed(uint32_t codepoint) {
+    for (auto component : components)
+        component->on_character_typed(codepoint);
+}
+
+void IContainer::on_key_event(int key, int action) {
+    for (auto component : components)
+        component->on_key_event(key, action);
+}
+
+IComponent *IContainer::find_component(int row, int col) const {
     for (auto component : components)
         if (component->get_row() == row && component->get_col() == col)
             return component;
     return nullptr;
 }
 
-void IContainer::build_rows(std::vector<float> &rowHeights) {
+void IContainer::build_rows(std::vector<float> &rowHeights) const {
     // Iterate all rows
     for (int r = 0; r < rows; r++) {
         // Find the tallest component in each row
@@ -133,7 +171,7 @@ void IContainer::build_rows(std::vector<float> &rowHeights) {
     }
 }
 
-void IContainer::build_cols(std::vector<float> &colWidths) {
+void IContainer::build_cols(std::vector<float> &colWidths) const {
     // Iterate all columns
     for (int c = 0; c < columns; c++) {
         // Find the widest component in each column
@@ -162,41 +200,4 @@ void IContainer::build_cols(std::vector<float> &colWidths) {
             colWidth = (colWidth / totalWidth * maximumSize.x);
         }
     }
-}
-
-void IContainer::set_cols(int c) {
-    this->columns = c;
-}
-
-void IContainer::set_rows(int r) {
-    this->rows = r;
-}
-
-void IContainer::on_mouse_down(glm::vec2 position) {
-    for (auto component : components)
-        component->on_mouse_down(position - get_origin());
-}
-
-void IContainer::on_mouse_up(glm::vec2 position) {
-    for (auto component : components)
-        component->on_mouse_up(position - get_origin());
-}
-
-glm::vec2 IContainer::get_origin() {
-    return position + padding;
-}
-
-void IContainer::on_mouse_move(glm::vec2 position) {
-    for (auto component : components)
-        component->on_mouse_move(position - get_origin());
-}
-
-void IContainer::on_character_typed(uint32_t codepoint) {
-    for (auto component : components)
-        component->on_character_typed(codepoint);
-}
-
-void IContainer::on_key_event(int key, int action) {
-    for (auto component : components)
-        component->on_key_event(key, action);
 }

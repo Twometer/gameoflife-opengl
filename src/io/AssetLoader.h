@@ -2,16 +2,16 @@
 // Created by twome on 06/05/2020.
 //
 
-#ifndef GAMEOFLIFE_OPENGL_LOADER_H
-#define GAMEOFLIFE_OPENGL_LOADER_H
+#ifndef GAMEOFLIFE_OPENGL_ASSETLOADER_H
+#define GAMEOFLIFE_OPENGL_ASSETLOADER_H
 
 
 #include <glad/glad.h>
 #include <string>
-#include "Texture.h"
+#include "../gl/Texture.h"
 #include "../gui/font/Font.h"
 
-class Loader {
+class AssetLoader {
 private:
     static void check_shader(const std::string &name, GLuint shader);
 
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif //GAMEOFLIFE_OPENGL_LOADER_H
+#endif //GAMEOFLIFE_OPENGL_ASSETLOADER_H

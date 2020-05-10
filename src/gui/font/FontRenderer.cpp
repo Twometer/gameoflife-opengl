@@ -11,7 +11,7 @@ FontRenderer::FontRenderer(Font *font) : font(font) {
     glGenBuffers(1, &vbo);
 }
 
-glm::vec2 FontRenderer::get_bounds(const std::string &text, float size) {
+glm::vec2 FontRenderer::get_bounds(const std::string &text, float size) const {
     float x = 0;
     float minY = 9999999;
     float maxY = 0;

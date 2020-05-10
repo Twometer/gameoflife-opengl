@@ -47,7 +47,7 @@ public:
     // if we want to have ANY objects as template typename
     // See: https://stackoverflow.com/q/115703
     template<typename T>
-    T *find_component(const std::string &id) {
+    T *find_component(const std::string &id) const {
         for (auto component : components)
             if (component->get_id() == id)
                 return dynamic_cast<T *>(component);
@@ -57,13 +57,13 @@ public:
     }
 
 private:
-    IComponent *find_component(int row, int col);
+    IComponent *find_component(int row, int col) const;
 
-    void build_rows(std::vector<float> &rowWidths);
+    void build_rows(std::vector<float> &rowWidths) const;
 
-    void build_cols(std::vector<float> &colHeights);
+    void build_cols(std::vector<float> &colHeights) const;
 
-    inline glm::vec2 get_origin();
+    inline glm::vec2 get_origin() const;
 };
 
 #endif //GAMEOFLIFE_OPENGL_ICONTAINER_H

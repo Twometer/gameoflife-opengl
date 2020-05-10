@@ -13,8 +13,8 @@
 
 class Graphics {
 private:
-    Vao* vao;
-    MeshBuilder* builder;
+    Vao *vao;
+    MeshBuilder *builder;
 
     BasicShader *guiShader;
 

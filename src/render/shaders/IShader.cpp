@@ -3,7 +3,7 @@
 //
 
 #include "IShader.h"
-#include "../../gl/Loader.h"
+#include "../../io/AssetLoader.h"
 
 int IShader::get_location(const std::string &uniform) {
     return glGetUniformLocation(id, uniform.c_str());
@@ -39,7 +39,7 @@ void IShader::bind() {
 }
 
 void IShader::initialize(const std::string &vertex, const std::string &fragment) {
-    id = Loader::load_shader(vertex, fragment);
+    id = AssetLoader::load_shader(vertex, fragment);
     bind_uniforms();
 }
 

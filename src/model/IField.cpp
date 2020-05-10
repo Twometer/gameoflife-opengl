@@ -5,4 +5,5 @@
 #include "IField.h"
 
 IField::~IField() {
+    delete vao;
 }

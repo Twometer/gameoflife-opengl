@@ -20,7 +20,6 @@ void GuiRenderer::draw() {
 void GuiRenderer::on_resize() {
     if (currentScreen != nullptr)
         this->currentScreen->layout();
-
 }
 
 void GuiRenderer::on_mouse_down(glm::vec2 position) {
@@ -48,7 +47,7 @@ void GuiRenderer::on_key_event(int key, int action) {
         currentScreen->on_key_event(key, action);
 }
 
-bool GuiRenderer::is_input_blocked() {
+bool GuiRenderer::is_input_blocked() const {
     return currentScreen != nullptr && currentScreen->blocks_game_inputs();
 }
 

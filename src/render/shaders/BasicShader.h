@@ -20,7 +20,7 @@ public:
         loc_cameraMatrix = get_location("cameraMatrix");
     }
 
-    void set_camera_matrix(glm::mat4 matrix){
+    void set_camera_matrix(glm::mat4 matrix) {
         load_matrix(loc_cameraMatrix, matrix);
     }
 

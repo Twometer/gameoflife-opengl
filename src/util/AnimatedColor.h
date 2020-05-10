@@ -25,7 +25,7 @@ public:
         return *this;
     }
 
-    glm::vec3 get_value() {
+    glm::vec3 get_value() const {
         return glm::vec3(r.get_value(), g.get_value(), b.get_value());
     }
 

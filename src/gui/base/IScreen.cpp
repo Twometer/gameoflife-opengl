@@ -21,11 +21,11 @@ void IScreen::layout() {
     IContainer::layout();
 }
 
-bool IScreen::blocks_game_inputs() {
+bool IScreen::blocks_game_inputs() const {
     return true;
 }
 
-IComponent *IScreen::get_focused_component() {
+IComponent *IScreen::get_focused_component() const {
     return focusedComponent;
 }
 

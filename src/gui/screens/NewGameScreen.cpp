@@ -3,7 +3,7 @@
 //
 
 #include "NewGameScreen.h"
-#include "../loader/GuiXmlLoader.h"
+#include "../../io/XmlGuiLoader.h"
 #include "../components/Button.h"
 #include "../../render/GameWindow.h"
 #include "MenuScreen.h"
@@ -12,7 +12,7 @@
 #include "../components/TextBox.h"
 
 NewGameScreen::NewGameScreen() : IScreen("newGameScreen") {
-    GuiXmlLoader::load(this, "new_game.xml");
+    XmlGuiLoader::load(this, "new_game.xml");
 
     auto tbWidth = find_component<TextBox>("tbWidth");
     auto tbHeight = find_component<TextBox>("tbHeight");

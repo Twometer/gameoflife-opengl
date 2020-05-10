@@ -30,7 +30,7 @@ public:
 
     virtual void remesh() = 0;
 
-    virtual glm::vec4 get_size() = 0;
+    virtual glm::vec4 get_size() const = 0;
 
     int get_living_cells() const {
         return living_cells;

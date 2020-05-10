@@ -23,7 +23,7 @@ private:
 public:
     explicit FontRenderer(Font *font);
 
-    glm::vec2 get_bounds(const std::string &text, float size = 1.0f);
+    glm::vec2 get_bounds(const std::string &text, float size = 1.0f) const;
 
     void draw(const std::string &text, glm::vec2 position, float size = 1.0f, glm::vec4 color = WHITE);
 

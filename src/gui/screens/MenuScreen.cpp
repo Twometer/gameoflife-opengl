@@ -5,12 +5,12 @@
 #include <iostream>
 #include "MenuScreen.h"
 #include "../components/Button.h"
-#include "../loader/GuiXmlLoader.h"
+#include "../../io/XmlGuiLoader.h"
 #include "../../render/GameWindow.h"
 #include "NewGameScreen.h"
 
 MenuScreen::MenuScreen() : IScreen("menuScreen") {
-    GuiXmlLoader::load(this, "main_menu.xml");
+    XmlGuiLoader::load(this, "main_menu.xml");
 
     auto btnNewGame = find_component<Button>("btnNewGame");
     auto btnLoadGame = find_component<Button>("btnLoadGame");

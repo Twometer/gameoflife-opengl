@@ -8,21 +8,22 @@
 
 #include <cstring>
 
-template <typename T>
+template<typename T>
 class DoubleBuffer {
 private:
-    T* front;
-    T* back;
+    T *front;
+    T *back;
 
 public:
     explicit DoubleBuffer(int size);
+
     ~DoubleBuffer();
 
     void swap();
 
-    T* get_front();
+    T *get_front() const;
 
-    T* get_back();
+    T *get_back() const;
 
 };
 
@@ -44,18 +45,18 @@ DoubleBuffer<T>::~DoubleBuffer() {
 
 template<typename T>
 void DoubleBuffer<T>::swap() {
-    T* tmp = front;
+    T *tmp = front;
     front = back;
     back = tmp;
 }
 
 template<typename T>
-T *DoubleBuffer<T>::get_front() {
+T *DoubleBuffer<T>::get_front() const {
     return front;
 }
 
 template<typename T>
-T *DoubleBuffer<T>::get_back() {
+T *DoubleBuffer<T>::get_back() const {
     return back;
 }
 

@@ -23,13 +23,13 @@ public:
 
     ~Vao();
 
-    void bind();
+    void bind() const;
 
-    void unbind();
+    void unbind() const;
 
-    void set_data(float* vertexBuf, int vertexBufSize, float* colorBuf, int colorBufSize);
+    void set_data(float *vertexBuf, int vertexBufSize, float *colorBuf, int colorBufSize);
 
-    void render();
+    void render() const;
 
 };
 

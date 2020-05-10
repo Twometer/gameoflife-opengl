@@ -35,7 +35,7 @@ void CheckBox::on_click(glm::vec2 position) {
         checkContentColor = glm::vec3(0.1529, 0.1922, 0.2118);
 }
 
-bool CheckBox::is_checked() {
+bool CheckBox::is_checked() const {
     return checked;
 }
 

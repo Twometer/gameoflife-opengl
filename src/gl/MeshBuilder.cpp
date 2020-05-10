@@ -25,7 +25,7 @@ float *MeshBuilder::get_vertices() {
     return &vertices[0];
 }
 
-int MeshBuilder::get_vertex_count() {
+int MeshBuilder::get_vertex_count() const {
     return vertices.size();
 }
 
@@ -33,7 +33,7 @@ float *MeshBuilder::get_colors() {
     return &colors[0];
 }
 
-int MeshBuilder::get_color_count() {
+int MeshBuilder::get_color_count() const {
     return colors.size();
 }
 

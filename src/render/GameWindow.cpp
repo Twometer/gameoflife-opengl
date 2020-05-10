@@ -7,12 +7,12 @@
 
 #include "GameWindow.h"
 #include "../model/Field2d.h"
-#include "../gl/Loader.h"
+#include "../io/AssetLoader.h"
 #include "../gui/screens/MenuScreen.h"
 
 GameWindow *GameWindow::instance = nullptr;
 
-GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"))), generationTimer(20),
+GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nirmala"))), generationTimer(20),
                            updateTimer(60) {
     field = new Field2d(128, 128);
     field->randomize(4);

@@ -18,10 +18,6 @@ private:
     MeshBuilder *meshBuilder;
     DoubleBuffer<bool> *buffer;
 
-    inline int get_index(int x, int y);
-
-    int count_neighbors(int x, int y);
-
 public:
     Field2d(int width, int height);
 
@@ -33,7 +29,13 @@ public:
 
     void remesh() override;
 
-    glm::vec4 get_size() override;
+    glm::vec4 get_size() const override;
+
+private:
+    inline int get_index(int x, int y) const;
+
+    int count_neighbors(int x, int y) const;
+
 };
 
 

@@ -6,9 +6,10 @@
 #include "../render/GameWindow.h"
 
 Graphics::Graphics(Vao *vao, MeshBuilder *builder, BasicShader *guiShader, const glm::vec2 &origin) : vao(vao),
-                                                                                                  builder(builder),
-                                                                                                  guiShader(guiShader),
-                                                                                                  origin(origin) {
+                                                                                                      builder(builder),
+                                                                                                      guiShader(
+                                                                                                              guiShader),
+                                                                                                      origin(origin) {
 }
 
 void Graphics::push_rectangle(float x, float y, float width, float height, glm::vec3 color) {

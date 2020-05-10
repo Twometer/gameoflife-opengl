@@ -28,7 +28,7 @@ public:
         dstValue = value;
     }
 
-    float get_value() {
+    float get_value() const {
         return curValue;
     }
 

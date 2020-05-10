@@ -23,13 +23,13 @@ public:
 
     void set_focused_component(IComponent *focusedComponent);
 
-    IComponent* get_focused_component();
+    IComponent *get_focused_component() const;
 
     /**
      * This may be true for e.g. the menu screen, but false for the ingame HUD screen
      * @return Whether the current screen should block inputs to the game such as zooming and moving the field.
      */
-    virtual bool blocks_game_inputs();
+    virtual bool blocks_game_inputs() const;
 
 };
 

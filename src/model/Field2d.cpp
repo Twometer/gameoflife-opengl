@@ -8,8 +8,21 @@
 #include "../gl/MeshBuilder.h"
 #include "../util/Logger.h"
 
+Field2d::Field2d(int width, int height) {
+    this->width = width;
+    this->height = height;
+    this->vao = new Vao(2);
+    buffer = new DoubleBuffer<bool>(width * height);
+    meshBuilder = new MeshBuilder();
+}
+
+Field2d::~Field2d() {
+    delete meshBuilder;
+    delete buffer;
+}
+
 void Field2d::tick() {
-    // Our front buffer contains the field that is currently visible on-screen
+    // The front buffer contains the field that is currently visible on-screen
     // On the back buffer we prepare the new field that contains the next generation
 
     living_cells = 0;
@@ -48,25 +61,37 @@ void Field2d::randomize(int mod) {
     }
 }
 
-Field2d::Field2d(int width, int height) {
-    this->width = width;
-    this->height = height;
-    this->vao = new Vao(2);
-    buffer = new DoubleBuffer<bool>(width * height);
-    meshBuilder = new MeshBuilder();
+void Field2d::remesh() {
+    meshBuilder->clear();
+    meshBuilder->push_rectangle(-0.25, -0.25, (float) width + .5f, (float) height + .5f, glm::vec3(0.3f, 0.3f, 0.3f));
+    meshBuilder->push_rectangle(0, 0, (float) width, (float) height, glm::vec3(0.2f, 0.2f, 0.2f));
+
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            bool alive = buffer->get_front()[get_index(i, j)];
+
+            if (alive) {
+                // Some nice color theme
+                meshBuilder->push_rectangle(i, j, 1, 1, glm::vec3(i / (float) width, j / (float) height, 1.0f));
+            }
+
+        }
+    }
+
+    vao->set_data(meshBuilder->get_vertices(), meshBuilder->get_vertex_count(), meshBuilder->get_colors(),
+                  meshBuilder->get_color_count());
 }
 
-Field2d::~Field2d() {
-    delete meshBuilder;
-    delete buffer;
-    delete vao;
+glm::vec4 Field2d::get_size() const {
+    return glm::vec4(width, height, 0, 0);
 }
 
-int Field2d::get_index(int x, int y) {
+
+int Field2d::get_index(int x, int y) const {
     return (y * width) + x;
 }
 
-int Field2d::count_neighbors(int x, int y) {
+int Field2d::count_neighbors(int x, int y) const {
     int neighbors = 0;
 
     // Iterate all Moore neighbors of the current cell on the front buffer
@@ -88,28 +113,3 @@ int Field2d::count_neighbors(int x, int y) {
     }
     return neighbors;
 }
-
-void Field2d::remesh() {
-    meshBuilder->clear();
-
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-            bool alive = buffer->get_front()[get_index(i, j)];
-
-            if (alive) {
-                // Some nice color theme
-                meshBuilder->push_rectangle(i, j, 1, 1, glm::vec3(i / (float) width, j / (float) height, 1.0f));
-            }
-
-        }
-    }
-
-    vao->set_data(meshBuilder->get_vertices(), meshBuilder->get_vertex_count(), meshBuilder->get_colors(),
-                  meshBuilder->get_color_count());
-}
-
-glm::vec4 Field2d::get_size() {
-    return glm::vec4(width, height, 0, 0);
-}
-
-

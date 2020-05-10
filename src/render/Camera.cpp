@@ -25,15 +25,6 @@ void Camera::update() {
                                   -camHeight / 2.f + midpoint.y, +camHeight / 2.f + midpoint.y);
 }
 
-glm::mat4 Camera::get_matrix() {
-    return projectionMatrix;
-}
-
-// Initialize matrix to identity
-Camera::Camera() : projectionMatrix(1.0f) {
-
-}
-
 void Camera::set_midpoint(glm::vec2 midpoint) {
     this->midpoint = midpoint;
 }
@@ -42,6 +33,10 @@ void Camera::move_midpoint(glm::vec2 offset) {
     this->midpoint += offset;
 }
 
-glm::vec2 Camera::get_size() {
+glm::mat4 Camera::get_matrix() const {
+    return projectionMatrix;
+}
+
+glm::vec2 Camera::get_size() const {
     return sizeInWorld;
 }

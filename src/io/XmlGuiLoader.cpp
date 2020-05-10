@@ -2,17 +2,17 @@
 // Created by twome on 09/05/2020.
 //
 
-#include "../../util/Logger.h"
-#include "GuiXmlLoader.h"
-#include "../components/Panel.h"
-#include "../components/Label.h"
-#include "../components/Button.h"
-#include "../components/TextBox.h"
-#include "../components/CheckBox.h"
+#include "../util/Logger.h"
+#include "XmlGuiLoader.h"
+#include "../gui/components/Panel.h"
+#include "../gui/components/Label.h"
+#include "../gui/components/Button.h"
+#include "../gui/components/TextBox.h"
+#include "../gui/components/CheckBox.h"
 
 using namespace tinyxml2;
 
-void GuiXmlLoader::load(IScreen *screen, const std::string &name) {
+void XmlGuiLoader::load(IScreen *screen, const std::string &name) {
     std::string path = "assets/screens/" + name;
 
     XMLDocument doc;
@@ -28,7 +28,7 @@ void GuiXmlLoader::load(IScreen *screen, const std::string &name) {
     scan(screen, root);
 }
 
-IComponent *GuiXmlLoader::instantiate(const char *name, const char *idPtr) {
+IComponent *XmlGuiLoader::instantiate(const char *name, const char *idPtr) {
     std::string id = std::string(idPtr);
     if (strcmp(name, "Panel") == 0)
         return new Panel(id);
@@ -43,7 +43,7 @@ IComponent *GuiXmlLoader::instantiate(const char *name, const char *idPtr) {
     return nullptr;
 }
 
-void GuiXmlLoader::scan(IContainer *parent, tinyxml2::XMLElement *xml) {
+void XmlGuiLoader::scan(IContainer *parent, tinyxml2::XMLElement *xml) {
     for (XMLElement *child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
         IComponent *uiChild = instantiate(child->Name(), child->Attribute("Id"));
 
@@ -67,7 +67,7 @@ void GuiXmlLoader::scan(IContainer *parent, tinyxml2::XMLElement *xml) {
     }
 }
 
-void GuiXmlLoader::apply_properties(IComponent *component, tinyxml2::XMLElement *xml) {
+void XmlGuiLoader::apply_properties(IComponent *component, tinyxml2::XMLElement *xml) {
     component->set_row(xml->IntAttribute("Row", 0));
     component->set_row_span(xml->IntAttribute("RowSpan", 1));
     component->set_col(xml->IntAttribute("Col", 0));
@@ -86,7 +86,7 @@ void GuiXmlLoader::apply_properties(IComponent *component, tinyxml2::XMLElement 
             textComponent->set_text(std::string(text));
         textComponent->set_font_size(xml->FloatAttribute("FontSize", 1.0f));
 
-        if (auto textBox = dynamic_cast<TextBox *>(component)){
+        if (auto textBox = dynamic_cast<TextBox *>(component)) {
             const char *placeholder = xml->Attribute("Placeholder");
             if (placeholder != nullptr)
                 textBox->set_placeholder(std::string(placeholder));
@@ -95,7 +95,7 @@ void GuiXmlLoader::apply_properties(IComponent *component, tinyxml2::XMLElement 
 
 }
 
-glm::vec2 GuiXmlLoader::parse_vec(const char *srcPtr) {
+glm::vec2 XmlGuiLoader::parse_vec(const char *srcPtr) {
     if (srcPtr == nullptr)
         return {0, 0};
 
@@ -110,7 +110,7 @@ glm::vec2 GuiXmlLoader::parse_vec(const char *srcPtr) {
     return glm::vec2(x, y);
 }
 
-Alignment GuiXmlLoader::parse_alignment(const char *src) {
+Alignment XmlGuiLoader::parse_alignment(const char *src) {
     if (src == nullptr)
         return Alignment::START;
 

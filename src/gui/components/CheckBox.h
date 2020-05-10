@@ -23,7 +23,7 @@ public:
 
     void on_click(glm::vec2 position) override;
 
-    bool is_checked();
+    bool is_checked() const;
 
 };
 

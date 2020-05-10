@@ -43,6 +43,7 @@ private:
     bool shouldClose;
 
     GameWindow();
+
 public:
     static GameWindow *get_instance();
 

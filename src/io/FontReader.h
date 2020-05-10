@@ -7,8 +7,8 @@
 
 
 #include <fstream>
-#include "Glyph.h"
-#include "Font.h"
+#include "../gui/font/Glyph.h"
+#include "../gui/font/Font.h"
 
 class FontReader {
 

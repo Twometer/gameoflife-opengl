@@ -38,9 +38,9 @@ public:
 
     void on_key_event(int key, int action);
 
-    void focus_component(IComponent *component);
+    bool is_input_blocked() const;
 
-    bool is_input_blocked();
+    void focus_component(IComponent *component);
 
 };
 

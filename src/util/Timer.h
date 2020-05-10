@@ -11,23 +11,32 @@ class Timer {
 private:
     double delay;
 
-    double lastTick;
+    double lastTick = 0;
+
+    bool paused = false;
 
 public:
-    explicit Timer(int tps)
-            : delay(1.0 / tps), lastTick(0) {
+    explicit Timer(int tps) : delay(1.0 / tps) {
     }
 
     void reset() {
         lastTick = glfwGetTime();
     }
 
-    bool elapsed() {
-        return (glfwGetTime() - lastTick) > delay;
+    bool elapsed() const {
+        return !paused && (glfwGetTime() - lastTick) > delay;
     }
 
     void set_tps(int tps) {
         delay = 1.0 / tps;
+    }
+
+    void pause() {
+        paused = true;
+    }
+
+    void resume() {
+        paused = false;
     }
 
 };
