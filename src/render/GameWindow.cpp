@@ -17,8 +17,7 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(Loader::load_font("nirmala"
     field = new Field2d(128, 128);
     field->randomize(4);
     field->remesh();
-
-    camera.set_midpoint(glm::vec2(64, 64));
+    center_camera();
 
     standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
     ibeamCursor = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
@@ -163,6 +162,18 @@ void GameWindow::set_cursor(Cursor cursor) {
         else if (cursor == Cursor::IBEAM)
             glfwSetCursor(glfwHandle, ibeamCursor);
     }
+}
+
+void GameWindow::set_field(IField *field) {
+    delete this->field;
+    this->field = field;
+
+    center_camera();
+}
+
+void GameWindow::center_camera() {
+    auto size = field->get_size();
+    camera.set_midpoint(glm::vec2(size.x, size.y) * 0.5f);
 }
 
 

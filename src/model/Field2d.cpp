@@ -108,4 +108,8 @@ void Field2d::remesh() {
                   meshBuilder->get_color_count());
 }
 
+glm::vec4 Field2d::get_size() {
+    return glm::vec4(width, height, 0, 0);
+}
+
 

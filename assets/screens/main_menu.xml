@@ -9,7 +9,7 @@
         <Label Id="titleLabel" Row="0" Text="Game of Life" FontSize="0.8" VerticalAlignment="CENTER"
                HorizontalAlignment="CENTER"/>
         <Label Id="subtitleLabel" Row="1" Text="(c) 2020 Twometer Apps" FontSize="0.25" VerticalAlignment="CENTER"
-               HorizontalAlignment="CENTER"/>
+               HorizontalAlignment="CENTER" Margin="0,8"/>
         <Button Id="btnNewGame" Row="2" Text="New game" FontSize="0.55" Margin="32,8" Padding="32,0"
                 HorizontalAlignment="STRETCH"/>
         <Button Id="btnLoadGame" Row="3" Text="Load game" FontSize="0.55" Margin="32,8" Padding="32,0"

@@ -19,6 +19,8 @@ void Camera::update() {
 
     sizeInWorld = glm::vec2(camWidth, camHeight);
 
+    this->midpoint.update();
+    glm::vec2 midpoint = this->midpoint.get_value();
     projectionMatrix = glm::ortho(-camWidth / 2.f + midpoint.x, +camWidth / 2.f + midpoint.x,
                                   -camHeight / 2.f + midpoint.y, +camHeight / 2.f + midpoint.y);
 }

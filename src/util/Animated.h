@@ -7,6 +7,8 @@
 
 #include <glm/glm.hpp>
 
+constexpr float ANIMATION_SPEED = 0.045f;
+
 class Animated {
 private:
     float srcValue;
@@ -32,7 +34,7 @@ public:
 
     void update() {
         if (progress < 1.0f)
-            progress += 0.1f;
+            progress += ANIMATION_SPEED;
         curValue = srcValue + (dstValue - srcValue) * glm::sin(progress * M_PI_2);
     }
 

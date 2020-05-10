@@ -5,17 +5,22 @@
 -->
 
 <Screen Id="newGameScreen" VerticalAlignment="STRETCH" HorizontalAlignment="STRETCH">
-    <Panel Id="mainPanel" VerticalAlignment="CENTER" HorizontalAlignment="CENTER" Rows="4" Cols="3" Padding="64,16">
+    <Panel Id="mainPanel" VerticalAlignment="CENTER" HorizontalAlignment="CENTER" Rows="6" Cols="3" Padding="64,16">
         <Label Id="titleLabel" Row="0" Text="Create game" FontSize="0.8" VerticalAlignment="CENTER"
                HorizontalAlignment="CENTER" ColSpan="3"/>
 
-        <TextBox Id="tbWidth" Row="1" Col="0" VerticalALignment="CENTER" HorizontalAlignment="CENTER" Margin="5,5" Placeholder="Width" FontSize="0.6" Padding="25,10" Text="16"/>
+        <TextBox Id="tbWidth" Row="1" Col="0" VerticalALignment="CENTER" HorizontalAlignment="CENTER" Margin="5,5"
+                 Placeholder="Width" FontSize="0.6" Padding="25,10" Text="16"/>
         <Label Id="lbx" Row="1" Col="1" VerticalAlignment="CENTER" FontSize="0.6" Text="x" Padding="5,0"/>
-        <TextBox Id="tbHeight" Row="1" Col="2" VerticalALignment="CENTER" HorizontalAlignment="CENTER" Margin="5,5" Placeholder="Height" FontSize="0.6" Padding="25,10" Text="16"/>
+        <TextBox Id="tbHeight" Row="1" Col="2" VerticalALignment="CENTER" HorizontalAlignment="CENTER" Margin="5,5"
+                 Placeholder="Height" FontSize="0.6" Padding="25,10" Text="16"/>
 
-        <Button Id="btnCreate" Row="2" Text="Create" FontSize="0.55" Margin="32,8" Padding="32,4"
+        <CheckBox Id="cbRandomize" Row="2" Text="Randomize" FontSize="0.55" ColSpan="3" HorizontalAlignment="CENTER"
+                  Margin="0,16"/>
+
+        <Button Id="btnCreate" Row="3" Text="Create" FontSize="0.55" Margin="32,8" Padding="32,4"
                 HorizontalAlignment="STRETCH" ColSpan="3"/>
-        <Button Id="btnBack" Row="3" Text="Back" FontSize="0.55" Margin="32,8" Padding="32,4"
+        <Button Id="btnBack" Row="4" Text="Back" FontSize="0.55" Margin="32,8" Padding="32,4"
                 HorizontalAlignment="STRETCH" ColSpan="3"/>
     </Panel>
 </Screen>

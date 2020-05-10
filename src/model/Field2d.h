@@ -32,6 +32,8 @@ public:
     void randomize(int mod) override;
 
     void remesh() override;
+
+    glm::vec4 get_size() override;
 };
 
 

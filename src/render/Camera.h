@@ -6,13 +6,13 @@
 #define GAMEOFLIFE_OPENGL_CAMERA_H
 
 #include <glm/glm.hpp>
-#include "../util/Animated.h"
+#include "../util/AnimatedVec2.h"
 
 class Camera {
 private:
     glm::mat4 projectionMatrix;
 
-    glm::vec2 midpoint;
+    AnimatedVec2 midpoint = glm::vec2(0, 0);
 
     glm::vec2 sizeInWorld;
 

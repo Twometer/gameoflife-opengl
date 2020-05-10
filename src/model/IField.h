@@ -6,8 +6,14 @@
 #define GAMEOFLIFE_OPENGL_IFIELD_H
 
 
+#include <glm/vec4.hpp>
 #include "../gl/Vao.h"
 
+/**
+ * The base class for all Game of Life fields
+ * At the moment this is only the 2D field
+ * but maybe I have time to implement 3D and 4D as well
+ */
 class IField {
 
 protected:
@@ -24,7 +30,9 @@ public:
 
     virtual void remesh() = 0;
 
-    int get_living_cells() {
+    virtual glm::vec4 get_size() = 0;
+
+    int get_living_cells() const {
         return living_cells;
     }
 

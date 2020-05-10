@@ -8,6 +8,7 @@
 #include "../components/Label.h"
 #include "../components/Button.h"
 #include "../components/TextBox.h"
+#include "../components/CheckBox.h"
 
 using namespace tinyxml2;
 
@@ -37,6 +38,8 @@ IComponent *GuiXmlLoader::instantiate(const char *name, const char *idPtr) {
         return new Button(id);
     if (strcmp(name, "TextBox") == 0)
         return new TextBox(id);
+    if (strcmp(name, "CheckBox") == 0)
+        return new CheckBox(id);
     return nullptr;
 }
 

@@ -23,6 +23,10 @@ public:
     virtual void on_text_changed() {
     }
 
+    const std::string &get_text() const {
+        return text;
+    };
+
     void set_text(std::string text) {
         this->text = text;
         on_text_changed();

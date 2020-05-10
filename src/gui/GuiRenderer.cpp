@@ -7,7 +7,9 @@
 void GuiRenderer::show_screen(IScreen *screen) {
     delete this->currentScreen;
     this->currentScreen = screen;
-    this->currentScreen->layout();
+
+    if (screen != nullptr)
+        screen->layout();
 }
 
 void GuiRenderer::draw() {

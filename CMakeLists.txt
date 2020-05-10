@@ -31,7 +31,7 @@ add_executable(gameoflife_opengl
         src/gui/components/Panel.cpp
         src/gui/components/Button.cpp
         src/gui/Graphics.cpp
-        src/gui/loader/GuiXmlLoader.cpp src/gui/screens/NewGameScreen.cpp src/gui/screens/NewGameScreen.h src/gui/components/TextBox.cpp src/gui/components/TextBox.h src/gui/base/ITextComponent.h src/gui/enums/Cursor.h)
+        src/gui/loader/GuiXmlLoader.cpp src/gui/screens/NewGameScreen.cpp src/gui/screens/NewGameScreen.h src/gui/components/TextBox.cpp src/gui/components/TextBox.h src/gui/base/ITextComponent.h src/gui/enums/Cursor.h src/gui/components/CheckBox.cpp src/gui/components/CheckBox.h)
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)

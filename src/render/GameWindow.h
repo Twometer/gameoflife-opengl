@@ -80,8 +80,12 @@ public:
 
     void set_cursor(Cursor cursor);
 
+    void set_field(IField *field);
+
 private:
     void handle_input();
+
+    void center_camera();
 };
 
 
