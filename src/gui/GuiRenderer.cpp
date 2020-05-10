@@ -5,7 +5,6 @@
 #include "GuiRenderer.h"
 
 void GuiRenderer::show_screen(IScreen *screen) {
-    delete this->currentScreen;
     this->currentScreen = screen;
 
     if (screen != nullptr)

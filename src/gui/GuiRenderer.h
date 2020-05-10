@@ -14,6 +14,7 @@
 class GuiRenderer {
 private:
     IScreen *currentScreen = nullptr;
+    IScreen *lastScreen = nullptr;
 
     Vao vao = Vao(2);
     MeshBuilder meshBuilder;

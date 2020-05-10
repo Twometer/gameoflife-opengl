@@ -7,7 +7,6 @@
 <Screen Id="ingameGui" VerticalAlignment="STRETCH" HorizontalAlignment="STRETCH" Rows="2">
     <Panel Id="toolBar" Row="0" Cols="5" VerticalAlignment="START" HorizontalAlignment="START" Padding="16,11">
         <ToolButton Id="btnBack" Texture="back" Col="0" VerticalAlignment="CENTER" Margin="8,0"/>
-
         <ToolButton Id="btnNew" Texture="new" Col="1" VerticalAlignment="CENTER" Margin="8,0"/>
         <ToolButton Id="btnOpen" Texture="open" Col="2" VerticalAlignment="CENTER" Margin="8,0"/>
         <ToolButton Id="btnSave" Texture="save" Col="3" VerticalAlignment="CENTER" Margin="8,0"/>

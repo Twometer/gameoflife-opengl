@@ -13,11 +13,6 @@ GameWindow *GameWindow::instance = nullptr;
 
 GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nirmala"))), generationTimer(20),
                            updateTimer(60) {
-    field = new Field(128, 128);
-    field->randomize(4);
-    field->remesh();
-    center_camera();
-
     ingameGui = new IngameGuiScreen();
     ingameGui->btnPlayPause->set_click_listener([this]() {
         if (generationTimer.is_paused()) {
@@ -31,6 +26,10 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
     ingameGui->btnNextGen->set_click_listener([this]() {
         next_generation();
     });
+    ingameGui->btnBack->set_click_listener([this]() {
+        show_demo_scene();
+        guiRenderer.show_screen(new MenuScreen());
+    });
 
     standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
     ibeamCursor = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
@@ -38,6 +37,7 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    show_demo_scene();
 }
 
 GameWindow::~GameWindow() {
@@ -223,6 +223,18 @@ void GameWindow::toggle_cell(glm::vec2 mousePos) {
         field->toggle_cell(fieldX, fieldY);
         field->remesh();
     }
+}
+
+void GameWindow::show_demo_scene() {
+    auto field = new Field(128, 128);
+    field->randomize(4);
+    field->remesh();
+
+    camera.zoom = .01f;
+
+    generationTimer.resume();
+    set_field(field);
+    center_camera();
 }
 
 

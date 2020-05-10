@@ -18,6 +18,12 @@ public:
     ToolButton *btnPlayPause;
     ToolButton *btnNextGen;
 
+    ToolButton *btnBack;
+    ToolButton *btnNew;
+    ToolButton *btnOpen;
+    ToolButton *btnSave;
+    ToolButton *btnSettings;
+
     IngameGuiScreen();
 
     bool blocks_game_inputs() const override;

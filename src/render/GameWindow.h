@@ -22,7 +22,7 @@ private:
 
     GLFWwindow *glfwHandle;
 
-    Field *field;
+    Field *field = nullptr;
 
     Camera camera;
 
@@ -87,6 +87,8 @@ public:
     void set_field(Field *field);
 
     void show_ingame_gui();
+
+    void show_demo_scene();
 
 private:
     void handle_input();

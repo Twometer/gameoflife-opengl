@@ -13,6 +13,12 @@ IngameGuiScreen::IngameGuiScreen() : IScreen("ingameGui") {
 
     btnPlayPause = find_component<ToolButton>("btnPlayPause");
     btnNextGen = find_component<ToolButton>("btnNextGen");
+
+    btnBack = find_component<ToolButton>("btnBack");
+    btnNew = find_component<ToolButton>("btnNew");
+    btnOpen = find_component<ToolButton>("btnOpen");
+    btnSave = find_component<ToolButton>("btnSave");
+    btnSettings = find_component<ToolButton>("btnSettings");
 }
 
 bool IngameGuiScreen::blocks_game_inputs() const {
