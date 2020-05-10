@@ -85,6 +85,9 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    Logger::info("Shutting down...");
+    glfwDestroyWindow(window);
     delete gameWindow;
 
     return 0;
