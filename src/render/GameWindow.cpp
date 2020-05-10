@@ -9,6 +9,7 @@
 #include "../io/AssetLoader.h"
 #include "../gui/screens/MenuScreen.h"
 #include "../gui/dialogs/SettingsDialog.h"
+#include "../io/FieldIO.h"
 
 GameWindow *GameWindow::instance = nullptr;
 
@@ -40,6 +41,12 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
     });
     ingameGui->btnSettings->set_click_listener([this]() {
        guiRenderer.show_dialog(new SettingsDialog());
+    });
+    ingameGui->btnSave->set_click_listener([this]() {
+       FieldIO::write_field("test.bin", field);
+    });
+    ingameGui->btnOpen->set_click_listener([this]() {
+        set_field(FieldIO::read_field("test.bin"));
     });
 
     standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);

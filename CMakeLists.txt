@@ -18,21 +18,29 @@ add_executable(gameoflife_opengl
         src/io/AssetLoader.cpp
         src/io/FontReader.cpp
         src/io/XmlGuiLoader.cpp
+        src/io/FieldIO.cpp
         src/gl/Vao.cpp
         src/gl/MeshBuilder.cpp
+        src/gl/TextureManager.cpp
         src/gui/font/FontRenderer.cpp
         src/gui/screens/MenuScreen.cpp
         src/gui/screens/NewGameScreen.cpp
+        src/gui/screens/IngameGuiScreen.cpp
         src/gui/base/IContainer.cpp
         src/gui/base/IScreen.cpp
+        src/gui/base/IDialog.cpp
         src/gui/base/IComponent.cpp
+        src/gui/base/IImageComponent.cpp
         src/gui/components/Label.cpp
         src/gui/components/Panel.cpp
         src/gui/components/Button.cpp
         src/gui/components/TextBox.cpp
         src/gui/components/CheckBox.cpp
+        src/gui/components/ToolButton.cpp
+        src/gui/dialogs/SettingsDialog.cpp
         src/gui/GuiRenderer.cpp
-        src/gui/Graphics.cpp src/model/Field.cpp src/model/Field.h src/gui/screens/IngameGuiScreen.cpp src/gui/screens/IngameGuiScreen.h src/gui/components/ToolButton.cpp src/gui/components/ToolButton.h src/render/shaders/TexturedShader.h src/gui/base/IImageComponent.h src/gl/TextureManager.cpp src/gl/TextureManager.h src/gui/base/IImageComponent.cpp src/gui/base/IDialog.cpp src/gui/base/IDialog.h src/gui/dialogs/SettingsDialog.cpp src/gui/dialogs/SettingsDialog.h)
+        src/gui/Graphics.cpp
+        src/model/Field.cpp)
 
 target_include_directories(gameoflife_opengl PRIVATE libs/glm libs/glfw/include inc)
 target_link_libraries(gameoflife_opengl glfw ${GLFW_LIBRARIES} z.lib)

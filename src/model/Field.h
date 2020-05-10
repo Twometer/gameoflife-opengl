@@ -38,6 +38,12 @@ public:
 
     void toggle_cell(int x, int y);
 
+    void set_cell(int x, int y, bool alive);
+
+    bool get_cell(int x, int y);
+
+    bool *get_front_buffer();
+
     glm::vec2 get_size() const;
 
     int get_living_cells() const;

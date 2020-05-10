@@ -86,11 +86,24 @@ void Field::render() {
 
 void Field::clear() {
     buffer->clear();
+    generation = 0;
 }
 
 void Field::toggle_cell(int x, int y) {
     bool *b = &buffer->get_front()[get_index(x, y)];
     *b = !*b;
+}
+
+void Field::set_cell(int x, int y, bool alive) {
+    buffer->get_front()[get_index(x, y)] = alive;
+}
+
+bool Field::get_cell(int x, int y) {
+    return buffer->get_front()[get_index(x, y)];
+}
+
+bool *Field::get_front_buffer() {
+    return buffer->get_front();
 }
 
 glm::vec2 Field::get_size() const {
