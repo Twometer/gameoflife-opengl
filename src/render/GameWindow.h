@@ -14,6 +14,10 @@
 #include "../util/Timer.h"
 #include "../gui/GuiRenderer.h"
 #include "../gui/screens/IngameGuiScreen.h"
+#include "../gl/Fbo.h"
+#include "Postproc.h"
+#include "shaders/HBlurShader.h"
+#include "shaders/VBlurShader.h"
 #include <GLFW/glfw3.h>
 
 class GameWindow {
@@ -27,6 +31,11 @@ private:
     Camera camera;
 
     BasicShader basicShader;
+
+    Fbo fbo;
+    Fbo fbo2;
+    HBlurShader hBlurShader;
+    VBlurShader vBlurShader;
 
     Timer updateTimer;      // This timer checks input data and updates animations at a constant rate
     Timer generationTimer;  // This timer calculates the next GOL generation after a given time
@@ -53,6 +62,8 @@ public:
     ~GameWindow();
 
     void draw_frame();
+
+    void draw_field();
 
     void on_startup();
 

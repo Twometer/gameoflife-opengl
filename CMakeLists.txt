@@ -14,12 +14,14 @@ add_executable(gameoflife_opengl
         src/util/Logger.cpp
         src/render/GameWindow.cpp
         src/render/Camera.cpp
+        src/render/Postproc.cpp
         src/render/shaders/IShader.cpp
         src/io/AssetLoader.cpp
         src/io/FontReader.cpp
         src/io/XmlGuiLoader.cpp
         src/io/FieldIO.cpp
         src/gl/Vao.cpp
+        src/gl/Fbo.cpp
         src/gl/MeshBuilder.cpp
         src/gl/TextureManager.cpp
         src/gui/font/FontRenderer.cpp

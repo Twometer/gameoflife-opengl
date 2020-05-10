@@ -15,7 +15,7 @@
 GameWindow *GameWindow::instance = nullptr;
 
 GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nirmala"))), generationTimer(20),
-                           updateTimer(60) {
+                           updateTimer(60), fbo(512, 384), fbo2(1024, 768) {
     ingameGui = new IngameGuiScreen();
     ingameGui->btnPlayPause->set_click_listener([this]() {
         if (generationTimer.is_paused()) {
@@ -41,7 +41,7 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
         }
     });
     ingameGui->btnSettings->set_click_listener([this]() {
-       guiRenderer.show_dialog(new SettingsDialog());
+        guiRenderer.show_dialog(new SettingsDialog());
     });
     ingameGui->btnSave->set_click_listener([this]() {
         nfdchar_t *outPath = nullptr;
@@ -67,6 +67,8 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
     standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
     ibeamCursor = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
 
+    Postproc::initialize();
+
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
@@ -83,9 +85,25 @@ void GameWindow::draw_frame() {
 
     camera.update();
 
-    basicShader.bind();
-    basicShader.set_camera_matrix(camera.get_matrix());
-    field->render();
+    if (guiRenderer.is_input_blocked()) {
+        // Draw a blurry game
+        fbo.bind();
+        draw_field();
+        fbo.unbind();
+
+        Postproc::start();
+        hBlurShader.bind();
+        hBlurShader.set_target_width(get_viewport_size().x / 2);
+        Postproc::copy(&fbo, &fbo2);
+
+        vBlurShader.bind();
+        vBlurShader.set_target_height(get_viewport_size().y / 2);
+        Postproc::copy(&fbo2, nullptr);
+        Postproc::stop();
+    } else {
+        // Draw normal game
+        draw_field();
+    }
 
     if (generationTimer.elapsed()) {
         next_generation();
@@ -98,6 +116,12 @@ void GameWindow::draw_frame() {
     }
 
     guiRenderer.draw();
+}
+
+void GameWindow::draw_field() {
+    basicShader.bind();
+    basicShader.set_camera_matrix(camera.get_matrix());
+    field->render();
 }
 
 void GameWindow::handle_input() {
@@ -202,7 +226,6 @@ void GameWindow::close() {
 void GameWindow::set_cursor(Cursor cursor) {
     if (cursor != currentCursor) {
         currentCursor = cursor;
-
         if (cursor == Cursor::STANDARD)
             glfwSetCursor(glfwHandle, standardCursor);
         else if (cursor == Cursor::IBEAM)
