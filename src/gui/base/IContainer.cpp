@@ -56,7 +56,7 @@ void IContainer::layout() {
         float width = component->get_horizontal_alignment() == Alignment::STRETCH ? cellWidth
                                                                                   : component->get_minimum_size().x;
 
-        float height = component->get_horizontal_alignment() == Alignment::STRETCH ? cellHeight
+        float height = component->get_vertical_alignment() == Alignment::STRETCH ? cellHeight
                                                                                    : component->get_minimum_size().y;
 
         // Account for CENTER and END alignments

@@ -73,8 +73,8 @@ void Field::remesh() {
         }
     }
 
-    vao->set_data(meshBuilder->get_vertices(), meshBuilder->get_vertex_count(), meshBuilder->get_colors(),
-                  meshBuilder->get_color_count());
+    vao->set_data(meshBuilder->get_vertices(), meshBuilder->get_vertex_count(), meshBuilder->get_meta(),
+                  meshBuilder->get_meta_count());
 }
 
 void Field::render() {

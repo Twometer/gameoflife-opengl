@@ -9,7 +9,7 @@ Vao::Vao(int dimensions) {
     glBindVertexArray(vao);
 
     glGenBuffers(1, &vertexBuffer);
-    glGenBuffers(1, &colorBuffer);
+    glGenBuffers(1, &metaBuffer);
 
     glBindVertexArray(0);
 
@@ -24,15 +24,15 @@ void Vao::unbind() const {
     glBindVertexArray(0);
 }
 
-void Vao::set_data(float *vertexBuf, int vertexBufSize, float *colorBuf, int colorBufSize) {
+void Vao::set_data(float *vertexBuf, int vertexBufSize, float *metaBuf, int metaBufSize, int metaBufDimensions) {
     bind();
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, vertexBufSize * sizeof(GLfloat), vertexBuf, GL_DYNAMIC_DRAW);
     glVertexAttribPointer(0, dimensions, GL_FLOAT, false, 0, nullptr);
 
-    glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-    glBufferData(GL_ARRAY_BUFFER, colorBufSize * sizeof(GLfloat), colorBuf, GL_DYNAMIC_DRAW);
-    glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, nullptr);
+    glBindBuffer(GL_ARRAY_BUFFER, metaBuffer);
+    glBufferData(GL_ARRAY_BUFFER, metaBufSize * sizeof(GLfloat), metaBuf, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(1, metaBufDimensions, GL_FLOAT, false, 0, nullptr);
 
     unbind();
     vertexCount = vertexBufSize / dimensions;
@@ -57,7 +57,7 @@ void Vao::render() const {
 
 Vao::~Vao() {
     glDeleteBuffers(1, &vertexBuffer);
-    glDeleteBuffers(1, &colorBuffer);
+    glDeleteBuffers(1, &metaBuffer);
 
     glDeleteVertexArrays(1, &vao);
 }

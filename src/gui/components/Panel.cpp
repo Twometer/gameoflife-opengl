@@ -10,7 +10,8 @@ void Panel::draw(Graphics &graphics) {
     graphics.push_rectangle(position.x, position.y, size.x, 2, glm::vec3(0.0, 0.6588, 1.0));
     graphics.end();
 
-    IContainer::draw(graphics);
+    Graphics g = graphics.create_offset(glm::vec2(0,1));
+    IContainer::draw(g);
 }
 
 Panel::Panel(const std::string &id) : IContainer(id) {

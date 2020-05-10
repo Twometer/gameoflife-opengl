@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Author: Twometer
+    Date: 5/10/20 12:30 PM
+-->
+
+<Screen Id="ingameGui" VerticalAlignment="STRETCH" HorizontalAlignment="STRETCH" Rows="2">
+    <Panel Id="menuPanel" Row="0" VerticalAlignment="START" HorizontalAlignment="START" Padding="16,8" Cols="3">
+        <Label Id="lbLivingCells" Col="0" Text="File" FontSize="0.5" Margin="8,0"/>
+        <Label Id="lbLivingCells" Col="1" Text="Game" FontSize="0.5" Margin="8,0"/>
+        <Label Id="lbLivingCells" Col="2" Text="Tools" FontSize="0.5" Margin="8,0"/>
+    </Panel>
+    <Panel Id="toolPanel" Row="1" Cols="3" VerticalAlignment="END" HorizontalAlignment="CENTER" Padding="16,8">
+        <ToolButton Id="btnPlayPause" Texture="play" Col="0" VerticalAlignment="CENTER" Margin="8,0"/>
+        <Label Id="lbLivingCells" Text="Cells: 0" FontSize="0.5" Col="1" Margin="16,0"/>
+        <ToolButton Id="btnNextGen" Texture="next" Col="2" VerticalAlignment="CENTER" Margin="8,0"/>
+    </Panel>
+</Screen>

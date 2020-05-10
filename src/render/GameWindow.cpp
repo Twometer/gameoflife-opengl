@@ -148,7 +148,7 @@ FontRenderer *GameWindow::get_font_renderer() {
     return &fontRenderer;
 }
 
-bool GameWindow::should_close() {
+bool GameWindow::should_close() const {
     return shouldClose;
 }
 
@@ -180,17 +180,16 @@ void GameWindow::center_camera() {
 }
 
 void GameWindow::toggle_cell(glm::vec2 mousePos) {
-
-    // Find zero point in screen space by projecting with the matrix
+    // Find zero point in screen space by projecting (0|0) with the matrix
     glm::vec2 zeroPoint = (camera.get_matrix() * glm::vec4(0, 0, 0.0f, 1.0f) +
                            glm::vec4(1.0f, 1.0f, 0.0f, 0.0f)) * 0.5f;
 
-    // Using that offset, unproject again to find mouse position in world space
+    // Using that offset, unproject again to find mouse position in field space
     int fieldX = glm::floor((mousePos.x / viewportSize.x - zeroPoint.x) * camera.get_size().x);
     // Y mouse is inverted (OpenGL coordinate system is inverted to ours), so 1 - mousePos
     int fieldY = glm::floor(((1 - mousePos.y / viewportSize.y) - zeroPoint.y) * camera.get_size().y);
 
-    // Check if the click was inside the field
+    // Check if that click was inside the field
     if (fieldX >= 0 && fieldY >= 0 && fieldX < field->get_size().x && fieldY < field->get_size().y) {
         field->toggle_cell(fieldX, fieldY);
         field->remesh();

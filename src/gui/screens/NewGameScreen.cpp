@@ -9,6 +9,7 @@
 #include "MenuScreen.h"
 #include "../components/CheckBox.h"
 #include "../components/TextBox.h"
+#include "IngameGuiScreen.h"
 
 NewGameScreen::NewGameScreen() : IScreen("newGameScreen") {
     XmlGuiLoader::load(this, "new_game.xml");
@@ -31,7 +32,7 @@ NewGameScreen::NewGameScreen() : IScreen("newGameScreen") {
 
         GameWindow *win = GameWindow::get_instance();
         win->set_field(field);
-        win->get_gui_renderer()->show_screen(nullptr);
+        win->get_gui_renderer()->show_screen(new IngameGuiScreen());
     });
 
     btnBack->set_click_listener([]() {

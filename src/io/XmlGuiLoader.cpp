@@ -9,6 +9,7 @@
 #include "../gui/components/Button.h"
 #include "../gui/components/TextBox.h"
 #include "../gui/components/CheckBox.h"
+#include "../gui/components/ToolButton.h"
 
 using namespace tinyxml2;
 
@@ -40,6 +41,8 @@ IComponent *XmlGuiLoader::instantiate(const char *name, const char *idPtr) {
         return new TextBox(id);
     if (strcmp(name, "CheckBox") == 0)
         return new CheckBox(id);
+    if (strcmp(name, "ToolButton") == 0)
+        return new ToolButton(id);
     return nullptr;
 }
 
@@ -91,8 +94,11 @@ void XmlGuiLoader::apply_properties(IComponent *component, tinyxml2::XMLElement 
             if (placeholder != nullptr)
                 textBox->set_placeholder(std::string(placeholder));
         }
+    } else if (auto imageComponent = dynamic_cast<IImageComponent *>(component)) {
+        const char *textureId = xml->Attribute("Texture");
+        if (textureId != nullptr)
+            imageComponent->set_texture(std::string(textureId));
     }
-
 }
 
 glm::vec2 XmlGuiLoader::parse_vec(const char *srcPtr) {

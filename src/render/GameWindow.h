@@ -75,7 +75,7 @@ public:
 
     FontRenderer *get_font_renderer();
 
-    bool should_close();
+    bool should_close() const;
 
     void close();
 

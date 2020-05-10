@@ -7,6 +7,7 @@
 
 #include "base/IScreen.h"
 #include "../render/shaders/BasicShader.h"
+#include "../render/shaders/TexturedShader.h"
 #include "Graphics.h"
 #include "../gl/Vao.h"
 
@@ -16,10 +17,11 @@ private:
 
     Vao vao = Vao(2);
     MeshBuilder meshBuilder;
-    Graphics graphics = Graphics(&vao, &meshBuilder, &guiShader, glm::vec2(0, 0));
+    Graphics graphics = Graphics(&vao, &meshBuilder, &flatShader, &texturedShader, glm::vec2(0, 0));
 
     // We can reuse the main game shader here
-    BasicShader guiShader;
+    BasicShader flatShader;
+    TexturedShader texturedShader;
 
 public:
     void show_screen(IScreen *screen);
