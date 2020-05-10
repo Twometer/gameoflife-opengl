@@ -87,6 +87,7 @@ void Field::render() {
 void Field::clear() {
     buffer->clear();
     generation = 0;
+    livingCells = 0;
 }
 
 void Field::toggle_cell(int x, int y) {
