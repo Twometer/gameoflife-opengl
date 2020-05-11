@@ -11,9 +11,9 @@ void Panel::draw(Graphics &graphics) {
     graphics.end();
 
     Graphics g = graphics.create_offset(glm::vec2(0,1));
-    IContainer::draw(g);
+    Container::draw(g);
 }
 
-Panel::Panel(const std::string &id) : IContainer(id) {
+Panel::Panel(const std::string &id) : Container(id) {
 
 }

@@ -6,7 +6,7 @@
 #include "../../io/XmlGuiLoader.h"
 #include "../components/Button.h"
 
-SettingsDialog::SettingsDialog() : IDialog("settingsDialog") {
+SettingsDialog::SettingsDialog() : Dialog("settingsDialog") {
     XmlGuiLoader::load(this, "settings_dialog.xml");
 
     auto exitButton = find_component<Button>("btnExit");

@@ -6,7 +6,7 @@
 
 #include "../../render/GameWindow.h"
 
-Label::Label(const std::string &id) : ITextComponent(id) {
+Label::Label(const std::string &id) : TextComponent(id) {
 }
 
 void Label::draw(Graphics &graphics) {

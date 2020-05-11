@@ -5,17 +5,17 @@
 #ifndef GAMEOFLIFE_OPENGL_GUIRENDERER_H
 #define GAMEOFLIFE_OPENGL_GUIRENDERER_H
 
-#include "base/IScreen.h"
+#include "base/Screen.h"
 #include "../render/shaders/BasicShader.h"
 #include "../render/shaders/TexturedShader.h"
 #include "Graphics.h"
 #include "../gl/Vao.h"
-#include "base/IDialog.h"
+#include "base/Dialog.h"
 
 class GuiRenderer {
 private:
-    IScreen *currentScreen = nullptr;
-    IDialog *currentDialog = nullptr;
+    Screen *currentScreen = nullptr;
+    Dialog *currentDialog = nullptr;
 
     Vao vao = Vao(2);
     MeshBuilder meshBuilder;
@@ -26,9 +26,9 @@ private:
     TexturedShader texturedShader;
 
 public:
-    void show_screen(IScreen *screen);
+    void show_screen(Screen *screen);
 
-    void show_dialog(IDialog *dialog);
+    void show_dialog(Dialog *dialog);
 
     void draw();
 
@@ -46,7 +46,7 @@ public:
 
     bool is_input_blocked() const;
 
-    void focus_component(IComponent *component);
+    void focus_component(Component *component);
 
 };
 

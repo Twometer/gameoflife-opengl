@@ -6,9 +6,9 @@
 #define GAMEOFLIFE_OPENGL_MENUSCREEN_H
 
 
-#include "../base/IScreen.h"
+#include "../base/Screen.h"
 
-class MenuScreen : public IScreen {
+class MenuScreen : public Screen {
 
 public:
     MenuScreen();

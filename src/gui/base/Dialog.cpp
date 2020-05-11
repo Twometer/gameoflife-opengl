@@ -2,11 +2,11 @@
 // Created by twome on 10/05/2020.
 //
 
-#include "IDialog.h"
+#include "Dialog.h"
 #include "../../render/GameWindow.h"
 
-IDialog::IDialog(const std::string &id) : IScreen(id) {}
+Dialog::Dialog(const std::string &id) : Screen(id) {}
 
-void IDialog::close() {
+void Dialog::close() {
     GameWindow::get_instance()->get_gui_renderer()->show_dialog(nullptr);
 }

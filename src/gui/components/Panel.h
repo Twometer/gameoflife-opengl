@@ -6,11 +6,11 @@
 #define GAMEOFLIFE_OPENGL_PANEL_H
 
 
-#include "../base/IContainer.h"
+#include "../base/Container.h"
 #include "../../gl/Vao.h"
 #include "../../gl/MeshBuilder.h"
 
-class Panel : public IContainer {
+class Panel : public Container {
 public:
     explicit Panel(const std::string &id);
 

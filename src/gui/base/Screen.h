@@ -2,28 +2,28 @@
 // Created by twome on 08/05/2020.
 //
 
-#ifndef GAMEOFLIFE_OPENGL_ISCREEN_H
-#define GAMEOFLIFE_OPENGL_ISCREEN_H
+#ifndef GAMEOFLIFE_OPENGL_SCREEN_H
+#define GAMEOFLIFE_OPENGL_SCREEN_H
 
-#include "IContainer.h"
+#include "Container.h"
 
 /**
  * The base class for all GUI screens
  */
-class IScreen : public IContainer {
+class Screen : public Container {
 private:
-    IComponent *focusedComponent = nullptr;
+    Component *focusedComponent = nullptr;
 
 public:
-    explicit IScreen(const std::string &id);
+    explicit Screen(const std::string &id);
 
     void draw(Graphics &graphics) override;
 
     void layout() override;
 
-    void set_focused_component(IComponent *focusedComponent);
+    void set_focused_component(Component *focusedComponent);
 
-    IComponent *get_focused_component() const;
+    Component *get_focused_component() const;
 
     /**
      * This may be true for e.g. the menu screen, but false for the ingame HUD screen
@@ -33,4 +33,4 @@ public:
 
 };
 
-#endif //GAMEOFLIFE_OPENGL_ISCREEN_H
+#endif //GAMEOFLIFE_OPENGL_SCREEN_H

@@ -8,18 +8,18 @@
 #include <string>
 #include <tinyxml2.h>
 
-#include "../gui/base/IScreen.h"
+#include "../gui/base/Screen.h"
 
 class XmlGuiLoader {
 public:
-    static void load(IScreen *screen, const std::string &path);
+    static void load(Screen *screen, const std::string &path);
 
 private:
-    static void scan(IContainer *parent, tinyxml2::XMLElement *xml);
+    static void scan(Container *parent, tinyxml2::XMLElement *xml);
 
-    static IComponent *instantiate(const char *name, const char *id);
+    static Component *instantiate(const char *name, const char *id);
 
-    static void apply_properties(IComponent *component, tinyxml2::XMLElement *xml);
+    static void apply_properties(Component *component, tinyxml2::XMLElement *xml);
 
     static glm::vec2 parse_vec(const char *src);
 

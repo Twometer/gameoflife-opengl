@@ -6,7 +6,7 @@
 #include "TextBox.h"
 #include "../../render/GameWindow.h"
 
-TextBox::TextBox(const std::string &id) : ITextComponent(id) {
+TextBox::TextBox(const std::string &id) : TextComponent(id) {
 }
 
 void TextBox::draw(Graphics &graphics) {
@@ -41,12 +41,12 @@ void TextBox::layout() {
 }
 
 void TextBox::on_got_focus() {
-    IComponent::on_got_focus();
+    Component::on_got_focus();
     borderColor = glm::vec3(0.0, 0.6588, 1.0);
 }
 
 void TextBox::on_lost_focus() {
-    IComponent::on_lost_focus();
+    Component::on_lost_focus();
     borderColor = glm::vec3(0.2157, 0.2549, 0.2745);
 }
 

@@ -5,7 +5,7 @@
 #include "IngameGuiScreen.h"
 #include "../../io/XmlGuiLoader.h"
 
-IngameGuiScreen::IngameGuiScreen() : IScreen("ingameGui") {
+IngameGuiScreen::IngameGuiScreen() : Screen("ingameGui") {
     XmlGuiLoader::load(this, "ingame_gui.xml");
 
     lbLivingCells = find_component<Label>("lbLivingCells");

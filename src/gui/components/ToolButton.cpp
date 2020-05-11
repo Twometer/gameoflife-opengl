@@ -4,7 +4,7 @@
 
 #include "ToolButton.h"
 
-ToolButton::ToolButton(const std::string &id) : IImageComponent(id) {
+ToolButton::ToolButton(const std::string &id) : ImageComponent(id) {
 
 }
 

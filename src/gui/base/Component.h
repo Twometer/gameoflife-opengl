@@ -2,8 +2,8 @@
 // Created by twome on 08/05/2020.
 //
 
-#ifndef GAMEOFLIFE_OPENGL_ICOMPONENT_H
-#define GAMEOFLIFE_OPENGL_ICOMPONENT_H
+#ifndef GAMEOFLIFE_OPENGL_COMPONENT_H
+#define GAMEOFLIFE_OPENGL_COMPONENT_H
 
 #include <string>
 #include <glm/vec2.hpp>
@@ -15,7 +15,7 @@
 /**
  * The base class for all GUI components
  */
-class IComponent {
+class Component {
 protected:
     std::string id;
 
@@ -44,7 +44,7 @@ private:
     std::function<void()> clickListener;
 
 public:
-    explicit IComponent(const std::string &id);
+    explicit Component(const std::string &id);
 
     virtual void draw(Graphics &graphics) = 0;
 
@@ -134,4 +134,4 @@ public:
 
 };
 
-#endif //GAMEOFLIFE_OPENGL_ICOMPONENT_H
+#endif //GAMEOFLIFE_OPENGL_COMPONENT_H

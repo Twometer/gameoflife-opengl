@@ -7,10 +7,10 @@
 
 
 #include "../../gl/Texture.h"
-#include "../base/IImageComponent.h"
+#include "../base/ImageComponent.h"
 #include "../../util/Animated.h"
 
-class ToolButton : public IImageComponent {
+class ToolButton : public ImageComponent {
 private:
     Animated expansion = 0.0f;
 

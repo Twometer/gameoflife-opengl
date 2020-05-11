@@ -6,10 +6,10 @@
 #define GAMEOFLIFE_OPENGL_CHECKBOX_H
 
 
-#include "../base/ITextComponent.h"
+#include "../base/TextComponent.h"
 #include "../../util/AnimatedColor.h"
 
-class CheckBox : public ITextComponent {
+class CheckBox : public TextComponent {
 private:
     AnimatedColor checkContentColor = glm::vec3(0.1529, 0.1922, 0.2118);
     bool checked = false;

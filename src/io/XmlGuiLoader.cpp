@@ -13,7 +13,7 @@
 
 using namespace tinyxml2;
 
-void XmlGuiLoader::load(IScreen *screen, const std::string &name) {
+void XmlGuiLoader::load(Screen *screen, const std::string &name) {
     std::string path = "assets/screens/" + name;
 
     XMLDocument doc;
@@ -29,7 +29,7 @@ void XmlGuiLoader::load(IScreen *screen, const std::string &name) {
     scan(screen, root);
 }
 
-IComponent *XmlGuiLoader::instantiate(const char *name, const char *idPtr) {
+Component *XmlGuiLoader::instantiate(const char *name, const char *idPtr) {
     std::string id = std::string(idPtr);
     if (strcmp(name, "Panel") == 0)
         return new Panel(id);
@@ -46,9 +46,9 @@ IComponent *XmlGuiLoader::instantiate(const char *name, const char *idPtr) {
     return nullptr;
 }
 
-void XmlGuiLoader::scan(IContainer *parent, tinyxml2::XMLElement *xml) {
+void XmlGuiLoader::scan(Container *parent, tinyxml2::XMLElement *xml) {
     for (XMLElement *child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
-        IComponent *uiChild = instantiate(child->Name(), child->Attribute("Id"));
+        Component *uiChild = instantiate(child->Name(), child->Attribute("Id"));
 
         if (uiChild == nullptr) {
             Logger::error("Invalid component: " + std::string(child->Name()));
@@ -56,7 +56,7 @@ void XmlGuiLoader::scan(IContainer *parent, tinyxml2::XMLElement *xml) {
         }
 
         if (!child->NoChildren()) {
-            auto *container = dynamic_cast<IContainer *>(uiChild);
+            auto *container = dynamic_cast<Container *>(uiChild);
             if (!container) {
                 Logger::error(
                         "Tried to add components to a non-container object of type " + std::string(child->Name()));
@@ -70,7 +70,7 @@ void XmlGuiLoader::scan(IContainer *parent, tinyxml2::XMLElement *xml) {
     }
 }
 
-void XmlGuiLoader::apply_properties(IComponent *component, tinyxml2::XMLElement *xml) {
+void XmlGuiLoader::apply_properties(Component *component, tinyxml2::XMLElement *xml) {
     component->set_row(xml->IntAttribute("Row", 0));
     component->set_row_span(xml->IntAttribute("RowSpan", 1));
     component->set_col(xml->IntAttribute("Col", 0));
@@ -80,10 +80,10 @@ void XmlGuiLoader::apply_properties(IComponent *component, tinyxml2::XMLElement 
     component->set_horizontal_alignment(parse_alignment(xml->Attribute("HorizontalAlignment")));
     component->set_vertical_alignment(parse_alignment(xml->Attribute("VerticalAlignment")));
 
-    if (auto container = dynamic_cast<IContainer *>(component)) {
+    if (auto container = dynamic_cast<Container *>(component)) {
         container->set_rows(xml->IntAttribute("Rows", 1));
         container->set_cols(xml->IntAttribute("Cols", 1));
-    } else if (auto textComponent = dynamic_cast<ITextComponent *>(component)) {
+    } else if (auto textComponent = dynamic_cast<TextComponent *>(component)) {
         const char *text = xml->Attribute("Text");
         if (text != nullptr)
             textComponent->set_text(std::string(text));
@@ -94,7 +94,7 @@ void XmlGuiLoader::apply_properties(IComponent *component, tinyxml2::XMLElement 
             if (placeholder != nullptr)
                 textBox->set_placeholder(std::string(placeholder));
         }
-    } else if (auto imageComponent = dynamic_cast<IImageComponent *>(component)) {
+    } else if (auto imageComponent = dynamic_cast<ImageComponent *>(component)) {
         const char *textureId = xml->Attribute("Texture");
         if (textureId != nullptr)
             imageComponent->set_texture(std::string(textureId));

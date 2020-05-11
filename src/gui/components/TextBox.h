@@ -6,10 +6,10 @@
 #define GAMEOFLIFE_OPENGL_TEXTBOX_H
 
 
-#include "../base/ITextComponent.h"
+#include "../base/TextComponent.h"
 #include "../../util/AnimatedColor.h"
 
-class TextBox : public ITextComponent {
+class TextBox : public TextComponent {
 private:
     AnimatedColor borderColor = glm::vec3(0.2157, 0.2549, 0.2745);
 

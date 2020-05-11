@@ -28,11 +28,11 @@ add_executable(gameoflife_opengl
         src/gui/screens/MenuScreen.cpp
         src/gui/screens/NewGameScreen.cpp
         src/gui/screens/IngameGuiScreen.cpp
-        src/gui/base/IContainer.cpp
-        src/gui/base/IScreen.cpp
-        src/gui/base/IDialog.cpp
-        src/gui/base/IComponent.cpp
-        src/gui/base/IImageComponent.cpp
+        src/gui/base/Container.cpp
+        src/gui/base/Screen.cpp
+        src/gui/base/Dialog.cpp
+        src/gui/base/Component.cpp
+        src/gui/base/ImageComponent.cpp
         src/gui/components/Label.cpp
         src/gui/components/Panel.cpp
         src/gui/components/Button.cpp

@@ -6,9 +6,9 @@
 #define GAMEOFLIFE_OPENGL_SETTINGSDIALOG_H
 
 
-#include "../base/IDialog.h"
+#include "../base/Dialog.h"
 
-class SettingsDialog : public IDialog {
+class SettingsDialog : public Dialog {
 public:
     SettingsDialog();
 

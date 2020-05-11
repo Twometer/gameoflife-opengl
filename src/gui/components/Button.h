@@ -6,12 +6,12 @@
 #define GAMEOFLIFE_OPENGL_BUTTON_H
 
 
-#include "../base/ITextComponent.h"
+#include "../base/TextComponent.h"
 #include "../../gl/Vao.h"
 #include "../../gl/MeshBuilder.h"
 #include "../../util/AnimatedColor.h"
 
-class Button : public ITextComponent {
+class Button : public TextComponent {
 private:
     AnimatedColor color = glm::vec3(0.1804, 0.8, 0.4431);
 

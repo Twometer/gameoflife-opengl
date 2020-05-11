@@ -2,23 +2,23 @@
 // Created by twome on 09/05/2020.
 //
 
-#ifndef GAMEOFLIFE_OPENGL_ITEXTCOMPONENT_H
-#define GAMEOFLIFE_OPENGL_ITEXTCOMPONENT_H
+#ifndef GAMEOFLIFE_OPENGL_TEXTCOMPONENT_H
+#define GAMEOFLIFE_OPENGL_TEXTCOMPONENT_H
 
-#include "IComponent.h"
+#include "Component.h"
 
 /**
- * The ITextComponent describes a component
+ * The TextComponent describes a component
  * that displays text (obviously): It defines
  * default behavior for text content and font size
  */
-class ITextComponent : public IComponent {
+class TextComponent : public Component {
 protected:
     std::string text = "";
     float fontSize = 1.0f;
 
 public:
-    ITextComponent(const std::string &id) : IComponent(id) {}
+    TextComponent(const std::string &id) : Component(id) {}
 
     virtual void on_text_changed() {
     }
@@ -37,4 +37,4 @@ public:
     }
 };
 
-#endif //GAMEOFLIFE_OPENGL_ITEXTCOMPONENT_H
+#endif //GAMEOFLIFE_OPENGL_TEXTCOMPONENT_H

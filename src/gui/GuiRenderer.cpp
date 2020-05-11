@@ -4,14 +4,14 @@
 
 #include "GuiRenderer.h"
 
-void GuiRenderer::show_screen(IScreen *screen) {
+void GuiRenderer::show_screen(Screen *screen) {
     this->currentScreen = screen;
 
     if (screen != nullptr)
         screen->layout();
 }
 
-void GuiRenderer::show_dialog(IDialog *dialog) {
+void GuiRenderer::show_dialog(Dialog *dialog) {
     this->currentDialog = dialog;
 
     if (dialog != nullptr)
@@ -71,9 +71,9 @@ bool GuiRenderer::is_input_blocked() const {
     return (currentScreen != nullptr && currentScreen->blocks_game_inputs()) || currentDialog != nullptr;
 }
 
-void GuiRenderer::focus_component(IComponent *component) {
+void GuiRenderer::focus_component(Component *component) {
     if (currentScreen != nullptr) {
-        IComponent *currentFocus = currentScreen->get_focused_component();
+        Component *currentFocus = currentScreen->get_focused_component();
         if (currentFocus != nullptr)
             currentFocus->on_lost_focus();
 

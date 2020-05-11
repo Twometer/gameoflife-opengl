@@ -6,9 +6,9 @@
 #define GAMEOFLIFE_OPENGL_NEWGAMESCREEN_H
 
 
-#include "../base/IScreen.h"
+#include "../base/Screen.h"
 
-class NewGameScreen : public IScreen {
+class NewGameScreen : public Screen {
 public:
     NewGameScreen();
 };

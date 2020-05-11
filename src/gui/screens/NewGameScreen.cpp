@@ -10,7 +10,7 @@
 #include "../components/CheckBox.h"
 #include "../components/TextBox.h"
 
-NewGameScreen::NewGameScreen() : IScreen("newGameScreen") {
+NewGameScreen::NewGameScreen() : Screen("newGameScreen") {
     XmlGuiLoader::load(this, "new_game.xml");
 
     auto tbWidth = find_component<TextBox>("tbWidth");

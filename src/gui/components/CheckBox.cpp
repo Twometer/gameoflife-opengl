@@ -5,7 +5,7 @@
 #include "CheckBox.h"
 #include "../../render/GameWindow.h"
 
-CheckBox::CheckBox(const std::string &id) : ITextComponent(id) {
+CheckBox::CheckBox(const std::string &id) : TextComponent(id) {
 }
 
 void CheckBox::draw(Graphics &graphics) {

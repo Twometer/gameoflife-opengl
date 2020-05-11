@@ -6,9 +6,9 @@
 #define GAMEOFLIFE_OPENGL_LABEL_H
 
 #include <string>
-#include "../base/ITextComponent.h"
+#include "../base/TextComponent.h"
 
-class Label : public ITextComponent {
+class Label : public TextComponent {
 public:
     explicit Label(const std::string &id);
 

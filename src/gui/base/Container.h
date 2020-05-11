@@ -2,25 +2,25 @@
 // Created by twome on 08/05/2020.
 //
 
-#ifndef GAMEOFLIFE_OPENGL_ICONTAINER_H
-#define GAMEOFLIFE_OPENGL_ICONTAINER_H
+#ifndef GAMEOFLIFE_OPENGL_CONTAINER_H
+#define GAMEOFLIFE_OPENGL_CONTAINER_H
 
 #include <vector>
-#include "IComponent.h"
+#include "Component.h"
 
 /**
- * The IContainer is a special component that
+ * The Container is a special component that
  * implements a simple grid-based container for components
  */
-class IContainer : public IComponent {
+class Container : public Component {
 protected:
-    std::vector<IComponent *> components;
+    std::vector<Component *> components;
 
     int rows = 1;
     int columns = 1;
 
 public:
-    explicit IContainer(const std::string &id);
+    explicit Container(const std::string &id);
 
     void draw(Graphics &graphics) override;
 
@@ -30,7 +30,7 @@ public:
 
     void set_cols(int c);
 
-    void add_component(IComponent *component);
+    void add_component(Component *component);
 
     void on_mouse_down(glm::vec2 position) override;
 
@@ -51,8 +51,8 @@ public:
         for (auto component : components)
             if (component->get_id() == id)
                 return dynamic_cast<T *>(component);
-            else if (auto container = dynamic_cast<IContainer *>(component)) {
-                IComponent *found = container->find_component<T>(id);
+            else if (auto container = dynamic_cast<Container *>(component)) {
+                Component *found = container->find_component<T>(id);
                 if (found != nullptr)
                     return dynamic_cast<T *>(found);
             }
@@ -60,7 +60,7 @@ public:
     }
 
 private:
-    IComponent *find_component(int row, int col) const;
+    Component *find_component(int row, int col) const;
 
     void build_rows(std::vector<float> &rowWidths) const;
 
@@ -69,4 +69,4 @@ private:
     inline glm::vec2 get_origin() const;
 };
 
-#endif //GAMEOFLIFE_OPENGL_ICONTAINER_H
+#endif //GAMEOFLIFE_OPENGL_CONTAINER_H

@@ -6,7 +6,7 @@
 #include "Button.h"
 #include "../../render/GameWindow.h"
 
-Button::Button(const std::string &id) : ITextComponent(id) {
+Button::Button(const std::string &id) : TextComponent(id) {
 }
 
 void Button::draw(Graphics &graphics) {

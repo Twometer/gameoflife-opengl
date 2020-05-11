@@ -13,7 +13,7 @@
 #include "NewGameScreen.h"
 #include "../../io/FieldIO.h"
 
-MenuScreen::MenuScreen() : IScreen("menuScreen") {
+MenuScreen::MenuScreen() : Screen("menuScreen") {
     XmlGuiLoader::load(this, "main_menu.xml");
 
     auto btnNewGame = find_component<Button>("btnNewGame");

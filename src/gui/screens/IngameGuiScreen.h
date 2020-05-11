@@ -6,11 +6,11 @@
 #define GAMEOFLIFE_OPENGL_INGAMEGUISCREEN_H
 
 
-#include "../base/IScreen.h"
+#include "../base/Screen.h"
 #include "../components/Label.h"
 #include "../components/ToolButton.h"
 
-class IngameGuiScreen : public IScreen {
+class IngameGuiScreen : public Screen {
 public:
     Label *lbLivingCells;
     Label *lbGeneration;
