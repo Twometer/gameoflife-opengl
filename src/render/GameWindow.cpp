@@ -55,7 +55,7 @@ GameWindow::GameWindow() : fontRenderer(FontRenderer(AssetLoader::load_font("nir
     });
     ingameGui->btnOpen->set_click_listener([this]() {
         nfdchar_t *outPath = nullptr;
-        nfdresult_t result = NFD_OpenDialog("bin,txt", nullptr, &outPath);
+        nfdresult_t result = NFD_OpenDialog("bin,nk", nullptr, &outPath);
 
         if (result == NFD_OKAY) {
             std::string path = std::string(outPath);

@@ -26,7 +26,7 @@ MenuScreen::MenuScreen() : Screen("menuScreen") {
 
     btnLoadGame->set_click_listener([]() {
         nfdchar_t *outPath = nullptr;
-        nfdresult_t result = NFD_OpenDialog("bin,txt", nullptr, &outPath);
+        nfdresult_t result = NFD_OpenDialog("bin,nk", nullptr, &outPath);
 
         if (result == NFD_OKAY) {
             std::string path = std::string(outPath);

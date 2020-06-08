@@ -31,10 +31,10 @@ void Field::tick() {
             bool newState = alive;
             if (alive && neighbors < 2)         // Underpopulation
                 newState = false;
-            else if (alive && neighbors < 4)    // Stays alive
-                newState = true;
             else if (alive && neighbors > 3)    // Overpopulation
                 newState = false;
+            else if (alive && neighbors < 4)    // Stays alive
+                newState = true;
             else if (!alive && neighbors == 3)  // Reproduction
                 newState = true;
 
