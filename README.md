@@ -2,6 +2,8 @@
 
 Conway's game of life with cool features and OpenGL
 
+Made for computer science class
+
 
 ## Used libraries
 - [glfw](https://github.com/glfw/glfw): OpenGL window and context management
