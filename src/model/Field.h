@@ -32,7 +32,7 @@ public:
 
     void remesh();
 
-    void render();
+    void render() const;
 
     void clear();
 
@@ -40,7 +40,7 @@ public:
 
     void set_cell(int x, int y, bool alive);
 
-    bool get_cell(int x, int y);
+    bool get_cell(int x, int y) const;
 
     bool *get_front_buffer();
 

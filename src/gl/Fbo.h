@@ -22,15 +22,15 @@ public:
 
     ~Fbo();
 
-    void bind();
+    void bind() const;
 
-    void unbind();
+    static void unbind();
 
-    GLuint get_color_texture();
+    GLuint get_color_texture() const;
 
-    int get_width();
+    int get_width() const;
 
-    int get_height();
+    int get_height() const;
 
 private:
     void create_framebuffer();

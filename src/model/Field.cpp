@@ -80,7 +80,7 @@ void Field::remesh() {
                   meshBuilder->get_meta_count());
 }
 
-void Field::render() {
+void Field::render() const {
     vao->render();
 }
 
@@ -99,7 +99,7 @@ void Field::set_cell(int x, int y, bool alive) {
     buffer->get_front()[get_index(x, y)] = alive;
 }
 
-bool Field::get_cell(int x, int y) {
+bool Field::get_cell(int x, int y) const {
     return buffer->get_front()[get_index(x, y)];
 }
 

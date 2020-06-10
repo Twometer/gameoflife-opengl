@@ -215,12 +215,8 @@ FontRenderer *GameWindow::get_font_renderer() {
     return &fontRenderer;
 }
 
-bool GameWindow::should_close() const {
-    return shouldClose;
-}
-
 void GameWindow::close() {
-    shouldClose = true;
+    glfwSetWindowShouldClose(glfwHandle, true);
 }
 
 void GameWindow::set_cursor(Cursor cursor) {

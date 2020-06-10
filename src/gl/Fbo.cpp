@@ -16,7 +16,7 @@ Fbo::~Fbo() {
     glDeleteRenderbuffers(1, &colorBuffer);
 }
 
-void Fbo::bind() {
+void Fbo::bind() const {
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     glViewport(0, 0, width, height);
 }
@@ -27,15 +27,15 @@ void Fbo::unbind() {
     glViewport(0, 0, viewportSize.x, viewportSize.y);
 }
 
-GLuint Fbo::get_color_texture() {
+GLuint Fbo::get_color_texture() const {
     return colorTexture;
 }
 
-int Fbo::get_width() {
+int Fbo::get_width() const {
     return width;
 }
 
-int Fbo::get_height() {
+int Fbo::get_height() const {
     return height;
 }
 

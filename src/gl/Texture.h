@@ -13,7 +13,7 @@ struct Texture {
     unsigned int width;
     unsigned int height;
 
-    void bind() {
+    void bind() const {
         glBindTexture(GL_TEXTURE_2D, id);
     }
 

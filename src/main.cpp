@@ -29,7 +29,7 @@ void character_callback(GLFWwindow *window, unsigned int codepoint) {
 
 int main() {
     // Seed the randomizer
-    srand(time(NULL));
+    srand(time(nullptr));
 
     // Load GLFW
     Logger::info("Initializing rendering context...");
@@ -80,7 +80,7 @@ int main() {
     Logger::info("Init complete, starting game");
 
     // Then start the game
-    while (!glfwWindowShouldClose(window) && !gameWindow->should_close()) {
+    while (!glfwWindowShouldClose(window)) {
         gameWindow->draw_frame();
         glfwSwapBuffers(window);
         glfwPollEvents();

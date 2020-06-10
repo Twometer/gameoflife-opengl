@@ -52,8 +52,6 @@ private:
     GLFWcursor *ibeamCursor;
     Cursor currentCursor = Cursor::STANDARD;
 
-    bool shouldClose;
-
     GameWindow();
 
 public:
@@ -88,8 +86,6 @@ public:
     GuiRenderer *get_gui_renderer();
 
     FontRenderer *get_font_renderer();
-
-    bool should_close() const;
 
     void close();
 

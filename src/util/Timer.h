@@ -31,7 +31,7 @@ public:
         delay = 1.0 / tps;
     }
 
-    bool is_paused() {
+    bool is_paused() const {
         return paused;
     }
 
